@@ -1,0 +1,28 @@
+{
+  "name": "rental_sales_tools",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000r\u0000e\u0000n\u0000t\u0000a\u0000l\u0000_\u0000s\u0000a\u0000l\u0000e\u0000s\u0000_\u0000t\u0000o\u0000o\u0000l\u0000s\u0000\r\u0000 \u0000",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WzRd-off/rental_sales_tools.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/WzRd-off/rental_sales_tools/issues"
+  },
+  "homepage": "https://github.com/WzRd-off/rental_sales_tools#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "prisma": "^7.4.2"
+  }
+}
