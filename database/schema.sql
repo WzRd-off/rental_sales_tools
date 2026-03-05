@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS users
   login TEXT NOT NULL,
   fullname TEXT,
   password_hash  TEXT UNIQUE NOT NULL, 
-  number INTEGER UNIQUE 
+  number TEXT UNIQUE 
 );
 
 CREATE TABLE IF NOT EXISTS products(
@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS products(
   category TEXT NOT NULL,
   description TEXT NOT NULL,
   cost REAL NOT NULL,
-  photo BLOB NOT NULL,
+  photo TEXT NOT NULL,
   status TEXT NOT NULL
 );
 
@@ -25,9 +25,8 @@ CREATE TABLE IF NOT EXISTS reviews
   user_id INTEGER,
   comment TEXT,
   rating INTEGER,
-  time DATETIME DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (user_id) REFERENCES users(user_id),
-  UNIQUE (prod_id, user_id)
+  time TEXT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
 CREATE TABLE IF NOT EXISTS wishlist
@@ -36,8 +35,7 @@ CREATE TABLE IF NOT EXISTS wishlist
   user_id INTEGER,
   prod_id INTEGER,
   FOREIGN KEY (user_id) REFERENCES users(user_id),
-  FOREIGN KEY (prod_id) REFERENCES products(prod_id),
-  UNIQUE (prod_id, user_id)
+  FOREIGN KEY (prod_id) REFERENCES products(prod_id)
 );
 
 CREATE TABLE IF NOT EXISTS history_purchases
@@ -46,8 +44,7 @@ CREATE TABLE IF NOT EXISTS history_purchases
   prod_id INTEGER,
   user_id INTEGER,
   FOREIGN KEY (user_id) REFERENCES users(user_id),
-  FOREIGN KEY (prod_id) REFERENCES products(prod_id),
-  UNIQUE (prod_id, user_id)
+  FOREIGN KEY (prod_id) REFERENCES products(prod_id)
 );
 
 CREATE TABLE IF NOT EXISTS history_rentals
@@ -56,8 +53,8 @@ CREATE TABLE IF NOT EXISTS history_rentals
   prod_id INTEGER,
   user_id INTEGER,
   FOREIGN KEY (user_id) REFERENCES users(user_id),
-  FOREIGN KEY (prod_id) REFERENCES products(prod_id),
-  UNIQUE (prod_id, user_id)
+  FOREIGN KEY (prod_id) REFERENCES products(prod_id)
 );
+
 
 
