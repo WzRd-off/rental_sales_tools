@@ -15,7 +15,8 @@ CREATE TABLE IF NOT EXISTS products(
   description TEXT NOT NULL,
   cost REAL NOT NULL,
   photo TEXT NOT NULL,
-  status TEXT NOT NULL
+  status TEXT NOT NULL,
+  count_of_bought INTEGER DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS reviews
