@@ -2,20 +2,40 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
-  <title>Авторизація / Реєстрація</title>
+  <title>Авторизація</title>
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .auth-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 48px; 
+    }
+
+    .auth-card {
+        width: 100%;
+        max-width: 480px;
+    }
+
+    .text-center-h1 {
+        text-align: center;
+    }
+
+    .container {
+        padding-top: 64px;
+    padding-bottom: 64px;
+    }
+  </style>
 </head>
 <body>
-  <div class="container mt-16">
+  <div class="container">
 
-    <h1 class="section-title text-center mb-8">Аутентифікація</h1>
-
-    <div class="grid-2 gap-8">
+    <div class="auth-grid">
 
       <!-- вход -->
-      <div class="card">
+      <div class="card auth-card">
         <div class="card-body">
-          <h2 class="h2 mb-6">Вхід</h2>
+          <h2 class="h2 mb-6 text-center">Вхід</h2>
 
             <div class="form-group">
               <label class="form-label" for="login_email">Email</label>
@@ -32,12 +52,12 @@
         </div>
       </div>
 
-      <!-- регистрац ия -->
-      <div class="card">
+      <!-- регистрация -->
+      <div class="card auth-card">
         <div class="card-body">
-          <h2 class="h2 mb-6">Реєстрація</h2>
+          <h2 class="h2 mb-6 text-center">Реєстрація</h2>
 
-            <h3 class="text-2 font-bold mb-4">Дані представника</h3>
+            <h3 class="text-2 font-bold mb-4 text-center">Дані представника</h3>
 
             <div class="form-group">
               <label class="form-label" for="fullname">ПІБ</label>
@@ -59,7 +79,7 @@
               <input class="input" type="password" id="password" name="password" required minlength="6" placeholder="Ваш пароль">
             </div>
 
-            <h3 class="text-2 font-bold mt-6 mb-4">Реквізити компанії</h3>
+            <h3 class="text-2 font-bold mt-6 mb-4 text-center">Реквізити компанії</h3>
 
             <div class="form-group">
               <label class="form-label" for="company_name">Назва компанії</label>
