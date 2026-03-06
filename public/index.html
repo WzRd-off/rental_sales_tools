@@ -7,8 +7,8 @@
     <title>БудІнструмент — Головна</title>
 </head>
 <body>
-
-    <header class="header">
+<div id="header"></div>
+<!-- <header class="header">
         <div class="container header__inner">
             <a href="/" class="header__logo">
                 <div class="header__logo-mark">
@@ -42,7 +42,7 @@
             </div>
         </div>
     </header>
-
+-->
     <section class="section" style="background: var(--c-header-bg); color: white; padding: 100px 0;">
         <div class="container">
             <div class="section-eyebrow">B2B SOLUTIONS</div>
@@ -78,21 +78,189 @@
         </div>
     </section>
 
-    <section class="section">
-        <div class="container">
-            <div class="flex-between mb-8">
-                <div>
-                    <div class="section-eyebrow">MOST POPULAR</div>
-                    <h2 class="section-title">ПОПУЛЯРНІ ІНСТРУМЕНТИ</h2>
+  <div class="grid grid-3">
+                    <div class="card product-card">
+                        <div class="product-card__img">
+                            <div class="product-card__icon">🛠️</div>
+                            <span class="badge badge-success" style="position: absolute; top: 12px; right: 12px;">Новинка</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="product-card__sku">SKU: BSH-500-TX</div>
+                            <h3 class="product-card__name">Відбійний молоток Bosch GSH 5</h3>
+                            <div class="grid grid-2 gap-2">
+                                <div>
+                                    <div class="product-card__price-label">Продаж</div>
+                                    <div class="product-card__price">24 100 ₴</div>
+                                </div>
+                                <div>
+                                    <div class="product-card__price-label">Оренда</div>
+                                    <div class="product-card__rent">450 ₴</div>
+                                </div>
+                            </div>
+                            <button class="btn btn-dark btn-block mt-4 btn-sm">В КОШИК</button>
+                        </div>
+                    </div>
+
+                    <div class="card product-card">
+                        <div class="product-card__img">
+                            <div class="product-card__icon">⚡</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="product-card__sku">SKU: MKT-453-Z</div>
+                            <h3 class="product-card__name">Шуруповерт Makita DDF453</h3>
+                            <div class="grid grid-2 gap-2">
+                                <div>
+                                    <div class="product-card__price-label">Продаж</div>
+                                    <div class="product-card__price">4 850 ₴</div>
+                                </div>
+                                <div>
+                                    <div class="product-card__price-label">Оренда</div>
+                                    <div class="product-card__rent">120 ₴</div>
+                                </div>
+                            </div>
+                            <button class="btn btn-dark btn-block mt-4 btn-sm">В КОШИК</button>
+                        </div>
+                    </div>
+
+                    <div class="card product-card">
+                        <div class="product-card__img">
+                            <div class="product-card__icon">📏</div>
+                            <span class="badge badge-warning" style="position: absolute; top: 12px; right: 12px;">Акція</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="product-card__sku">SKU: DW-088-K</div>
+                            <h3 class="product-card__name">Лазерний рівень DeWalt DW088</h3>
+                            <div class="grid grid-2 gap-2">
+                                <div>
+                                    <div class="product-card__price-label">Продаж</div>
+                                    <div class="product-card__price">6 200 ₴</div>
+                                </div>
+                                <div>
+                                    <div class="product-card__price-label">Оренда</div>
+                                    <div class="product-card__rent">200 ₴</div>
+                                </div>
+                            </div>
+                            <button class="btn btn-dark btn-block mt-4 btn-sm">В КОШИК</button>
+                        </div>
+                    </div>
+                </div>
+
+    <section class="section" style="background: var(--c-bg-raised); border-top: 1px solid var(--c-border); border-bottom: 1px solid var(--c-border);">
+    <div class="container">
+        <div class="flex-between mb-8">
+            <div>
+                <div class="section-eyebrow" style="color: var(--c-danger);">Hot Offers</div>
+                <h2 class="section-title">Акційні пропозиції</h2>
+                <p class="section-subtitle">Найкращі ціни на професійне обладнання цього тижня</p>
+            </div>
+        </div>
+
+        <div class="grid grid-4">
+            <div class="card product-card">
+                <div class="product-card__img">
+                    <div class="product-card__icon">📏</div>
+                    <span class="badge badge-danger" style="position: absolute; top: 12px; left: 12px;">-20%</span>
+                </div>
+                <div class="card-body">
+                    <div class="product-card__sku">SKU: BSH-L-20</div>
+                    <h3 class="product-card__name">Лазерний рівень Bosch GLL 3-80</h3>
+                    
+                    <div class="mb-4">
+                        <div class="product-card__price-label">Стара ціна</div>
+                        <div class="text-3 text-sm" style="text-decoration: line-through;">18 500.00 ₴</div>
+                        
+                        <div class="product-card__price-label mt-2">Ціна зі знижкою</div>
+                        <div class="product-card__price" style="color: var(--c-danger);">14 800.00 ₴</div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="product-card__price-label">Оренда / доба</div>
+                        <div class="product-card__rent">400.00 ₴</div>
+                    </div>
+                    <button class="btn btn-dark btn-block mt-4">В КОШИК</button>
                 </div>
             </div>
 
-            <div class="grid grid-4">
-                
-                        </div>
+            <div class="card product-card">
+                <div class="product-card__img">
+                    <div class="product-card__icon">🪚</div>
+                    <span class="badge badge-danger" style="position: absolute; top: 12px; left: 12px;">-15%</span>
                 </div>
-    </section>
+                <div class="card-body">
+                    <div class="product-card__sku">SKU: STI-MS-180</div>
+                    <h3 class="product-card__name">Бензопила Stihl MS 180</h3>
+                    
+                    <div class="mb-4">
+                        <div class="product-card__price-label">Стара ціна</div>
+                        <div class="text-3 text-sm" style="text-decoration: line-through;">9 200.00 ₴</div>
+                        
+                        <div class="product-card__price-label mt-2">Ціна зі знижкою</div>
+                        <div class="product-card__price" style="color: var(--c-danger);">7 820.00 ₴</div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="product-card__price-label">Оренда / доба</div>
+                        <div class="product-card__rent">320.00 ₴</div>
+                    </div>
+                    <button class="btn btn-dark btn-block mt-4">В КОШИК</button>
+                </div>
+            </div>
 
+            <div class="card product-card">
+                <div class="product-card__img">
+                    <div class="product-card__icon">🛠️</div>
+                    <span class="badge badge-danger" style="position: absolute; top: 12px; left: 12px;">-25%</span>
+                </div>
+                <div class="card-body">
+                    <div class="product-card__sku">SKU: MKT-HR-24</div>
+                    <h3 class="product-card__name">Перфоратор Makita HR2470</h3>
+                    
+                    <div class="mb-4">
+                        <div class="product-card__price-label">Стара ціна</div>
+                        <div class="text-3 text-sm" style="text-decoration: line-through;">5 400.00 ₴</div>
+                        
+                        <div class="product-card__price-label mt-2">Ціна зі знижкою</div>
+                        <div class="product-card__price" style="color: var(--c-danger);">4 050.00 ₴</div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="product-card__price-label">Оренда / доба</div>
+                        <div class="product-card__rent">150.00 ₴</div>
+                    </div>
+                    <button class="btn btn-dark btn-block mt-4">В КОШИК</button>
+                </div>
+            </div>
+
+            <div class="card product-card">
+                <div class="product-card__img">
+                    <div class="product-card__icon">🔋</div>
+                    <span class="badge badge-danger" style="position: absolute; top: 12px; left: 12px;">-10%</span>
+                </div>
+                <div class="card-body">
+                    <div class="product-card__sku">SKU: DW-DCD-77</div>
+                    <h3 class="product-card__name">Шуруповерт DeWalt DCD771</h3>
+                    
+                    <div class="mb-4">
+                        <div class="product-card__price-label">Стара ціна</div>
+                        <div class="text-3 text-sm" style="text-decoration: line-through;">6 100.00 ₴</div>
+                        
+                        <div class="product-card__price-label mt-2">Ціна зі знижкою</div>
+                        <div class="product-card__price" style="color: var(--c-danger);">5 490.00 ₴</div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="product-card__price-label">Оренда / доба</div>
+                        <div class="product-card__rent">200.00 ₴</div>
+                    </div>
+                    <button class="btn btn-dark btn-block mt-4">В КОШИК</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="footer"></div>
+<!--
     <footer class="footer">
         <div class="container">
             <div class="footer__grid">
@@ -138,7 +306,8 @@
             </div>
         </div>
     </footer>
-
-    <script src="js/main.js"></script>
+-->
+    <script src="/js/utils.js"></script>
+<script src="/js/header.js"></script>
 </body>
 </html>
