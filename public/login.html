@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Авторизація / Реєстрація</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container mt-16">
+
+    <h1 class="section-title text-center mb-8">Аутентифікація</h1>
+
+    <div class="grid-2 gap-8">
+
+      <!-- вход -->
+      <div class="card">
+        <div class="card-body">
+          <h2 class="h2 mb-6">Вхід</h2>
+
+            <div class="form-group">
+              <label class="form-label" for="login_email">Email</label>
+              <input class="input" type="email" id="login_email" name="email" required placeholder="example@company.com">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="login_password">Пароль</label>
+              <input class="input" type="password" id="login_password" name="password" required placeholder="Ваш пароль">
+            </div>
+
+            <button class="btn btn-primary w-full mt-4" type="submit">Увійти</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- регистрац ия -->
+      <div class="card">
+        <div class="card-body">
+          <h2 class="h2 mb-6">Реєстрація</h2>
+
+            <h3 class="text-2 font-bold mb-4">Дані представника</h3>
+
+            <div class="form-group">
+              <label class="form-label" for="fullname">ПІБ</label>
+              <input class="input" type="text" id="fullname" name="fullname" required placeholder="Ім'я Прізвище">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="email">Email</label>
+              <input class="input" type="email" id="email" name="email" required placeholder="example@company.com">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="phone">Телефон</label>
+              <input class="input" type="tel" id="phone" name="phone" required placeholder="+380 00 000 00 00">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="password">Пароль</label>
+              <input class="input" type="password" id="password" name="password" required minlength="6" placeholder="Ваш пароль">
+            </div>
+
+            <h3 class="text-2 font-bold mt-6 mb-4">Реквізити компанії</h3>
+
+            <div class="form-group">
+              <label class="form-label" for="company_name">Назва компанії</label>
+              <input class="input" type="text" id="company_name" name="company_name" required placeholder="ТОВ Приклад">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="company_code">ЄДРПОУ / ІПН</label>
+              <input class="input" type="text" id="company_code" name="company_code" required placeholder="12345678">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="company_address">Юридична адреса</label>
+              <input class="input" type="text" id="company_address" name="company_address" required placeholder="вул. Приклад, 1, Київ">
+            </div>
+
+            <button class="btn btn-primary w-full mt-4" type="submit">Зареєструватися</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</body>
+</html>
