@@ -3,17 +3,13 @@ const fs = require('fs');
 
 const DB_PATH = './database/db_main.db';
 
-const db = new sqlite3.Database(DB_PATH, (err) => {
-    if (err) {
-        console.error('Помилка підключення до бази даних:', err.message);
-    } else {
-        console.log('Підключення до SQLite успішно.');
-    }
-});
-
 class DBManager {
-    constructor(database) {
-        this.db = database;
+    constructor() {
+        this.db = new sqlite3.Database(DB_PATH, (err) => {
+            if (err) {
+                console.error('Помилка підключення до БД:', err.message);
+            }
+        });
         this._initSchema();
     }
 
@@ -33,7 +29,7 @@ class DBManager {
         }
     }
 
-    run(query, params = []) {
+    _run(query, params = []) {
         return new Promise((resolve, reject) => {
             this.db.run(query, params, function (err) {
                 if (err) {
@@ -45,7 +41,7 @@ class DBManager {
         });
     }
 
-    get(query, params = []) {
+    _get(query, params = []) {
         return new Promise((resolve, reject) => {
             this.db.get(query, params, (err, row) => {              
                 if (err) {
@@ -57,7 +53,7 @@ class DBManager {
         });  
     }
 
-    all(query, params = []) {
+    _all(query, params = []) {
         return new Promise((resolve, reject) => {
             this.db.all(query, params, (err, rows) => {
                 if (err) {
@@ -66,6 +62,16 @@ class DBManager {
                     resolve(rows);
                 }
             });
+        });
+    }
+
+    _close() {
+        this.db.close((err) => {
+            if (err) {
+                console.error('Помилка при закритті бази даних:', err.message);
+            } else {
+                console.log('База даних успішно закрита.');
+            }
         });
     }
 }
