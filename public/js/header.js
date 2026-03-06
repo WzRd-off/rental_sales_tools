@@ -4,6 +4,7 @@
 
 // ---------- НАВИГАЦИЯ ----------
 const navLinks = [
+
   { label: 'Головна',       href: '/index.html' },
   { label: 'Каталог',       href: '/catalog.html' },
   { label: 'Оренда',        href: '/catalog.html?type=rent' },
@@ -11,6 +12,7 @@ const navLinks = [
 ]
 
 // ---------- ГЕНЕРАЦИЯ ХЕДЕРА ----------
+
 function renderHeader() {
   const currentPath = window.location.pathname
 
@@ -85,6 +87,7 @@ function renderHeader() {
 }
 
 // ---------- ПОИСК ----------
+
 function initSearch() {
   const input = document.getElementById('search-input')
   if (!input) return
@@ -97,6 +100,7 @@ function initSearch() {
 }
 
 // ---------- ГЕНЕРАЦИЯ ФУТЕРА ----------
+
 function renderFooter() {
   const html = `
     <footer class="footer">
@@ -179,6 +183,7 @@ function updateCartBadge() {
 }
 
 // ---------- ЗАПУСК ----------
+
 document.addEventListener('DOMContentLoaded', function() {
   renderHeader()
   renderFooter()
