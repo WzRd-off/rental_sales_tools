@@ -161,11 +161,7 @@ function renderFooter() {
 
 // ---------- ОБНОВЛЕНИЕ СЧЁТЧИКА КОРЗИНЫ ----------
 function updateCartBadge() {
-<<<<<<< HEAD
   const cart = storage.get('cart') || []
-=======
-  const cart = storage.get('cart') 
->>>>>>> 42c73b05e2f3bef30576ac1c213809e098dbd1a2
   const count = cart.reduce((sum, item) => sum + item.quantity, 0)
   const badge = document.querySelector('.header__badge')
 
