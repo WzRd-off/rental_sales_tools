@@ -44,7 +44,7 @@ function showToast(message, type = 'info') {
         document.body.appendChild(container)
     }
     const toast = document.createElement('div')
-    toast.className = toast ${type}
+    toast.className = `toast ${type}`
     toast.textContent = message
     container.appendChild(toast)
     setTimeout(() => toast.remove(), 3000) //через 3 секунды удаляет тост

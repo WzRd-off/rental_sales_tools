@@ -1,20 +1,27 @@
- const navLinks = [
+// ============================================
+// HEADER.JS — генерация хедера и футера
+// ============================================
+
+// ---------- НАВИГАЦИЯ ----------
+const navLinks = [
+
   { label: 'Головна',       href: '/index.html' },
   { label: 'Каталог',       href: '/catalog.html' },
   { label: 'Оренда',        href: '/catalog.html?type=rent' },
   { label: 'Про компанію',  href: '/about.html' },
 ]
 
+// ---------- ГЕНЕРАЦИЯ ХЕДЕРА ----------
 
 function renderHeader() {
   const currentPath = window.location.pathname
 
   const navHTML = navLinks.map(link => {
     const isActive = currentPath.includes(link.href.split('?')[0])
-    return <a href="${link.href}" class="${isActive ? 'active' : ''}">${link.label}</a>
+    return `<a href="${link.href}" class="${isActive ? 'active' : ''}">${link.label}</a>`
   }).join('')
 
-  const cart = storage.get('cart')  []
+  const cart = storage.get('cart') || []
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0)
 
   const user = storage.get('user')
@@ -79,6 +86,8 @@ function renderHeader() {
   initSearch()
 }
 
+// ---------- ПОИСК ----------
+
 function initSearch() {
   const input = document.getElementById('search-input')
   if (!input) return
@@ -89,6 +98,8 @@ function initSearch() {
     }
   })
 }
+
+// ---------- ГЕНЕРАЦИЯ ФУТЕРА ----------
 
 function renderFooter() {
   const html = `
@@ -118,8 +129,7 @@ function renderFooter() {
           <div>
             <div class="footer__col-title">Клієнтам</div>
             <ul class="footer__links">
-              <li><a href="/profile.html">Осо
-[06.03.2026 16:55] Chymachechi1: бистий кабінет</a></li>
+              <li><a href="/profile.html">Особистий кабінет</a></li>
               <li><a href="/profile.html#orders">Історія замовлень</a></li>
               <li><a href="#">Техпідтримка</a></li>
             </ul>
@@ -149,8 +159,9 @@ function renderFooter() {
   if (target) target.innerHTML = html
 }
 
+// ---------- ОБНОВЛЕНИЕ СЧЁТЧИКА КОРЗИНЫ ----------
 function updateCartBadge() {
-  const cart = storage.get('cart')  []
+  const cart = storage.get('cart') || []
   const count = cart.reduce((sum, item) => sum + item.quantity, 0)
   const badge = document.querySelector('.header__badge')
 
@@ -170,6 +181,8 @@ function updateCartBadge() {
     if (badge) badge.remove()
   }
 }
+
+// ---------- ЗАПУСК ----------
 
 document.addEventListener('DOMContentLoaded', function() {
   renderHeader()
