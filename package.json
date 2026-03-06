@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/WzRd-off/rental_sales_tools#readme",
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "sqlite3": "^5.0.2"
   }
 }
