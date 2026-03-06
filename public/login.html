@@ -23,7 +23,22 @@
 
     .container {
         padding-top: 64px;
-    padding-bottom: 64px;
+        padding-bottom: 64px;
+    }
+
+    .view {
+      display: none;
+    }
+
+    .switch-link {
+      text-align: center;
+      margin-top: 12px;
+      cursor: pointer;
+      color: var(--c-brand);
+      font-weight: 600;
+    }
+    .switch-link:hover {
+      color: var(--c-brand-dark);
     }
   </style>
 </head>
@@ -33,7 +48,7 @@
     <div class="auth-grid">
 
       <!-- вход -->
-      <div class="card auth-card">
+      <div class="card auth-card" id="loginCard">
         <div class="card-body">
           <h2 class="h2 mb-6 text-center">Вхід</h2>
 
@@ -49,11 +64,14 @@
 
             <button class="btn btn-primary w-full mt-4" type="submit">Увійти</button>
           </form>
+
+          <div class="switch-link" id="showRegister">У вас немає акаунта? Зареєструватися</div>
+
         </div>
       </div>
 
       <!-- регистрация -->
-      <div class="card auth-card">
+      <div class="card auth-card view" id="registerCard">
         <div class="card-body">
           <h2 class="h2 mb-6 text-center">Реєстрація</h2>
 
@@ -98,11 +116,33 @@
 
             <button class="btn btn-primary w-full mt-4" type="submit">Зареєструватися</button>
           </form>
+
+          <div class="switch-link" id="showLogin">У вас є акаунт? Увійти</div>
+
         </div>
       </div>
 
     </div>
 
   </div>
+
+  <script>
+    const showRegister = document.getElementById('showRegister');
+    const showLogin = document.getElementById('showLogin');
+    const loginCard = document.getElementById('loginCard');
+    const registerCard = document.getElementById('registerCard');
+
+    showRegister.addEventListener('click', () => {
+      loginCard.classList.add('view');       
+      showRegister.classList.add('view');    
+      registerCard.classList.remove('view'); 
+    });
+
+    showLogin.addEventListener('click', () => {
+      registerCard.classList.add('view');     
+      loginCard.classList.remove('view');    
+      showRegister.classList.remove('view');  
+    });
+  </script>
 </body>
 </html>
