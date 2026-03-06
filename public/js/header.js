@@ -11,10 +11,10 @@ function renderHeader() {
 
   const navHTML = navLinks.map(link => {
     const isActive = currentPath.includes(link.href.split('?')[0])
-    return <a href="${link.href}" class="${isActive ? 'active' : ''}">${link.label}</a>
+    return `<a href="${link.href}" class="${isActive ? 'active' : ''}">${link.label}</a>`
   }).join('')
 
-  const cart = storage.get('cart')  []
+  const cart = storage.get('cart') || []
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0)
 
   const user = storage.get('user')
@@ -150,7 +150,7 @@ function renderFooter() {
 }
 
 function updateCartBadge() {
-  const cart = storage.get('cart')  []
+  const cart = storage.get('cart') 
   const count = cart.reduce((sum, item) => sum + item.quantity, 0)
   const badge = document.querySelector('.header__badge')
 
