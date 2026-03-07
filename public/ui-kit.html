@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>UI Kit | БудІнструмент</title>
+</head>
+<body style="padding: 50px 0;">
+
+    <div class="container">
+        <h1 style="margin-bottom: 40px; border-bottom: 2px solid var(--c-brand); padding-bottom: 10px;">
+            Система дизайну (Dark Mode)
+        </h1>
+
+        <div style="display: grid; gap: 50px;">
+            
+            <section class="card">
+                <h2 style="margin-bottom: 20px;">Кнопки (.btn)</h2>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <button class="btn btn-brand">Оформити замовлення</button>
+                    <button class="btn btn-outline">Редагувати</button>
+                    <button class="btn btn-brand" style="opacity: 0.6; cursor: not-allowed;">Неактивна</button>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2 style="margin-bottom: 20px;">Форми та ввід</h2>
+                <div style="max-width: 400px; display: grid; gap: 20px;">
+                    <input type="text" class="input" placeholder="Прізвище, Ім'я, По батькові">
+                    <input type="email" class="input" placeholder="example@mail.com">
+                    
+                    <div style="margin-top: 10px;">
+                        <label class="custom-control">
+                            <input type="radio" name="demo" checked>
+                            <span class="checkmark"></span>
+                            <span>Я новий покупець</span>
+                        </label>
+                        <label class="custom-control">
+                            <input type="radio" name="demo">
+                            <span class="checkmark"></span>
+                            <span>Я постійний покупець</span>
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2 style="margin-bottom: 20px;">Картка товару (Кошик)</h2>
+                <div style="display: flex; align-items: center; gap: 20px; border: 1px solid var(--c-border); padding: 15px; border-radius: 8px;">
+                    <div style="width: 80px; height: 80px; background: #222; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 30px;">🛠️</div>
+                    <div style="flex-grow: 1;">
+                        <div class="font-bold">Перфоратор Bosch GBH 2-28</div>
+                        <div class="text-muted" style="font-size: 12px;">Код: 363383</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div class="text-muted" style="text-decoration: line-through; font-size: 14px;">14 500 ₴</div>
+                        <div class="text-danger font-bold" style="font-size: 18px;">13 000 ₴</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2 style="margin-bottom: 20px;">Діалогові вікна</h2>
+                <button class="btn btn-outline" onclick="toggleModal('modal-demo', true)">Тестова модалка</button>
+            </section>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-demo">
+        <div class="modal-content">
+            <h3 style="margin-bottom: 15px;">Підтвердіть дію</h3>
+            <p class="text-muted" style="margin-bottom: 25px;">Ви впевнені, що хочете видалити товар з кошика?</p>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-brand" style="background: var(--c-danger);">Так, видалити</button>
+                <button class="btn btn-outline" onclick="toggleModal('modal-demo', false)">Скасувати</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+</body>
+</html>
