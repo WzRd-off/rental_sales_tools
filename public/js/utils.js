@@ -136,6 +136,6 @@ async function renderProductById(containerId, productId) {
     container.innerHTML = 'Товар не знайдений'
     return
   }
-  container.innerHTML = renderProductCard(product)git 
+  container.innerHTML = renderProductCard(product) 
 }
 // renderProductById('product-container', 5) -> редерит продукт с id=5 в <div id="product-container">
