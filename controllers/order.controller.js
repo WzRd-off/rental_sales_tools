@@ -1,5 +1,5 @@
-const DBManager = require('../database/db_manager');
-const db = new DBManager();
+const db = require('../database/db_manager');
+
 
 exports.createOrder = async (req, res) => {
     const { userId, prodId, type, startDate, endDate } = req.body;
