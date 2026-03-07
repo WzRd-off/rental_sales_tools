@@ -870,3 +870,73 @@ p { color: var(--c-text-2); line-height: 1.7; font-size: 0.95rem; }
 .w-full { width: 100%; }
 .divider { border: none; border-top: 1px solid var(--c-border); margin: var(--sp-6) 0; }
 
+.checkout-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+        @media (min-width: 992px) {
+            .checkout-layout {
+                grid-template-columns: 1fr 380px;
+            }
+        }
+
+        /* Стилі для акордеона */
+        .step-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 20px 24px;
+            background: #fff;
+            transition: background 0.3s;
+        }
+        .step-header:hover {
+            background: #fcfcfc;
+        }
+        .step-content {
+            padding: 0 24px 24px 24px;
+            display: none; /* Сховано за замовчуванням */
+        }
+        .step-content.active {
+            display: block; /* Показуємо, коли активно */
+        }
+        .step-number {
+            font-size: 1.25rem;
+            font-weight: bold;
+            font-family: sans-serif;
+        }
+        .arrow-icon {
+            transition: transform 0.3s;
+            font-size: 0.8rem;
+        }
+        .active-header .arrow-icon {
+            transform: rotate(180deg);
+        }
+        .card-accordion {
+            background: #fff;
+            border: 1px solid var(--c-border, #dee2e6);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+    .checkout-layout {
+        display: grid;
+        grid-template-columns: 1fr; /* 1 колонка на мобільних */
+        gap: 30px;
+        align-items: start;
+    }
+    
+    /* На великих екранах перетворюємо на 2 колонки */
+    @media (min-width: 992px) {
+        .checkout-layout {
+            grid-template-columns: 1fr 380px; /* Форма займає все, сайдбар - рівно 380px */
+        }
+    }
+.step-header:hover { background: #fcfcfc; }
+        .step-content { padding: 0 24px 24px 24px; display: none; }
+        .step-content.active { display: block; }
+        .active-header .arrow-icon { transform: rotate(180deg); }
+        .arrow-icon { transition: transform 0.3s; font-size: 0.8rem; }
