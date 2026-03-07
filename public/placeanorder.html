@@ -5,194 +5,192 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <title>Оформлення замовлення | БудІнструмент</title>
+    <style>
+        /* Робимо макет адаптивним: на телефоні 1 колонка, на ПК - 2 колонки */
+        .checkout-layout {
+            display: grid;
+            grid-template-columns: 1fr; /* 1 колонка за замовчуванням (для мобільних) */
+            gap: 30px;
+            align-items: start;
+        }
+        @media (min-width: 992px) {
+            .checkout-layout {
+                grid-template-columns: 1fr 380px; /* На великих екранах: форма зліва (широка), кошик справа (380px) */
+            }
+        }
+    </style>
 </head>
-<body style="background-color: #f8f9fa;">
+<body style="background-color: var(--bg-card, #f8f9fa); color: var(--c-text, #212529);">
 
 <div id="header"></div>
-   <!-- <header class="header">
-        <div class="container header__inner">
-            <a href="index.html" class="header__logo">
-                <div class="header__logo-mark">
-                    <svg viewBox="0 0 24 24" width="24" height="24">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="currentColor"/>
-                    </svg>
-                </div>
-                БудІнструмент
-            </a>
-            <div class="header__contact font-bold">0 (800) 755-105</div>
-        </div>
-    </header>-->
-
-    <main class="container mt-8 mb-16">
+  
+    <main class="container mt-8 mb-16" style="max-width: 1100px; margin: 40px auto; padding: 0 20px;">
         <div class="mb-6">
-            <h1 class="section-title" style="font-size: 2rem;">Оформлення замовлення</h1>
+            <h1 class="section-title" style="font-size: 2rem; margin-bottom: 30px; border-bottom: 2px solid var(--c-brand, #004085); padding-bottom: 10px;">Оформлення замовлення</h1>
         </div>
 
-        <!-- Главный контейнер - одна колонка (вертикальное расположение) -->
-        <div style="display: grid; grid-template-columns: 1fr; gap: var(--sp-8, 2rem); align-items: start;">
+        <div class="checkout-layout">
             
-            <!-- Форма с блоками 1, 2, 3 -->
-            <form id="checkout-form" class="flex flex-direction-column gap-8">
+            <form id="checkout-form" style="display: flex; flex-direction: column; gap: 24px;">
                 
-                <section class="card p-6" id="step-1-contact">
-                    <h2 class="font-display text-lg mb-6">1. Контактні дані</h2>
+                <section class="card" style="background: #fff; border: 1px solid var(--c-border, #dee2e6); border-radius: 8px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                    <h2 class="font-display" style="font-size: 1.25rem; margin-bottom: 24px;">1. Контактні дані</h2>
                     
-                    <div class="flex gap-6 mb-6" style="border-bottom: 1px solid var(--c-border); padding-bottom: 10px;">
-                        <label class="cursor-pointer" style="color: var(--c-brand); border-bottom: 2px solid var(--c-brand); padding-bottom: 10px; margin-bottom: -11px;">
+                    <div style="display: flex; gap: 24px; margin-bottom: 24px; border-bottom: 1px solid var(--c-border, #dee2e6); padding-bottom: 10px;">
+                        <label style="cursor: pointer; color: var(--c-brand, #004085); border-bottom: 2px solid var(--c-brand, #004085); padding-bottom: 10px; margin-bottom: -11px; font-weight: bold;">
                             <input type="radio" name="customer_type" value="new" checked style="display: none;" id="type-new"> 
                             Я новий покупець
                         </label>
-                        <label class="cursor-pointer text-3">
+                        <label style="cursor: pointer; color: var(--c-text-muted, #6c757d); padding-bottom: 10px;">
                             <input type="radio" name="customer_type" value="returning" style="display: none;" id="type-returning"> 
                             Я постійний покупець
                         </label>
                     </div>
 
-                    <div class="flex flex-direction-column gap-4">
-                        <input type="text" id="user-name" class="input p-4" placeholder="ПІБ" required>
-                        <input type="email" id="user-email" class="input p-4" placeholder="E-mail" required>
-                        <input type="tel" id="user-phone" class="input p-4" placeholder="Телефон" required>
+                    <div style="display: flex; flex-direction: column; gap: 16px;">
+                        <input type="text" id="user-name" class="input" style="width: 100%; padding: 12px; border: 1px solid var(--c-border, #dee2e6); border-radius: 4px;" placeholder="ПІБ" required>
+                        <input type="email" id="user-email" class="input" style="width: 100%; padding: 12px; border: 1px solid var(--c-border, #dee2e6); border-radius: 4px;" placeholder="E-mail" required>
+                        <input type="tel" id="user-phone" class="input" style="width: 100%; padding: 12px; border: 1px solid var(--c-border, #dee2e6); border-radius: 4px;" placeholder="Телефон" required>
                     </div>
                 </section>
 
-                <section class="card p-6" id="step-2-delivery">
-                    <h2 class="font-display text-lg mb-4">2. Доставка</h2>
+                <section class="card" style="background: #fff; border: 1px solid var(--c-border, #dee2e6); border-radius: 8px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                    <h2 class="font-display" style="font-size: 1.25rem; margin-bottom: 16px;">2. Доставка</h2>
                     
-                    <div class="flex items-center gap-2 mb-4 text-sm">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px; font-size: 14px;">
                         <span>📍 Ваше місто:</span>
-                        <a href="#" class="text-brand font-bold" style="text-decoration: underline;" id="select-city">Київ</a>
+                        <a href="#" style="color: var(--c-brand, #004085); font-weight: bold; text-decoration: underline;" id="select-city">Київ</a>
                     </div>
                     
-                    <div class="flex gap-4 mb-6 text-xs text-brand" id="quick-cities">
-                        <span class="cursor-pointer">Дніпро</span>
-                        <span class="cursor-pointer">Запоріжжя</span>
-                        <span class="cursor-pointer">Київ</span>
-                        <span class="cursor-pointer">Львів</span>
-                        <span class="cursor-pointer">Одеса</span>
+                    <div style="display: flex; gap: 16px; margin-bottom: 24px; font-size: 12px; color: var(--c-brand, #004085);" id="quick-cities">
+                        <span style="cursor: pointer;">Дніпро</span>
+                        <span style="cursor: pointer;">Запоріжжя</span>
+                        <span style="cursor: pointer;">Київ</span>
+                        <span style="cursor: pointer;">Львів</span>
+                        <span style="cursor: pointer;">Одеса</span>
                     </div>
 
-                    <div class="flex flex-direction-column gap-3" id="delivery-options">
-                        <label class="flex items-center gap-4 p-4 border cursor-pointer hover-border-brand" style="border-radius: var(--rd-md);">
+                    <div style="display: flex; flex-direction: column; gap: 12px;" id="delivery-options">
+                        <label style="display: flex; align-items: center; gap: 16px; padding: 16px; border: 1px solid var(--c-border, #dee2e6); border-radius: 8px; cursor: pointer;">
                             <input type="radio" name="delivery" value="pickup" checked id="del-pickup">
                             <div style="flex-grow: 1;">
-                                <div class="font-bold">Самовивіз з магазину</div>
-                                <div class="text-xs text-3 mt-1">м. Київ, вул. Будівельників, 14</div>
+                                <div style="font-weight: bold;">Самовивіз з магазину</div>
+                                <div style="font-size: 12px; color: var(--c-text-muted, #6c757d); margin-top: 4px;">м. Київ, вул. Будівельників, 14</div>
                             </div>
-                            <div class="font-bold text-sm">Безкоштовно</div>
+                            <div style="font-weight: bold; font-size: 14px;">Безкоштовно</div>
                         </label>
 
-                        <label class="flex items-center gap-4 p-4 border cursor-pointer hover-border-brand" style="border-radius: var(--rd-md);">
+                        <label style="display: flex; align-items: center; gap: 16px; padding: 16px; border: 1px solid var(--c-border, #dee2e6); border-radius: 8px; cursor: pointer;">
                             <input type="radio" name="delivery" value="ukrposhta" id="del-ukrposhta">
                             <div style="flex-grow: 1;">
-                                <div class="font-bold">Доставка у відділення Укрпошти</div>
-                                <div class="text-xs text-3 mt-1">Уточніть можливість доставки у менеджера</div>
+                                <div style="font-weight: bold;">Доставка у відділення Укрпошти</div>
+                                <div style="font-size: 12px; color: var(--c-text-muted, #6c757d); margin-top: 4px;">Уточніть можливість доставки у менеджера</div>
                             </div>
-                            <div class="font-bold text-sm">від 65 ₴</div>
+                            <div style="font-weight: bold; font-size: 14px;">від 65 ₴</div>
                         </label>
 
-                        <label class="flex items-center gap-4 p-4 border cursor-pointer hover-border-brand" style="border-radius: var(--rd-md);">
+                        <label style="display: flex; align-items: center; gap: 16px; padding: 16px; border: 1px solid var(--c-border, #dee2e6); border-radius: 8px; cursor: pointer;">
                             <input type="radio" name="delivery" value="novaposhta" id="del-novaposhta">
                             <div style="flex-grow: 1;">
-                                <div class="font-bold" style="color: #db2c27;">Нова пошта</div>
+                                <div style="font-weight: bold; color: #db2c27;">Нова пошта</div>
                             </div>
-                            <div class="font-bold text-sm">від 70 ₴</div>
+                            <div style="font-weight: bold; font-size: 14px;">від 70 ₴</div>
                         </label>
 
-                        <label class="flex items-center gap-4 p-4 border cursor-pointer hover-border-brand" style="border-radius: var(--rd-md);">
+                        <label style="display: flex; align-items: center; gap: 16px; padding: 16px; border: 1px solid var(--c-border, #dee2e6); border-radius: 8px; cursor: pointer;">
                             <input type="radio" name="delivery" value="courier" id="del-courier">
                             <div style="flex-grow: 1;">
-                                <div class="font-bold">Кур'єрська доставка по Києву</div>
+                                <div style="font-weight: bold;">Кур'єрська доставка по Києву</div>
                             </div>
-                            <div class="font-bold text-sm">від 400 ₴</div>
+                            <div style="font-weight: bold; font-size: 14px;">від 400 ₴</div>
                         </label>
                     </div>
                 </section>
 
-                <section class="card p-6" id="step-3-payment">
-                    <h2 class="font-display text-lg mb-6">3. Оплата</h2>
+                <section class="card" style="background: #fff; border: 1px solid var(--c-border, #dee2e6); border-radius: 8px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                    <h2 class="font-display" style="font-size: 1.25rem; margin-bottom: 24px;">3. Оплата</h2>
 
-                    <div class="flex flex-direction-column gap-3" id="payment-options">
+                    <div style="display: flex; flex-direction: column; gap: 12px;" id="payment-options">
                         
-                        <label class="flex items-center gap-4 p-4 border cursor-pointer hover-border-brand" style="border-radius: var(--rd-md);">
+                        <label style="display: flex; align-items: center; gap: 16px; padding: 16px; border: 1px solid var(--c-border, #dee2e6); border-radius: 8px; cursor: pointer;">
                             <input type="radio" name="payment" value="cash" checked id="pay-cash">
-                            <div class="font-bold">Готівкою</div>
+                            <div style="font-weight: bold;">Готівкою</div>
                         </label>
 
-                        <label class="flex items-center gap-4 p-4 border cursor-pointer hover-border-brand" style="border-radius: var(--rd-md);">
+                        <label style="display: flex; align-items: center; gap: 16px; padding: 16px; border: 1px solid var(--c-border, #dee2e6); border-radius: 8px; cursor: pointer;">
                             <input type="radio" name="payment" value="cod" id="pay-cod">
                             <div>
-                                <div class="font-bold">Накладений платіж</div>
-                                <div class="text-xs text-3 mt-1">З додатковою комісією за пересилання коштів</div>
+                                <div style="font-weight: bold;">Накладений платіж</div>
+                                <div style="font-size: 12px; color: var(--c-text-muted, #6c757d); margin-top: 4px;">З додатковою комісією за пересилання коштів</div>
                             </div>
                         </label>
 
-                        <label class="flex items-center gap-4 p-4 border cursor-pointer hover-border-brand" style="border-radius: var(--rd-md);">
+                        <label style="display: flex; align-items: center; gap: 16px; padding: 16px; border: 1px solid var(--c-border, #dee2e6); border-radius: 8px; cursor: pointer;">
                             <input type="radio" name="payment" value="terminal" id="pay-terminal">
                             <div>
-                                <div class="font-bold">Термінал</div>
-                                <div class="text-xs text-3 mt-1">При оплаті карткою по терміналу враховуйте комісію 2%</div>
+                                <div style="font-weight: bold;">Термінал</div>
+                                <div style="font-size: 12px; color: var(--c-text-muted, #6c757d); margin-top: 4px;">При оплаті карткою по терміналу враховуйте комісію 2%</div>
                             </div>
                         </label>
 
-                        <label class="flex items-center gap-4 p-4 border cursor-pointer hover-border-brand" style="border-radius: var(--rd-md);">
+                        <label style="display: flex; align-items: center; gap: 16px; padding: 16px; border: 1px solid var(--c-border, #dee2e6); border-radius: 8px; cursor: pointer;">
                             <input type="radio" name="payment" value="online" id="pay-online">
                             <div style="flex-grow: 1;">
-                                <div class="font-bold">Онлайн</div>
-                                <div class="text-xs text-3 mt-1">Оплата карткою, Apple Pay, Google Pay</div>
+                                <div style="font-weight: bold;">Онлайн</div>
+                                <div style="font-size: 12px; color: var(--c-text-muted, #6c757d); margin-top: 4px;">Оплата карткою, Apple Pay, Google Pay</div>
                             </div>
-                            <div class="flex gap-2 text-xl">💳 📱</div>
+                            <div style="display: flex; gap: 8px; font-size: 20px;">💳 📱</div>
                         </label>
                     </div>
                 </section>
             </form>
 
-            <!-- Сайдбар с заказом - теперь под формой (вертикально) -->
-            <aside style="position: sticky; top: var(--sp-4);">
-                <div class="card p-6 shadow-sm border" id="order-summary-block">
+            <aside style="position: sticky; top: 20px; align-self: start;">
+                <div class="card" style="background: #fff; border: 1px solid var(--c-border, #dee2e6); border-radius: 8px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);" id="order-summary-block">
                     
-                    <div class="flex-between mb-6 pb-4" style="border-bottom: 1px solid var(--c-border);">
-                        <h3 class="font-display text-lg">Ваше замовлення</h3>
-                        <a href="cart.html" class="text-brand text-xs">Редагувати</a>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 1px solid var(--c-border, #dee2e6); padding-bottom: 16px;">
+                        <h3 class="font-display" style="font-size: 1.25rem; margin: 0;">Ваше замовлення</h3>
+                        <a href="cart.html" style="color: var(--c-brand, #004085); font-size: 12px;">Редагувати</a>
                     </div>
 
-                    <div class="flex gap-4 mb-6">
-                        <div class="product-card__img" style="width: 60px; height: 60px; flex-shrink: 0; background: none;">
-                            <div class="product-card__icon" style="font-size: 1.5rem;">🛠️</div>
+                    <div style="display: flex; gap: 16px; margin-bottom: 24px;">
+                        <div style="width: 60px; height: 60px; flex-shrink: 0; background: #f8f9fa; display: flex; align-items: center; justify-content: center; border-radius: 4px;">
+                            <div style="font-size: 1.5rem;">🛠️</div>
                         </div>
                         <div style="flex-grow: 1;">
-                            <div class="text-sm mb-1" id="summary-product-name">Перфоратор Bosch GBH 2-28</div>
-                            <div class="text-xs text-3 mb-2">Код товару: <span id="summary-product-sku">363383</span></div>
-                            <div class="flex-between items-center">
-                                <span class="text-sm" id="summary-product-qty">1 шт</span>
+                            <div style="font-size: 14px; margin-bottom: 4px;" id="summary-product-name">Перфоратор Bosch GBH 2-28</div>
+                            <div style="font-size: 12px; color: var(--c-text-muted, #6c757d); margin-bottom: 8px;">Код: <span id="summary-product-sku">363383</span></div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 14px;" id="summary-product-qty">1 шт</span>
                                 <div>
-                                    <span class="text-xs text-3" style="text-decoration: line-through;" id="summary-old-price">14 500 ₴</span>
-                                    <span class="font-bold text-danger text-lg ml-2" id="summary-new-price">13 000 ₴</span>
+                                    <span style="font-size: 12px; color: var(--c-text-muted, #6c757d); text-decoration: line-through;" id="summary-old-price">14 500 ₴</span>
+                                    <span style="font-weight: bold; color: #dc3545; font-size: 16px; margin-left: 8px;" id="summary-new-price">13 000 ₴</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mb-6 pt-4" style="border-top: 1px solid var(--c-border);">
-                        <div class="flex-between mb-3 text-sm">
-                            <span class="text-3">Товарів у кошику</span>
-                            <span class="num" id="summary-total-qty">1 шт</span>
+                    <div style="margin-bottom: 24px; border-top: 1px solid var(--c-border, #dee2e6); padding-top: 16px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 14px;">
+                            <span style="color: var(--c-text-muted, #6c757d);">Товарів у кошику</span>
+                            <span id="summary-total-qty">1 шт</span>
                         </div>
-                        <div class="flex-between mb-3 text-sm">
-                            <span class="text-3">Сума замовлення</span>
-                            <span class="num" id="summary-total-price">14 500 ₴</span>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 14px;">
+                            <span style="color: var(--c-text-muted, #6c757d);">Сума замовлення</span>
+                            <span id="summary-total-price">14 500 ₴</span>
                         </div>
-                        <div class="flex-between mb-4 text-sm">
-                            <span class="text-danger">Знижка</span>
-                            <span class="num text-danger" id="summary-total-discount">-1 500 ₴</span>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 16px; font-size: 14px; color: #dc3545;">
+                            <span>Знижка</span>
+                            <span id="summary-total-discount">-1 500 ₴</span>
                         </div>
                         
-                        <div class="flex-between mb-6">
-                            <span class="font-display text-lg">Разом</span>
-                            <span class="num font-bold text-xl" id="summary-final-price">13 000 ₴</span>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 1.25rem; font-weight: bold;">Разом</span>
+                            <span style="font-weight: bold; font-size: 1.5rem;" id="summary-final-price">13 000 ₴</span>
                         </div>
                     </div>
 
-                    <button type="submit" form="checkout-form" class="btn btn-block btn-lg" style="background-color: #8da93e; color: white; border-radius: 4px; border: none; font-weight: bold;" id="btn-submit-order">
+                    <button type="submit" form="checkout-form" style="width: 100%; padding: 16px; background-color: var(--c-brand, #004085); color: white; border-radius: 4px; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase;" id="btn-submit-order">
                         ОФОРМИТИ ЗАМОВЛЕННЯ
                     </button>
                 </div>
@@ -202,11 +200,6 @@
     </main>
 
 <div id="footer"></div>
-    <!--<footer class="footer mt-16">
-        <div class="container footer__bottom">
-            <div>© 2026 БУДІНСТРУМЕНТ. ВСІ ПРАВА ЗАХИЩЕНІ.</div>
-        </div>
-    </footer>-->
 <script src="./js/utils.js"></script>
 <script src="./js/header.js"></script>
 </body>
