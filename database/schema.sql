@@ -1,15 +1,16 @@
 CREATE TABLE IF NOT EXISTS users
 (
-  user_id INTEGER PRIMARY KEY AUTOINCREMENT FOREINGN KEY,
-  email TEXT UNIQUE NOT NULL,
+  user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  email TEXT NOT NULL,
   login TEXT NOT NULL,
   fullname TEXT,
-  password_hash  TEXT UNIQUE NOT NULL, 
-  number TEXT UNIQUE 
+  password_hash  TEXT NOT NULL, 
+  phone_number TEXT,
+  UNIQUE(phone_number, email, password_hash)
 );
 
 CREATE TABLE IF NOT EXISTS products(
-  prod_id INTEGER PRIMARY KEY AUTOINCREMENT ,
+  prod_id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL,
   category TEXT NOT NULL,
   description TEXT NOT NULL,
