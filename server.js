@@ -8,6 +8,25 @@ const PORT = 3000;
 const dbManager = new DBManager();
 const app = express();
 
+async function addUser() {
+    let email = document.getElementById('user-email').textContent,
+     login =  document.getElementById('user-login').textContent,
+     fullname = document.getElementById('user-fullname').textContent,
+     password_hash = document.getElementById('user-password').textContent,
+     phone_number = document.getElementById('user-number').textContent;
+    
+    try {
+        await dbManager.run(
+            'INSERT INTO users (login, fullname, email, password_hash, phone_number) VALUES (?, ?, ?, ?, ?)', 
+            [`${login}`, `${fullname}`, `${email}`, `${password_hash}`, `${phone_number}`]
+        );
+        console.log('User is added');
+    } catch (err) {
+        console.error('Error:', err.message);
+    }
+}
+
+
 app.use(express.json());
 app.use(cors());
 app.use('/api', apiRouter);
