@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>UI Kit | БудІнструмент</title>
+</head>
+<body style="padding: 50px 0; background-color: var(--bg-main); color: var(--c-text);">
+
+    <div class="container">
+        <h1 style="margin-bottom: 40px; border-bottom: 2px solid var(--c-brand); padding-bottom: 10px; font-family: sans-serif;">
+            Система дизайну (Light Mode)
+        </h1>
+
+        <div style="display: grid; gap: 50px;">
+            
+            <section class="card" style="padding: 10px;">
+                <h2 style="margin-bottom: 20px; padding-left: 10px; font-family: sans-serif;">Кнопки .btn</h2>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <button class="btn btn-brand">ОФОРМИТИ ЗАМОВЛЕННЯ</button>
+                    <button class="btn btn-outline">РЕДАГУВАТИ</button>
+                    <button class="btn btn-brand" style="opacity: 0.6; cursor: not-allowed;">НЕАКТИВНА</button>
+                </div>
+            </section>
+            
+            <section class="card" style="padding: 10px;">
+                <h2 style="margin-bottom: 20px; padding-left: 10px; font-family: sans-serif;">Форми та ввід .input</h2>
+                <div style="max-width: 400px; display: grid; gap: 20px;">
+                    <input type="text" class="input" placeholder="Прізвище, Ім'я, По батькові">
+                    <input type="email" class="input" placeholder="example@mail.com">
+                    
+                    <div style="margin-top: 10px;">
+                        <label class="custom-control">
+                            <input type="radio" name="demo" checked>
+                            <span class="checkmark"></span>
+                            <span>Я новий покупець</span>
+                        </label>
+                        <label class="custom-control">
+                            <input type="radio" name="demo">
+                            <span class="checkmark"></span>
+                            <span>Я постійний покупець</span>
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card" style="padding: 10px;">
+                <h2 style="margin-bottom: 20px; padding-left: 10px; font-family: sans-serif;">Картки товарів .product-card</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px;">
+                    
+                    <div class="card product-card" style="margin-bottom: 0;">
+                        <div class="product-card__img" style="background: #222; height: 200px; border-radius: 4px; display: flex; align-items: center; justify-content: center; position: relative; margin-bottom: 15px;">
+                            <div style="font-size: 50px;">🛠️</div>
+                            <span class="badge" style="position: absolute; top: 12px; right: 12px; background: var(--c-brand); color: white; padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: bold;">НОВИНКА</span>
+                        </div>
+                        <div class="text-muted" style="font-size: 12px;padding-left: 25px;">SKU: BSH-500-TX</div>
+                        <h3 style="font-size: 18px; margin: 10px 0;padding-left: 25px; min-height: 44px;">Відбійний молоток Bosch GSH 5</h3>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                            <div>
+                                <div class="text-muted" style="font-size: 11px;padding-left: 30px;">Продаж</div>
+                                <div class="font-bold" style="padding-left: 20px;">24 100 ₴</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div class="text-muted" style="font-size: 11px;padding-right: 30px;">Оренда</div>
+                                <div class="text-brand font-bold"style="padding-right: 25px;">450 ₴</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-brand" style="width: 100%;color: rgba(6, 9, 165, 0.599)">В КОШИК</button>
+                    </div>
+
+                    <div class="card product-card" style="margin-bottom: 0;">
+                        <div class="product-card__img" style="background: #222; height: 200px; border-radius: 4px; display: flex; align-items: center; justify-content: center; position: relative; margin-bottom: 15px;">
+                            <div style="font-size: 50px;">📏</div>
+                            <span class="badge" style="position: absolute; top: 12px; right: 12px; background: #ffc107; color: #000; padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: bold;">АКЦІЯ</span>
+                        </div>
+                        <div class="text-muted" style="font-size: 12px;padding-left: 25px;">SKU: DW-088-K</div>
+                        <h3 style="font-size: 18px; margin: 10px 0; min-height: 44px;padding-left: 25px;">Лазерний рівень DeWalt DW088</h3>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                            <div>
+                                <div class="text-muted" style="font-size: 11px;padding-left: 30px;">Продаж</div>
+                                <div class="font-bold"style="padding-left: 25px;">6 200 ₴</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div class="text-muted" style="font-size: 11px;padding-right: 30px;">Оренда</div>
+                                <div class="text-brand font-bold"style="padding-right: 25px;">200 ₴</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-brand" style="width: 100%;color: rgba(6, 9, 165, 0.599)">В КОШИК</button>
+                    </div>
+
+                </div>
+            </section>
+
+          <section class="card" style="padding: 20px;">
+                <h2 style="margin-bottom: 20px; padding-left: 10px; font-family: sans-serif;">Діалогові вікна .modal</h2>
+                <div style="padding-left: 10px;">
+                    <button class="btn btn-outline" onclick="toggleModal('modal-demo', true)">Тестова модалка</button>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-demo">
+        <div class="modal-content">
+            <h3 style="margin-bottom: 15px; font-family: sans-serif;">Підтвердіть дію</h3>
+            <p class="text-muted" style="margin-bottom: 25px;">Ви впевнені, що хочете видалити товар з кошика?</p>
+            <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                <button class="btn btn-outline" onclick="toggleModal('modal-demo', false)">СКАСУВАТИ</button>
+                <button class="btn btn-brand" style="background: var(--c-danger);">ТАК, ВИДАЛИТИ</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/utils.js"></script>
+</body>
+</html>
