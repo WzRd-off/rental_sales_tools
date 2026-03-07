@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Кошик | БудІнструмент</title>
+</head>
+<body>
+<div id="header"></div>
+    <!--<header class="header">
+        <div class="container header__inner">
+            <a href="index.html" class="header__logo">
+                <div class="header__logo-mark">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                </div>
+                БудІнструмент
+            </a>
+            <nav class="header__nav">
+                <a href="index.html">Головна</a>
+                <a href="catalog.html">Каталог</a>
+                <a href="cart.html" class="active">Кошик</a>
+            </nav>
+        </div>
+    </header>-->
+
+    <main class="container mt-8">
+        <div class="mb-8">
+            <div class="section-eyebrow">Shopping Cart</div>
+            <h1 class="section-title">Мій кошик</h1>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 350px; gap: var(--sp-6); align-items: start;">
+            
+            <div id="cart-items-container" class="flex flex-direction-column gap-4">
+                
+                <div id="item-363383" class="card p-4 flex items-center gap-6" data-id="363383">
+                    <div class="product-card__img" style="width: 80px; height: 80px; flex-shrink: 0;">
+                        <div class="product-card__icon" style="font-size: 1.5rem;">🛠️</div>
+                    </div>
+
+                    <div style="flex-grow: 1;">
+                        <div class="product-card__sku">ID: <span id="sku-363383">363383</span></div>
+                        <h3 class="font-bold uppercase text-sm mb-2">Перфоратор Bosch GBH 2-28</h3>
+                        <div class="flex items-center gap-3">
+                            <span id="price-old-363383" class="text-3 text-xs" style="text-decoration: line-through;">14 500 ₴</span>
+                            <span class="badge badge-danger">-1 500 ₴</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <button id="btn-minus-363383" class="btn btn-outline btn-sm" style="padding: 2px 10px;">−</button>
+                        <input type="text" id="qty-363383" class="input num text-center" value="1" style="width: 50px; padding: 5px;">
+                        <button id="btn-plus-363383" class="btn btn-outline btn-sm" style="padding: 2px 10px;">+</button>
+                    </div>
+
+                    <div id="price-row-363383" class="num font-bold text-brand" style="width: 110px; text-align: right;">
+                        13 000 ₴
+                    </div>
+
+                    <button id="btn-remove-363383" class="header__icon-btn" style="color: var(--c-danger);">✕</button>
+                </div>
+
+            </div>
+
+            <aside>
+                <div class="card">
+                    <div class="card-header font-display uppercase tracking-wider">Підсумок замовлення</div>
+                    <div class="card-body">
+                        <div class="flex-between mb-3 text-sm">
+                            <span class="text-3">Товари</span>
+                            <span id="cart-total-count" class="num">1 шт</span>
+                        </div>
+                        <div class="flex-between mb-6 text-sm">
+                            <span class="text-3">Знижка</span>
+                            <span id="cart-total-discount" class="num text-danger">-1 500 ₴</span>
+                        </div>
+
+                        <div class="flex-between mb-8" style="border-top: 1px solid var(--c-border); padding-top: 1rem;">
+                            <span class="font-bold">РАЗОМ:</span>
+                            <span id="cart-total-price" class="num text-xl text-main">13 000 ₴</span>
+                        </div>
+
+                        <button id="btn-checkout" class="btn btn-dark btn-block btn-lg">ОФОРМИТИ ЗАМОВЛЕННЯ</button>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+<div id="footer"></div>
+ <!--   <footer class="footer mt-16">
+        <div class="container footer__bottom">
+            <div>© 2026 БУДІНСТРУМЕНТ. ВСІ ПРАВА ЗАХИЩЕНІ.</div>
+        </div>
+    </footer>-->
+    <script src="./js/utils.js"></script>
+<script src="./js/header.js"></script>
+</body>
+</html>
