@@ -869,3 +869,75 @@ p { color: var(--c-text-2); line-height: 1.7; font-size: 0.95rem; }
 
 .w-full { width: 100%; }
 .divider { border: none; border-top: 1px solid var(--c-border); margin: var(--sp-6) 0; }
+
+ .compare-table-container {
+            overflow-x: auto;
+            border-radius: var(--r-md);
+            border: 1px solid var(--c-border);
+            box-shadow: var(--shadow-sm);
+            background: var(--c-bg-white);
+        }
+
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px;
+        }
+
+        .compare-table th {
+            padding: var(--sp-6) var(--sp-5);
+            border-bottom: 1px solid var(--c-border);
+            border-right: 1px solid var(--c-border);
+            vertical-align: top;
+            width: 26%;
+        }
+        .compare-table th:last-child { border-right: none; }
+        .compare-table th.empty-cell { background: var(--c-bg); width: 22%; }
+
+        .compare-item { text-align: center; position: relative; }
+        .compare-item-img {
+            height: 140px; object-fit: contain; margin-bottom: var(--sp-3); mix-blend-mode: multiply;
+        }
+        .compare-item-title {
+            font-family: var(--font-display); font-size: 1.1rem; font-weight: 700;
+            color: var(--c-text); text-transform: uppercase; margin-bottom: var(--sp-2); line-height: 1.2;
+        }
+        .compare-item-price {
+            font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700;
+            color: var(--c-brand); margin-bottom: var(--sp-4); letter-spacing: -0.02em;
+        }
+
+        .btn-remove {
+            position: absolute; top: -15px; right: -15px;
+            background: var(--c-danger-bg); color: var(--c-danger);
+            border-radius: var(--r-sm); width: 32px; height: 32px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; transition: var(--tr); border: 1px solid transparent;
+        }
+        .btn-remove:hover { background: var(--c-danger); color: #fff; border-color: var(--c-danger); }
+
+        .compare-table td {
+            padding: var(--sp-4) var(--sp-5);
+            border-bottom: 1px solid var(--c-border);
+            border-right: 1px solid var(--c-border);
+            font-size: 0.95rem; color: var(--c-text-2);
+        }
+        .compare-table td:last-child { border-right: none; }
+        
+        .compare-table td:first-child {
+            font-weight: 600; color: var(--c-text); background: var(--c-bg);
+            text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em;
+        }
+
+        .cell-better {
+            background: var(--c-success-bg) !important; 
+            color: var(--c-success) !important;
+            font-weight: 600;
+        }
+        .cell-worse {
+            background: var(--c-danger-bg) !important;
+            color: var(--c-danger) !important;
+            font-weight: 600;
+        }
+        
+        .hide-same-rows .row-same { display: none; }

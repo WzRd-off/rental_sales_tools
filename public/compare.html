@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Порівняння товарів | БудІнструмент</title>
+    
+    <link rel="stylesheet" href="css/style.css"> 
+    
+</head>
+<body>
+
+    <div id="header"></div>
+
+    <main class="container section">
+        
+        <div class="flex-between flex-wrap gap-4 mb-6">
+            <div>
+                <div class="section-eyebrow">Аналіз характеристик</div>
+                <h1 class="section-title mb-0">Порівняння товарів</h1>
+            </div>
+            
+            <label class="flex items-center gap-2 font-medium" style="cursor: pointer; color: var(--c-text-2);">
+                <input type="checkbox" id="diff-toggle" style="width: 18px; height: 18px; accent-color: var(--c-brand);">
+                Показувати тільки відмінності
+            </label>
+        </div>
+
+        <div class="compare-table-container" id="compare-wrapper">
+            <table class="compare-table">
+               <thead>
+                    <tr>
+                        <th class="empty-cell"></th>
+                        <th>
+                            <div class="compare-item">
+                                <button class="btn-remove" title="Видалити" onclick="removeItem(this)">✕</button>
+                                
+                                <a href="product.html" style="text-decoration: none; color: inherit; display: block;">
+                                    <img src="https://via.placeholder.com/200" alt="Інструмент 1" class="compare-item-img w-full">
+                                    <h3 class="compare-item-title">Дриль-шурупокрут Bosch</h3>
+                                </a>
+                                
+                                <div class="compare-item-price num">2 500 ₴</div>
+                                <button class="btn btn-primary w-full" onclick="showToast('Товар додано в кошик', 'success')">В КОШИК</button>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="compare-item">
+                                <button class="btn-remove" title="Видалити" onclick="removeItem(this)">✕</button>
+                                
+                                <a href="product.html" style="text-decoration: none; color: inherit; display: block;">
+                                    <img src="https://via.placeholder.com/200" alt="Інструмент 2" class="compare-item-img w-full">
+                                    <h3 class="compare-item-title">Дриль-шурупокрут Makita</h3>
+                                </a>
+                                
+                                <div class="compare-item-price num">3 100 ₴</div>
+                                <button class="btn btn-primary w-full" onclick="showToast('Товар додано в кошик', 'success')">В КОШИК</button>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Живлення</td>
+                        <td>Акумулятор</td>
+                        <td>Акумулятор</td>
+                    </tr>
+                    <tr>
+                        <td>Потужність</td>
+                        <td>250 Вт</td>
+                        <td>290 Вт</td>
+                    </tr>
+                    <tr>
+                        <td>Гарантія</td>
+                        <td>2 роки</td>
+                        <td>3 роки</td>
+                    </tr>
+                    <tr>
+                        <td>Вага</td>
+                        <td>1.2 кг</td>
+                        <td>1.5 кг</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/header.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const rows = document.querySelectorAll('.compare-table tbody tr');
+            
+            rows.forEach(row => {
+                const cells = Array.from(row.querySelectorAll('td:not(:first-child)'));
+                if (cells.length < 2) return;
+
+              
+                const propName = row.querySelector('td:first-child').textContent.toLowerCase().trim();
+
+           
+                const firstText = cells[0].textContent.replace(/\s+/g, '').toLowerCase();
+                const isSame = cells.every(c => c.textContent.replace(/\s+/g, '').toLowerCase() === firstText);
+
+                if (isSame) {
+                    row.classList.add('row-same');
+                    return; 
+                }
+                
+            
+                row.classList.add('row-diff');
+
+              
+                const numValues = cells.map(cell => {
+                   
+                    const match = cell.textContent.replace(',', '.').match(/[-+]?[0-9]*\.?[0-9]+/);
+                    return match ? parseFloat(match[0]) : null;
+                });
+
+               
+                if (numValues.some(val => val === null || isNaN(val))) return;
+
+             
+                const lowerIsBetter = ['вага', 'ціна', 'шум', 'вібрація'].some(keyword => propName.includes(keyword));
+
+                const maxVal = Math.max(...numValues);
+                const minVal = Math.min(...numValues);
+
+                const bestVal = lowerIsBetter ? minVal : maxVal;
+                const worstVal = lowerIsBetter ? maxVal : minVal;
+
+              
+                cells.forEach((cell, index) => {
+                    const val = numValues[index];
+                    if (val === bestVal) {
+                        cell.classList.add('cell-better'); 
+                    } else if (val === worstVal) {
+                        cell.classList.add('cell-worse');  
+                    }
+                });
+            });
+
+            
+            const toggle = document.getElementById('diff-toggle');
+            const tableWrapper = document.getElementById('compare-wrapper');
+
+            if (toggle && tableWrapper) {
+                toggle.addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        tableWrapper.classList.add('hide-same-rows');
+                    } else {
+                        tableWrapper.classList.remove('hide-same-rows');
+                    }
+                });
+            }
+        });
+
+        function removeItem(btn) {
+            btn.closest('th').style.opacity = '0.3';
+            btn.closest('th').style.pointerEvents = 'none';
+            if(typeof showToast === 'function') {
+                showToast('Товар видалено з порівняння', 'error');
+            }
+        }
+    </script>
+</body>
+</html>
