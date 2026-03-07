@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дриль-шурупокрут Bosch | БудІнструмент</title>
+    <link rel="stylesheet" href="css/style.css"> 
+</head>
+<body>
+
+    <div id="header"></div>
+
+    <main class="container section" style="padding-top: var(--sp-8);">
+
+        <div class="grid grid-2 gap-8 items-start mb-8">
+            
+            <div class="gallery">
+                <div class="gallery-main">
+                    <img id="main-img" src="https://via.placeholder.com/600x600?text=Фото+1" alt="Товар">
+                </div>
+                <div class="gallery-thumbs">
+                    <div class="gallery-thumb active" onclick="changeImage(this, 'https://via.placeholder.com/600x600?text=Фото+1')">
+                        <img src="https://via.placeholder.com/600x600?text=Фото+1" alt="Thumb 1">
+                    </div>
+                    <div class="gallery-thumb" onclick="changeImage(this, 'https://via.placeholder.com/600x600?text=Фото+2')">
+                        <img src="https://via.placeholder.com/600x600?text=Фото+2" alt="Thumb 2">
+                    </div>
+                    <div class="gallery-thumb" onclick="changeImage(this, 'https://via.placeholder.com/600x600?text=Фото+3')">
+                        <img src="https://via.placeholder.com/600x600?text=Фото+3" alt="Thumb 3">
+                    </div>
+                    <div class="gallery-thumb" onclick="changeImage(this, 'https://via.placeholder.com/600x600?text=Фото+4')">
+                        <img src="https://via.placeholder.com/600x600?text=Фото+4" alt="Thumb 4">
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-info">
+                <div class="product-sku">Артикул: BS-102938</div>
+                <h1 class="product-title">Дриль-шурупокрут акумуляторний Bosch GSR 12V-30</h1>
+                
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="review-stars">★★★★★</div>
+                    <a href="#reviews" class="text-sm" onclick="openTab('tab-reviews')">12 відгуків</a>
+                </div>
+
+                <p class="text-2 mb-6">Компактний і потужний інструмент для професійного використання. Безщітковий двигун забезпечує тривалий термін служби та високу продуктивність.</p>
+
+                <div class="product-price-block">
+                    <div class="product-stock">В наявності</div>
+                    <div class="flex-between items-end mb-5">
+                        <div class="product-price">2 500 ₴</div>
+                        <div class="text-3 text-sm font-mono">Або оренда: <span class="text-brand font-bold">200 ₴ / доба</span></div>
+                    </div>
+                    
+                    <div class="flex gap-3">
+                        <button class="btn btn-primary btn-xl" style="flex: 2;">В КОШИК</button>
+                        <button class="btn btn-outline btn-xl" style="flex: 1;" title="Додати до порівняння">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3v18M8 3v18M3 8h5M16 16h5"/></svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <ul class="text-sm text-2" style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
+                    <li>✓ Безкоштовна доставка від 3000 ₴</li>
+                    <li>✓ Офіційна гарантія 36 місяців</li>
+                    <li>✓ Оплата при отриманні</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tabs-container">
+            <div class="tabs-nav">
+                <button class="tab-btn active" onclick="openTab('tab-desc', this)">Опис</button>
+                <button class="tab-btn" onclick="openTab('tab-chars', this)">Характеристики</button>
+                <button class="tab-btn" id="reviews-tab-btn" onclick="openTab('tab-reviews', this)">Відгуки (2)</button>
+            </div>
+
+            <div id="tab-desc" class="tab-pane active">
+                <h3 class="mb-4">Детальний опис товару</h3>
+                <div class="text-2" style="max-width: 800px;">
+                    <p class="mb-3">Bosch GSR 12V-30 — це професійний дриль-шурупокрут, який ідеально підходить для роботи у важкодоступних місцях завдяки своїй компактності.</p>
+                    <p>Завдяки безщітковому двигуну інструмент працює довше на одному заряді і не потребує обслуговування.</p>
+                </div>
+            </div>
+
+            <div id="tab-chars" class="tab-pane">
+                <table class="char-table">
+                    <tbody>
+                        <tr><td>Тип живлення</td><td>Акумулятор</td></tr>
+                        <tr><td>Напруга акумулятора</td><td>12 В</td></tr>
+                        <tr><td>Тип двигуна</td><td>Безщітковий</td></tr>
+                        <tr><td>Макс. крутний момент</td><td>30 Нм</td></tr>
+                        <tr><td>Вага</td><td>0.72 кг (без АКБ)</td></tr>
+                        <tr><td>Країна виробник</td><td>Малайзія</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="tab-reviews" class="tab-pane" id="reviews">
+                <div class="flex-between items-center mb-6" style="max-width: 800px;">
+                    <h3>Відгуки покупців</h3>
+                    <button class="btn btn-outline btn-sm">НАПИСАТИ ВІДГУК</button>
+                </div>
+
+                <div class="review-list">
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div>
+                                <div class="review-author">Олександр <span class="badge badge-success" style="font-size: 0.6rem;">Купив товар</span></div>
+                                <div class="review-date">12 Травня 2024</div>
+                            </div>
+                            <div class="review-stars">★★★★★</div>
+                        </div>
+                        <div class="review-text">
+                            Чудовий шурупокрут. Дуже легкий, рука не втомлюється навіть після цілого дня роботи. Акумулятор тримає довго. Рекомендую!
+                        </div>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div>
+                                <div class="review-author">Іван</div>
+                                <div class="review-date">03 Квітня 2024</div>
+                            </div>
+                            <div class="review-stars">★★★★☆</div>
+                        </div>
+                        <div class="review-text">
+                            Інструмент супер, але кейс в комплекті міг би бути трохи якіснішим. В цілому задоволений покупкою.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/header.js"></script>
+    
+    <script>
+        // Логіка для фотогалереї
+        function changeImage(element, src) {
+            document.getElementById('main-img').src = src;
+            document.querySelectorAll('.gallery-thumb').forEach(thumb => thumb.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        // Логіка для табів
+        function openTab(tabId, btnElement = null) {
+            // Ховаємо всі таби
+            document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+            // Показуємо потрібний
+            document.getElementById(tabId).classList.add('active');
+            
+            // Оновлюємо активну кнопку
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            if (btnElement) {
+                btnElement.classList.add('active');
+            } else {
+                if(tabId === 'tab-reviews') {
+                    document.getElementById('reviews-tab-btn').classList.add('active');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
