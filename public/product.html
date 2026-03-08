@@ -140,21 +140,21 @@
     <script src="js/header.js"></script>
     
     <script>
-        // Логіка для фотогалереї
+        
         function changeImage(element, src) {
             document.getElementById('main-img').src = src;
             document.querySelectorAll('.gallery-thumb').forEach(thumb => thumb.classList.remove('active'));
             element.classList.add('active');
         }
 
-        // Логіка для табів
+     
         function openTab(tabId, btnElement = null) {
-            // Ховаємо всі таби
+            
             document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
-            // Показуємо потрібний
+           
             document.getElementById(tabId).classList.add('active');
             
-            // Оновлюємо активну кнопку
+          
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             
             if (btnElement) {
