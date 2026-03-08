@@ -62,16 +62,5 @@ CREATE TABLE IF NOT EXISTS history_rentals (
   FOREIGN KEY (prod_id) REFERENCES products(prod_id)
 );
 
-CREATE TABLE IF NOT EXISTS comments (
-  comment_id INTEGER PRIMARY KEY AUTOINCREMENT,
-  prod_id INTEGER,
-  user_id INTEGER,
-  grade INTEGER NOT NULL,
-  comment TEXT ,
-  time TEXT NOT NULL DEFAULT Date('now'),
-  FOREIGN KEY (user_id) REFERENCES users(user_id),
-  FOREIGN KEY (prod_id) REFERENCES products(prod_id)
-);
-
 
 
