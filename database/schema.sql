@@ -1,16 +1,16 @@
-CREATE TABLE IF NOT EXISTS users
-(
+CREATE TABLE IF NOT EXISTS users (
   user_id INTEGER PRIMARY KEY AUTOINCREMENT,
-  email TEXT NOT NULL,
-  login TEXT NOT NULL,
+  email TEXT UNIQUE NOT NULL,
   fullname TEXT,
-  password_hash  TEXT NOT NULL, 
-  phone_number TEXT,
-  UNIQUE(phone_number, email, password_hash)
+  password_hash  TEXT UNIQUE NOT NULL, 
+  number TEXT UNIQUE,
+  company_name TEXT,
+  edrpou TEXT,
+  legal_address TEXT  
 );
 
-CREATE TABLE IF NOT EXISTS products(
-  prod_id INTEGER PRIMARY KEY AUTOINCREMENT,
+CREATE TABLE IF NOT EXISTS products (
+  prod_id INTEGER PRIMARY KEY AUTOINCREMENT ,
   name TEXT NOT NULL,
   category TEXT NOT NULL,
   description TEXT NOT NULL,
@@ -20,8 +20,7 @@ CREATE TABLE IF NOT EXISTS products(
   count_of_bought INTEGER DEFAULT 0
 );
 
-CREATE TABLE IF NOT EXISTS reviews
-(
+CREATE TABLE IF NOT EXISTS reviews (
   reviews_id INTEGER PRIMARY KEY AUTOINCREMENT,
   prod_id INTEGER, 
   user_id INTEGER,
@@ -31,8 +30,7 @@ CREATE TABLE IF NOT EXISTS reviews
   FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
-CREATE TABLE IF NOT EXISTS wishlist
-(
+CREATE TABLE IF NOT EXISTS wishlist (
   wishlist_id INTEGER PRIMARY KEY AUTOINCREMENT,
   user_id INTEGER,
   prod_id INTEGER,
@@ -40,20 +38,26 @@ CREATE TABLE IF NOT EXISTS wishlist
   FOREIGN KEY (prod_id) REFERENCES products(prod_id)
 );
 
-CREATE TABLE IF NOT EXISTS history_purchases
-(
+CREATE TABLE IF NOT EXISTS history_purchases (
   history_id INTEGER PRIMARY KEY AUTOINCREMENT,
   prod_id INTEGER,
   user_id INTEGER,
+  quantity INTEGER DEFAULT 1,
+  total_price REAL NOT NULL,
+  order_date TEXT DEFAULT Date('now'),
   FOREIGN KEY (user_id) REFERENCES users(user_id),
   FOREIGN KEY (prod_id) REFERENCES products(prod_id)
 );
 
-CREATE TABLE IF NOT EXISTS history_rentals
-(
+CREATE TABLE IF NOT EXISTS history_rentals (
   history_id INTEGER PRIMARY KEY AUTOINCREMENT,
   prod_id INTEGER,
   user_id INTEGER,
+  start_date TEXT NOT NULL,
+  end_date TEXT NOT NULL,
+  total_price REAL NOT NULL,
+  status TEXT DEFAULT 'Активна',
+  order_date TEXT DEFAULT Date('now'),
   FOREIGN KEY (user_id) REFERENCES users(user_id),
   FOREIGN KEY (prod_id) REFERENCES products(prod_id)
 );
