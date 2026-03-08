@@ -4,7 +4,10 @@ CREATE TABLE IF NOT EXISTS users
   email TEXT UNIQUE NOT NULL,
   fullname TEXT,
   password_hash  TEXT UNIQUE NOT NULL, 
-  number TEXT UNIQUE 
+  number TEXT UNIQUE,
+  company_name TEXT,
+  edrpou TEXT,
+  legal_address TEXT  
 );
 
 CREATE TABLE IF NOT EXISTS products(
@@ -38,24 +41,27 @@ CREATE TABLE IF NOT EXISTS wishlist
   FOREIGN KEY (prod_id) REFERENCES products(prod_id)
 );
 
-CREATE TABLE IF NOT EXISTS history_purchases
-(
+CREATE TABLE IF NOT EXISTS history_purchases (
   history_id INTEGER PRIMARY KEY AUTOINCREMENT,
   prod_id INTEGER,
   user_id INTEGER,
-  total_price REAL,
+  quantity INTEGER DEFAULT 1,
+  total_price REAL NOT NULL,
+  status TEXT DEFAULT 'Новий',
+  order_date TEXT DEFAULT Date('now'),
   FOREIGN KEY (user_id) REFERENCES users(user_id),
   FOREIGN KEY (prod_id) REFERENCES products(prod_id)
 );
 
-CREATE TABLE IF NOT EXISTS history_rentals
-(
+CREATE TABLE IF NOT EXISTS history_rentals (
   history_id INTEGER PRIMARY KEY AUTOINCREMENT,
   prod_id INTEGER,
   user_id INTEGER,
-  start_date TEXT,
-  end_date TEXT,
-  total_price REAL,
+  start_date TEXT NOT NULL,
+  end_date TEXT NOT NULL,
+  total_price REAL NOT NULL,
+  status TEXT DEFAULT 'Активна',
+  order_date TEXT DEFAULT Date('now'),
   FOREIGN KEY (user_id) REFERENCES users(user_id),
   FOREIGN KEY (prod_id) REFERENCES products(prod_id)
 );
