@@ -940,3 +940,15 @@ p { color: var(--c-text-2); line-height: 1.7; font-size: 0.95rem; }
         .step-content.active { display: block; }
         .active-header .arrow-icon { transform: rotate(180deg); }
         .arrow-icon { transition: transform 0.3s; font-size: 0.8rem; }
+        /* --- Валідація форм --- */
+.error-message { 
+    color: #dc3545; 
+    font-size: 12px; 
+    margin-top: 5px;
+    margin-bottom: 10px; 
+    display: none; /* Приховано за замовчуванням */
+}
+.input.invalid { 
+    border-color: #dc3545; 
+    background-color: #fff8f8; 
+}
