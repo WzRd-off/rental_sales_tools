@@ -1,6 +1,5 @@
-CREATE TABLE IF NOT EXISTS users
-(
-  user_id INTEGER PRIMARY KEY AUTOINCREMENT FOREINGN KEY,
+CREATE TABLE IF NOT EXISTS users (
+  user_id INTEGER PRIMARY KEY AUTOINCREMENT,
   email TEXT UNIQUE NOT NULL,
   fullname TEXT,
   password_hash  TEXT UNIQUE NOT NULL, 
@@ -10,7 +9,7 @@ CREATE TABLE IF NOT EXISTS users
   legal_address TEXT  
 );
 
-CREATE TABLE IF NOT EXISTS products(
+CREATE TABLE IF NOT EXISTS products (
   prod_id INTEGER PRIMARY KEY AUTOINCREMENT ,
   name TEXT NOT NULL,
   category TEXT NOT NULL,
@@ -21,8 +20,7 @@ CREATE TABLE IF NOT EXISTS products(
   count_of_bought INTEGER DEFAULT 0
 );
 
-CREATE TABLE IF NOT EXISTS reviews
-(
+CREATE TABLE IF NOT EXISTS reviews (
   reviews_id INTEGER PRIMARY KEY AUTOINCREMENT,
   prod_id INTEGER, 
   user_id INTEGER,
@@ -32,8 +30,7 @@ CREATE TABLE IF NOT EXISTS reviews
   FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
-CREATE TABLE IF NOT EXISTS wishlist
-(
+CREATE TABLE IF NOT EXISTS wishlist (
   wishlist_id INTEGER PRIMARY KEY AUTOINCREMENT,
   user_id INTEGER,
   prod_id INTEGER,
@@ -47,7 +44,6 @@ CREATE TABLE IF NOT EXISTS history_purchases (
   user_id INTEGER,
   quantity INTEGER DEFAULT 1,
   total_price REAL NOT NULL,
-  status TEXT DEFAULT 'Новий',
   order_date TEXT DEFAULT Date('now'),
   FOREIGN KEY (user_id) REFERENCES users(user_id),
   FOREIGN KEY (prod_id) REFERENCES products(prod_id)
@@ -62,6 +58,17 @@ CREATE TABLE IF NOT EXISTS history_rentals (
   total_price REAL NOT NULL,
   status TEXT DEFAULT 'Активна',
   order_date TEXT DEFAULT Date('now'),
+  FOREIGN KEY (user_id) REFERENCES users(user_id),
+  FOREIGN KEY (prod_id) REFERENCES products(prod_id)
+);
+
+CREATE TABLE IF NOT EXISTS comments (
+  comment_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  prod_id INTEGER,
+  user_id INTEGER,
+  grade INTEGER NOT NULL,
+  comment TEXT ,
+  time TEXT NOT NULL DEFAULT Date('now'),
   FOREIGN KEY (user_id) REFERENCES users(user_id),
   FOREIGN KEY (prod_id) REFERENCES products(prod_id)
 );
