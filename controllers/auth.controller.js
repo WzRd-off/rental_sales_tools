@@ -30,17 +30,37 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const user = await db._get('SELECT * FROM users WHERE email = ? AND password_hashed = ?', [email, hashedPassword]);
-        if (!user) {
-            return res.status(401).json({ success: false, message: 'Невірна пошта або пароль' });
+
+        if (!email || !password) {
+            return res.status(400).json({ success: false, message: 'Введіть email та пароль' });
         }
-        res.status(200).json({ success: true, message: 'Успішний вхід' });
+
+        const user = await db._get('SELECT * FROM users WHERE email = ?', [email]);
+        if (!user) {
+            return res.status(401).json({ success: false, message: 'Невірний email або пароль' });
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password_hash);
+        if (!isMatch) {
+            return res.status(401).json({ success: false, message: 'Невірний email або пароль' });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: 'Вхід успішний',
+            data: {
+                user_id: user.user_id,
+                email: user.email,
+                login: user.login,
+                fullname: user.fullname
+            }
+        });
     } catch (error) {
-        console.error('Помилка при вході користувача:', error);
+        console.error('Помилка входу:', error);
         res.status(500).json({ success: false, message: 'Помилка сервера' });
     }
 };
+
 
 module.exports = {
     registerUser,
