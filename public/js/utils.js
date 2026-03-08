@@ -105,7 +105,10 @@ function renderProductCard(product) {
           <div class="product-card__price-label">Категорія</div>
           <div class="product-card__rent">${product.category}</div>
         </div>
-        <button class="btn btn-dark btn-block mt-4">ДЕТАЛЬНІШЕ</button>
+        <div class="flex gap-2 mt-4">
+          <button class="btn btn-dark btn-block" onclick="window.location.href='product.html?id=${product.prod_id}'">ДЕТАЛЬНІШЕ</button>
+          <button class="btn btn-outline" onclick="addToCart(${JSON.stringify(product).replace(/"/g, '&quot;')})">🛒</button>
+        </div>
       </div>
     </div>
   `
@@ -113,19 +116,25 @@ function renderProductCard(product) {
 // renderProductCard(product) -> html карточки товара для каталога и страницы товара
 
 
-async function renderProducts(containerId) {
+async function renderProducts(containerId, limit = null) {
   const container = document.getElementById(containerId)
   if (!container) return
+
   container.innerHTML = 'Завантаження...'
-  const products = await fetchProducts()
+
+  let products = await fetchProducts()
+
+  if (limit) products = products.slice(0, limit)
+
   if (products.length === 0) {
     container.innerHTML = 'Товари не знайдені'
     return
   }
+
   container.innerHTML = products.map(renderProductCard).join('')
 }
-// renderProducts('catalog') -> рендерит все товары в <div id="catalog">
-
+// renderProducts('catalog') — все товары
+// renderProducts('popular-products', 4) — только первые 4
 
 async function renderProductById(containerId, productId) {
   const container = document.getElementById(containerId)
@@ -136,6 +145,6 @@ async function renderProductById(containerId, productId) {
     container.innerHTML = 'Товар не знайдений'
     return
   }
-  container.innerHTML = renderProductCard(product)
+  container.innerHTML = renderProductCard(product) 
 }
 // renderProductById('product-container', 5) -> редерит продукт с id=5 в <div id="product-container">
