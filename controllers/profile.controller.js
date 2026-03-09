@@ -8,8 +8,8 @@ const getProfile = async (req, res) => {
     }
 
     try {
-        const user = await db._get(
-            'SELECT user_id, email, login, fullname, number, company_name, edrpou, legal_address FROM users WHERE user_id = ?',
+        const user = await db.get(
+            'SELECT user_id, email, fullname, number, company_name, edrpou, legal_address FROM users WHERE user_id = ?',
             [userId]
         );
 
@@ -32,7 +32,7 @@ const getHistory = async (req, res) => {
     }
 
     try {
-        const purchases = await db._all(`
+        const purchases = await db.all(`
             SELECT h.*, p.name, p.photo 
             FROM history_purchases h
             JOIN products p ON h.prod_id = p.prod_id
@@ -40,7 +40,7 @@ const getHistory = async (req, res) => {
             ORDER BY h.order_date DESC
         `, [userId]);
 
-        const rentals = await db._all(`
+        const rentals = await db.all(`
             SELECT h.*, p.name, p.photo 
             FROM history_rentals h
             JOIN products p ON h.prod_id = p.prod_id
