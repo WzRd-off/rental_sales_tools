@@ -70,7 +70,7 @@ const updateProfile = async (req, res) => {
     }
 
     try {
-        await db._run(`
+        await db.run(`
             UPDATE users 
             SET email = ?, fullname = ?, number = ?, company_name = ?, edrpou = ?, legal_address = ?
             WHERE user_id = ?

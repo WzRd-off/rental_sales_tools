@@ -12,7 +12,7 @@ const createOrder = async (req, res) => {
     }
 
     try {
-        await db._run("BEGIN TRANSACTION");
+        await db.run("BEGIN TRANSACTION");
 
         let grandTotal = 0;
 
@@ -36,7 +36,7 @@ const createOrder = async (req, res) => {
 
             if (type === 'sell') {
                 itemTotalPrice = product.cost * quantity;
-                await db._run(
+                await db.run(
                     "INSERT INTO history_purchases (prod_id, user_id, quantity, total_price) VALUES (?, ?, ?, ?)",
                     [prodId, userId, quantity, itemTotalPrice]
                 );
@@ -58,7 +58,7 @@ const createOrder = async (req, res) => {
                 }
 
                 itemTotalPrice = days * product.cost * quantity; 
-                await db._run(
+                await db.run(
                     "INSERT INTO history_rentals (prod_id, user_id, start_date, end_date, total_price) VALUES (?, ?, ?, ?, ?)",
                     [prodId, userId, startDate, endDate, itemTotalPrice]
                 );
@@ -68,7 +68,7 @@ const createOrder = async (req, res) => {
                 throw err;
             }
 
-            await db._run(
+            await db.run(
                 "UPDATE products SET count_of_bought = count_of_bought + ? WHERE prod_id = ?",
                 [quantity, prodId]
             );
@@ -76,7 +76,7 @@ const createOrder = async (req, res) => {
             grandTotal += itemTotalPrice;
         }
 
-        await db._run("COMMIT");
+        await db.run("COMMIT");
 
         res.status(200).json({
             success: true,
@@ -85,7 +85,7 @@ const createOrder = async (req, res) => {
         });
 
     } catch (error) {
-        await db._run("ROLLBACK");
+        await db.run("ROLLBACK");
         
         const statusCode = error.status || 500;
         res.status(statusCode).json({
