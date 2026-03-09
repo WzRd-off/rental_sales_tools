@@ -9,47 +9,255 @@
 <body>
 <div id="header"></div>
 
-    <main class="container mt-8">
-        <div class="mb-8">
-            <div class="section-eyebrow">Shopping Cart</div>
-            <h1 class="section-title">Мій кошик</h1>
-        </div>
+<main class="container mt-8" style="margin-bottom: 100px;">
+    <div class="mb-8">
+        <div class="section-eyebrow">Shopping Cart</div>
+        <h1 class="section-title">Мій кошик</h1>
+    </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 350px; gap: var(--sp-6); align-items: start;">
-            
-            <div id="cart-items-container" class="flex flex-direction-column gap-4">
-                
-                
+    <!-- ПОРОЖНІЙ КОШИК -->
+    <div id="cart-empty" style="display: none; text-align: center; padding: 80px 0;">
+        <div style="font-size: 4rem; margin-bottom: 16px;">🛒</div>
+        <p style="color: #94a3b8; font-size: 1.2rem; margin-bottom: 24px;">Кошик порожній</p>
+        <a href="catalog.html" class="btn btn-primary">ПЕРЕЙТИ ДО КАТАЛОГУ</a>
+    </div>
 
-            </div>
+    <!-- КОШИК З ТОВАРАМИ -->
+    <div id="cart-content" style="display: none; display: grid; grid-template-columns: 1fr 350px; gap: var(--sp-6); align-items: start;">
 
-            <aside>
-                <div class="card">
-                    <div class="card-header font-display uppercase tracking-wider">Підсумок замовлення</div>
-                    <div class="card-body">
-                        <div class="flex-between mb-3 text-sm">
-                            <span class="text-3">Товари</span>
-                            <span id="cart-total-count" class="num">1 шт</span>
+        <div>
+            <!-- СПИСОК ТОВАРІВ -->
+            <div id="cart-items-container" style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px;"></div>
+
+            <!-- ФОРМА ОФОРМЛЕННЯ -->
+            <div class="card">
+                <div class="card-header font-display uppercase tracking-wider">Дані для замовлення</div>
+                <div class="card-body">
+                    <form id="checkout-form" style="display: flex; flex-direction: column; gap: 16px;">
+
+                        <div>
+                            <label style="display: block; font-size: 12px; font-weight: 700; color: #666; text-transform: uppercase; margin-bottom: 6px;">Ім'я та прізвище</label>
+                            <input type="text" id="user-name" class="input" placeholder="Іванов Іван" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                            <span id="name-error" style="display: none; font-size: 12px; color: #dc2626; margin-top: 4px;">Введіть коректне ім'я (мінімум 3 символи)</span>
                         </div>
-                        <div class="flex-between mb-6 text-sm">
-                            <span class="text-3">Знижка</span>
-                            <span id="cart-total-discount" class="num text-danger">-1 500 ₴</span>
+
+                        <div>
+                            <label style="display: block; font-size: 12px; font-weight: 700; color: #666; text-transform: uppercase; margin-bottom: 6px;">Телефон</label>
+                            <input type="text" id="user-phone" class="input" placeholder="0671234567" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                            <span id="phone-error" style="display: none; font-size: 12px; color: #dc2626; margin-top: 4px;">Введіть коректний номер (10 цифр)</span>
                         </div>
 
-                        <div class="flex-between mb-8" style="border-top: 1px solid var(--c-border); padding-top: 1rem;">
-                            <span class="font-bold">РАЗОМ:</span>
-                            <span id="cart-total-price" class="num text-xl text-main">13 000 ₴</span>
+                        <div>
+                            <label style="display: block; font-size: 12px; font-weight: 700; color: #666; text-transform: uppercase; margin-bottom: 6px;">Адреса доставки</label>
+                            <input type="text" id="user-address" class="input" placeholder="м. Київ, вул. Хрещатик, 1" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
                         </div>
 
-                        <button id="btn-checkout" class="btn btn-dark btn-block btn-lg">ОФОРМИТИ ЗАМОВЛЕННЯ</button>
-                    </div>
+                    </form>
                 </div>
-            </aside>
+            </div>
         </div>
-    </main>
+
+        <!-- ПІДСУМОК -->
+        <aside>
+            <div class="card" style="position: sticky; top: 20px;">
+                <div class="card-header font-display uppercase tracking-wider">Підсумок замовлення</div>
+                <div class="card-body">
+                    <div class="flex-between mb-3 text-sm">
+                        <span class="text-3">Товари</span>
+                        <span id="cart-total-count" class="num">0 шт</span>
+                    </div>
+                    <div class="flex-between mb-6" style="border-top: 1px solid var(--c-border); padding-top: 1rem;">
+                        <span class="font-bold">РАЗОМ:</span>
+                        <span id="cart-total-price" class="num text-xl text-main">0 ₴</span>
+                    </div>
+                    <button id="submit-btn" class="btn btn-dark btn-block btn-lg" onclick="document.getElementById('checkout-form').dispatchEvent(new Event('submit', {cancelable: true}))">
+                        ОФОРМИТИ ЗАМОВЛЕННЯ
+                    </button>
+                </div>
+            </div>
+        </aside>
+    </div>
+</main>
+
 <div id="footer"></div>
+
 <script src="./js/utils.js"></script>
 <script src="./js/header.js"></script>
-<script src="./js/cart.js"></script>
+<script>
+
+    // ---------- РЕНДЕР КОШИКА ----------
+    function renderCart() {
+        const cart = storage.get('cart') || []
+        const container = document.getElementById('cart-items-container')
+        const cartContent = document.getElementById('cart-content')
+        const cartEmpty = document.getElementById('cart-empty')
+
+        if (cart.length === 0) {
+            cartEmpty.style.display = 'block'
+            cartContent.style.display = 'none'
+            return
+        }
+
+        cartEmpty.style.display = 'none'
+        cartContent.style.display = 'grid'
+
+        container.innerHTML = cart.map(item => `
+            <div class="card p-4" data-id="${item.id}" style="display: flex; align-items: center; gap: 16px;">
+                <div class="product-card__img" style="width: 80px; height: 80px; flex-shrink: 0; border-radius: 8px; overflow: hidden; background: #f8fafc;">
+                    <img src="/images/${item.photo || ''}" alt="${item.name}"
+                         style="width: 100%; height: 100%; object-fit: contain;"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="product-card__icon" style="display:none; font-size: 1.5rem;">🛠️</div>
+                </div>
+                <div style="flex-grow: 1;">
+                    <div class="product-card__sku" style="font-size: 11px; color: #94a3b8;">SKU: ${item.id}</div>
+                    <h3 style="font-size: 14px; font-weight: 800; text-transform: uppercase; margin: 4px 0;">${item.name}</h3>
+                    <div style="font-size: 16px; font-weight: 900; color: #0f172a;">${formatPrice(item.price)}</div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <button class="btn btn-outline btn-sm" style="padding: 2px 10px;" onclick="changeQty(${item.id}, -1)">−</button>
+                    <span style="width: 30px; text-align: center; font-weight: 700;">${item.quantity}</span>
+                    <button class="btn btn-outline btn-sm" style="padding: 2px 10px;" onclick="changeQty(${item.id}, 1)">+</button>
+                </div>
+                <div style="width: 110px; text-align: right; font-weight: 900; color: var(--c-brand);">
+                    ${formatPrice(item.price * item.quantity)}
+                </div>
+                <button class="header__icon-btn" style="color: var(--c-danger);" onclick="removeItem(${item.id})">✕</button>
+            </div>
+        `).join('')
+
+        updateSummary(cart)
+    }
+
+    function updateSummary(cart) {
+        const totalCount = cart.reduce((s, i) => s + i.quantity, 0)
+        const totalPrice = cart.reduce((s, i) => s + i.price * i.quantity, 0)
+        document.getElementById('cart-total-count').textContent = `${totalCount} шт`
+        document.getElementById('cart-total-price').textContent = formatPrice(totalPrice)
+    }
+
+    function changeQty(id, delta) {
+        const cart = storage.get('cart') || []
+        const item = cart.find(i => i.id === id)
+        if (!item) return
+        item.quantity += delta
+        if (item.quantity <= 0) {
+            cart.splice(cart.indexOf(item), 1)
+        }
+        storage.set('cart', cart)
+        updateCartBadge()
+        renderCart()
+    }
+
+    function removeItem(id) {
+        const cart = (storage.get('cart') || []).filter(i => i.id !== id)
+        storage.set('cart', cart)
+        updateCartBadge()
+        renderCart()
+    }
+
+    // ---------- ВАЛІДАЦІЯ ----------
+    function showError(input, errorId) {
+        input.style.borderColor = '#dc2626'
+        const el = document.getElementById(errorId)
+        if (el) el.style.display = 'block'
+    }
+
+    function hideError(input, errorId) {
+        input.style.borderColor = '#cbd5e1'
+        const el = document.getElementById(errorId)
+        if (el) el.style.display = 'none'
+    }
+
+    function validateForm() {
+        let isValid = true
+        const name = document.getElementById('user-name')
+        if (name && name.value.trim().length < 3) {
+            showError(name, 'name-error'); isValid = false
+        } else if (name) {
+            hideError(name, 'name-error')
+        }
+        const phone = document.getElementById('user-phone')
+        if (phone) {
+            const clean = phone.value.replace(/\D/g, '')
+            if (!/^[0-9]{10}$/.test(clean)) {
+                showError(phone, 'phone-error'); isValid = false
+            } else {
+                hideError(phone, 'phone-error')
+            }
+        }
+        return isValid
+    }
+
+    // ---------- ОФОРМЛЕННЯ ----------
+    async function submitOrder() {
+        const cart = storage.get('cart') || []
+        if (cart.length === 0) { showToast('Кошик порожній', 'error'); return }
+
+        const user = storage.get('user')
+        if (!user) {
+            showToast('Будь ласка, увійдіть в систему', 'error')
+            window.location.href = '/login.html'
+            return
+        }
+
+        const items = cart.map(item => {
+            const orderItem = {
+                prodId: item.id,
+                type: item.type === 'rent' ? 'rent' : 'sell',
+                quantity: item.quantity
+            }
+            if (item.type === 'rent') {
+                const today = new Date()
+                const endDate = new Date()
+                endDate.setDate(today.getDate() + (item.days || 1))
+                orderItem.startDate = today.toISOString().split('T')[0]
+                orderItem.endDate = endDate.toISOString().split('T')[0]
+            }
+            return orderItem
+        })
+
+        const btn = document.getElementById('submit-btn')
+        if (btn) { btn.disabled = true; btn.textContent = 'Відправляємо...' }
+
+        try {
+            const res = await fetch('/api/orders/checkout', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ userId: user.user_id, items })
+            })
+            const data = await res.json()
+            if (data.success) {
+                storage.remove('cart')
+                updateCartBadge()
+                showToast('Замовлення успішно оформлено!', 'success')
+                setTimeout(() => { window.location.href = '/index.html' }, 1500)
+            } else {
+                showToast(data.message || 'Помилка оформлення замовлення', 'error')
+                if (btn) { btn.disabled = false; btn.textContent = 'ОФОРМИТИ ЗАМОВЛЕННЯ' }
+            }
+        } catch(e) {
+            console.error(e)
+            showToast('Помилка сервера, спробуйте пізніше', 'error')
+            if (btn) { btn.disabled = false; btn.textContent = 'ОФОРМИТИ ЗАМОВЛЕННЯ' }
+        }
+    }
+
+    // ---------- ЗАПУСК ----------
+    document.addEventListener('DOMContentLoaded', function() {
+        renderCart()
+
+        const form = document.getElementById('checkout-form')
+        if (!form) return
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault()
+            if (!validateForm()) {
+                showToast('Будь ласка, перевірте правильність заповнення полів', 'error')
+                return
+            }
+            await submitOrder()
+        })
+    })
+</script>
 </body>
 </html>
