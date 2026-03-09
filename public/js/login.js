@@ -1,5 +1,13 @@
+// public/js/login.js
+// Якщо вже залогінений — одразу на профіль
+if (storage.get('user')) {
+  window.location.href = 'profile.html'
+}
+
+// ── ВХІД ─────────────────────────────────────────────────────────────────────
+
 document.querySelector('#loginCard .btn').addEventListener('click', async () => {
-  const email = document.getElementById('login_email').value.trim()
+  const email    = document.getElementById('login_email').value.trim()
   const password = document.getElementById('login_password').value.trim()
 
   if (!email || !password) {
@@ -8,36 +16,36 @@ document.querySelector('#loginCard .btn').addEventListener('click', async () => 
   }
 
   try {
-    const res = await fetch(`${API_URL}/api/auth/login`, {
+    const res  = await fetch(`${API_URL}/api/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })
     })
 
     const data = await res.json()
-
     if (!res.ok) throw new Error(data.message || 'Помилка входу')
 
     storage.set('user', data.user)
-    storage.set('token', data.token)
 
     showToast('Ласкаво просимо!', 'success')
     setTimeout(() => window.location.href = 'profile.html', 1000)
 
-  } catch(e) {
+  } catch (e) {
     console.error(e)
     showToast(e.message, 'error')
   }
 })
 
+// ── РЕЄСТРАЦІЯ ────────────────────────────────────────────────────────────────
+
 document.querySelector('#registerCard .btn').addEventListener('click', async () => {
-  const fullname = document.getElementById('fullname').value.trim()
-  const email = document.getElementById('email').value.trim()
-  const phone = document.getElementById('phone').value.trim()
-  const password = document.getElementById('password').value.trim()
-  const company_name = document.getElementById('company_name').value.trim()
-  const company_code = document.getElementById('company_code').value.trim()
-  const company_address = document.getElementById('company_address').value.trim()
+  const fullname         = document.getElementById('fullname').value.trim()
+  const email            = document.getElementById('email').value.trim()
+  const phone            = document.getElementById('phone').value.trim()
+  const password         = document.getElementById('password').value.trim()
+  const company_name     = document.getElementById('company_name').value.trim()
+  const company_code     = document.getElementById('company_code').value.trim()
+  const company_address  = document.getElementById('company_address').value.trim()
 
   if (!fullname || !email || !phone || !password || !company_name || !company_code || !company_address) {
     showToast('Заповніть всі поля', 'error')
@@ -45,22 +53,22 @@ document.querySelector('#registerCard .btn').addEventListener('click', async () 
   }
 
   try {
-    const res = await fetch(`${API_URL}/api/auth/register`, {
+    const res  = await fetch(`${API_URL}/api/auth/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ fullname, email, phone, password, company_name, company_code, company_address })
     })
 
     const data = await res.json()
-
     if (!res.ok) throw new Error(data.message || 'Помилка реєстрації')
 
-    showToast('Реєстрація успішна! Увійдіть в акаунт', 'success')
-    setTimeout(() => {
-      document.getElementById('showLogin').click()
-    }, 1500)
+    // auth.controller повертає user — одразу логінимо і на профіль
+    storage.set('user', data.user)
 
-  } catch(e) {
+    showToast('Реєстрація успішна!', 'success')
+    setTimeout(() => window.location.href = 'profile.html', 1000)
+
+  } catch (e) {
     console.error(e)
     showToast(e.message, 'error')
   }
