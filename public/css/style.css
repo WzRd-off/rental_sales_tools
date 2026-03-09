@@ -882,7 +882,6 @@ p { color: var(--c-text-2); line-height: 1.7; font-size: 0.95rem; }
             }
         }
 
-        /* Стилі для акордеона */
         .step-header {
             display: flex;
             justify-content: space-between;
@@ -897,10 +896,10 @@ p { color: var(--c-text-2); line-height: 1.7; font-size: 0.95rem; }
         }
         .step-content {
             padding: 0 24px 24px 24px;
-            display: none; /* Сховано за замовчуванням */
+            display: none; 
         }
         .step-content.active {
-            display: block; /* Показуємо, коли активно */
+            display: block; 
         }
         .step-number {
             font-size: 1.25rem;
@@ -924,15 +923,14 @@ p { color: var(--c-text-2); line-height: 1.7; font-size: 0.95rem; }
         }
     .checkout-layout {
         display: grid;
-        grid-template-columns: 1fr; /* 1 колонка на мобільних */
+        grid-template-columns: 1fr;
         gap: 30px;
         align-items: start;
     }
     
-    /* На великих екранах перетворюємо на 2 колонки */
     @media (min-width: 992px) {
         .checkout-layout {
-            grid-template-columns: 1fr 380px; /* Форма займає все, сайдбар - рівно 380px */
+            grid-template-columns: 1fr 380px; 
         }
     }
 .step-header:hover { background: #fcfcfc; }

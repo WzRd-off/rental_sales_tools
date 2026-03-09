@@ -3,40 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Особистий кабінет — ToolRent B2B</title>
+
+  <title>Особистий кабінет</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="profile.css">
+  <link rel="stylesheet" href="css/profile.css">
 </head>
 <body>
+
 <div id="header"></div>
+
 
 <div class="pg-profile-hero">
   <div class="container">
     <div class="pg-profile-hero__inner">
-      <div class="pg-profile-hero__avatar">БТ</div>
+      <div class="pg-profile-hero__avatar" id="hero-avatar">—</div>
       <div class="pg-profile-hero__info">
-        <div class="pg-profile-hero__name">БудТех ТОВ</div>
+        <div class="pg-profile-hero__name" id="hero-name">—</div>
         <div class="pg-profile-hero__meta">
-          <span class="pg-profile-hero__meta-item"><strong>ЄДРПОУ:</strong> 34712089</span>
+          <span class="pg-profile-hero__meta-item"><strong>ЄДРПОУ:</strong> <span id="hero-edrpou">—</span></span>
           <div class="pg-profile-hero__dot"></div>
-          <span class="pg-profile-hero__meta-item"><strong>Email:</strong> zakupki@budtech.ua</span>
-          <div class="pg-profile-hero__dot"></div>
-          <span class="pg-profile-hero__meta-item"><strong>Клієнт з:</strong> березня 2023</span>
+          <span class="pg-profile-hero__meta-item"><strong>Email:</strong> <span id="hero-email">—</span></span>
         </div>
       </div>
       <div class="pg-profile-hero__stats">
         <div class="pg-profile-hero__stat">
-          <div class="pg-profile-hero__stat-val">14</div>
+          <div class="pg-profile-hero__stat-val" id="stat-total">—</div>
           <div class="pg-profile-hero__stat-lbl">Замовлень</div>
         </div>
         <div class="pg-profile-hero__stat">
-          <div class="pg-profile-hero__stat-val">3</div>
+          <div class="pg-profile-hero__stat-val" id="stat-active">—</div>
           <div class="pg-profile-hero__stat-lbl">Активних</div>
         </div>
         <div class="pg-profile-hero__stat">
-          <div class="pg-profile-hero__stat-val">87&thinsp;400</div>
+          <div class="pg-profile-hero__stat-val" id="stat-spent">—</div>
           <div class="pg-profile-hero__stat-lbl">Грн витрачено</div>
         </div>
       </div>
@@ -45,22 +46,20 @@
 </div>
 
 
+<main>
   <div class="container">
     <div class="pg-profile-layout">
-
-     
       <aside class="pg-profile-sidenav">
         <div class="pg-profile-sidenav__section">
           <div class="pg-profile-sidenav__label">Кабінет</div>
           <button class="pg-profile-sidenav__item is-active" data-panel="orders">
             <svg viewBox="0 0 15 15"><rect x="2" y="1" width="11" height="13" rx="1"/><path d="M5 5h5M5 8h5M5 11h3" stroke-width="1.3"/></svg>
             Історія замовлень
-            <span class="pg-profile-sidenav__count">14</span>
+            <span class="pg-profile-sidenav__count" id="nav-count-orders">0</span
           </button>
           <button class="pg-profile-sidenav__item" data-panel="wishlist">
             <svg viewBox="0 0 15 15"><path d="M7.5 12.5S2 9 2 5.5a2.5 2.5 0 015 0 2.5 2.5 0 015 0c0 3.5-5.5 7-5.5 7z" stroke-width="1.3"/></svg>
             Бажане
-            <span class="pg-profile-sidenav__count">3</span>
           </button>
         </div>
         <div class="pg-profile-sidenav__section">
@@ -80,289 +79,59 @@
         </div>
       </aside>
 
-      
       <div>
-
-        
         <div id="panel-orders" class="pg-profile-panel is-active">
-
           <div class="flex-between" style="margin-bottom:var(--sp-5)">
             <h3 style="font-size:1.4rem">Історія замовлень</h3>
-            <div style="display:flex;gap:var(--sp-2)">
-              <select class="input" style="width:auto;padding:6px 10px;font-size:0.78rem">
-                <option>Всі статуси</option>
-                <option>Активна оренда</option>
-                <option>Завершено</option>
-                <option>Покупка</option>
-              </select>
-              <button class="btn btn-outline btn-sm">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 1h10l-4 5v4l-2-1V6z"/></svg>
-                Фільтр
-              </button>
-            </div>
           </div>
 
           <div class="pg-history-tabs">
             <button class="pg-history-tab is-active" data-tab="all">
-              Всі <span class="pg-history-tab__count">14</span>
+              Всі <span class="pg-history-tab__count" id="count-all">0</span>
             </button>
             <button class="pg-history-tab" data-tab="rent-active">
-              Активна оренда <span class="pg-history-tab__count">3</span>
+              Активна оренда <span class="pg-history-tab__count" id="count-rent-active">0</span>
             </button>
             <button class="pg-history-tab" data-tab="rent-done">
-              Завершена оренда <span class="pg-history-tab__count">7</span>
+              Завершена оренда <span class="pg-history-tab__count" id="count-rent-done">0</span>
             </button>
             <button class="pg-history-tab" data-tab="purchase">
-              Покупки <span class="pg-history-tab__count">4</span>
+              Покупки <span class="pg-history-tab__count" id="count-purchase">0</span>
             </button>
           </div>
 
-          
           <div id="tab-all" class="pg-tab-panel is-active">
             <div class="table-wrapper">
               <table class="table">
                 <thead><tr>
-                  <th></th><th>№ замовлення</th><th>Дата</th><th>Тип</th>
-                  <th>Статус</th><th>Позицій</th><th>Сума</th><th></th>
+                  <th></th><th>№</th><th>Дата</th><th>Тип</th>
+                  <th>Статус</th><th>Сума</th><th></th>
                 </tr></thead>
-                <tbody>
-
-                  <tr class="pg-order-row" data-order="1">
-                    <td><span class="pg-order-expand">▶</span></td>
-                    <td class="td-num">#2024-0087</td>
-                    <td class="text-sm">15 груд 2024</td>
-                    <td><span class="badge badge-blue">Оренда</span></td>
-                    <td><span class="badge badge-success">Активна</span></td>
-                    <td class="td-num">2</td>
-                    <td class="td-num">4 800 ₴</td>
-                    <td><button class="btn btn-sm btn-outline">Деталі</button></td>
-                  </tr>
-                  <tr class="pg-order-detail-row" id="detail-1">
-                    <td colspan="8" class="pg-order-detail-cell">
-                      <div class="pg-order-detail-inner">
-                        <div class="alert alert-success" style="margin-bottom:var(--sp-3)">
-                          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="7.5" cy="7.5" r="6"/><path d="M5 7.5l2 2 3-3"/></svg>
-                          Активна оренда. Дата повернення: <strong>22 грудня 2024</strong>
-                        </div>
-                        <div class="pg-order-items">
-                          <div class="pg-order-item">
-                            <div class="pg-order-item__icon">⚡</div>
-                            <div style="flex:1">
-                              <div class="pg-order-item__name">Перфоратор Bosch GBH 2-26</div>
-                              <div class="pg-order-item__sku">ART-BH226</div>
-                            </div>
-                            <span class="pg-order-item__dates">15.12 – 22.12</span>
-                            <div class="pg-order-item__price">2 800 ₴</div>
-                          </div>
-                          <div class="pg-order-item">
-                            <div class="pg-order-item__icon">🔧</div>
-                            <div style="flex:1">
-                              <div class="pg-order-item__name">Шуруповерт DeWalt DCD796</div>
-                              <div class="pg-order-item__sku">ART-DW796</div>
-                            </div>
-                            <span class="pg-order-item__dates">15.12 – 22.12</span>
-                            <div class="pg-order-item__price">2 000 ₴</div>
-                          </div>
-                        </div>
-                        <div class="pg-order-detail-actions">
-                          <button class="btn btn-ghost btn-sm">Завантажити рахунок</button>
-                          <button class="btn btn-outline btn-sm">Продовжити оренду</button>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr class="pg-order-row" data-order="2">
-                    <td><span class="pg-order-expand">▶</span></td>
-                    <td class="td-num">#2024-0072</td>
-                    <td class="text-sm">2 листоп 2024</td>
-                    <td><span class="badge badge-blue">Оренда</span></td>
-                    <td><span class="badge badge-gray">Завершена</span></td>
-                    <td class="td-num">4</td>
-                    <td class="td-num">12 600 ₴</td>
-                    <td><button class="btn btn-sm btn-outline">Деталі</button></td>
-                  </tr>
-                  <tr class="pg-order-detail-row" id="detail-2">
-                    <td colspan="8" class="pg-order-detail-cell">
-                      <div class="pg-order-detail-inner">
-                        <div class="pg-order-items">
-                          <div class="pg-order-item">
-                            <div class="pg-order-item__icon">🪚</div>
-                            <div style="flex:1">
-                              <div class="pg-order-item__name">Торцева пила Makita LS1019</div>
-                              <div class="pg-order-item__sku">ART-MK1019</div>
-                            </div>
-                            <span class="pg-order-item__dates">02.11 – 16.11</span>
-                            <div class="pg-order-item__price">12 600 ₴</div>
-                          </div>
-                        </div>
-                        <div class="pg-order-detail-actions">
-                          <button class="btn btn-ghost btn-sm">Завантажити рахунок</button>
-                          <button class="btn btn-outline btn-sm" style="color:var(--c-brand);border-color:var(--c-brand)">Орендувати знову</button>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr class="pg-order-row" data-order="3">
-                    <td><span class="pg-order-expand">▶</span></td>
-                    <td class="td-num">#2024-0061</td>
-                    <td class="text-sm">18 жовтня 2024</td>
-                    <td><span class="badge badge-warning">Покупка</span></td>
-                    <td><span class="badge badge-success">Доставлено</span></td>
-                    <td class="td-num">6</td>
-                    <td class="td-num">38 900 ₴</td>
-                    <td><button class="btn btn-sm btn-outline">Деталі</button></td>
-                  </tr>
-                  <tr class="pg-order-detail-row" id="detail-3">
-                    <td colspan="8" class="pg-order-detail-cell">
-                      <div class="pg-order-detail-inner">
-                        <div class="pg-order-items">
-                          <div class="pg-order-item">
-                            <div class="pg-order-item__icon">⚙️</div>
-                            <div style="flex:1">
-                              <div class="pg-order-item__name">Зварювальний апарат ESAB 200</div>
-                              <div class="pg-order-item__sku">ART-ES200</div>
-                            </div>
-                            <span class="pg-order-item__qty">×1</span>
-                            <div class="pg-order-item__price">29 100 ₴</div>
-                          </div>
-                          <div class="pg-order-item">
-                            <div class="pg-order-item__icon">🔩</div>
-                            <div style="flex:1">
-                              <div class="pg-order-item__name">Набір ключів Snap-On 24 шт.</div>
-                              <div class="pg-order-item__sku">ART-SN24SET</div>
-                            </div>
-                            <span class="pg-order-item__qty">×2</span>
-                            <div class="pg-order-item__price">9 800 ₴</div>
-                          </div>
-                        </div>
-                        <div class="pg-order-detail-actions">
-                          <button class="btn btn-ghost btn-sm">Завантажити рахунок</button>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr class="pg-order-row" data-order="4">
-                    <td><span class="pg-order-expand">▶</span></td>
-                    <td class="td-num">#2024-0091</td>
-                    <td class="text-sm">17 груд 2024</td>
-                    <td><span class="badge badge-blue">Оренда</span></td>
-                    <td><span class="badge badge-success">Активна</span></td>
-                    <td class="td-num">1</td>
-                    <td class="td-num">3 200 ₴</td>
-                    <td><button class="btn btn-sm btn-outline">Деталі</button></td>
-                  </tr>
-                  <tr class="pg-order-detail-row" id="detail-4">
-                    <td colspan="8" class="pg-order-detail-cell">
-                      <div class="pg-order-detail-inner">
-                        <div class="alert alert-success" style="margin-bottom:var(--sp-3)">
-                          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="7.5" cy="7.5" r="6"/><path d="M5 7.5l2 2 3-3"/></svg>
-                          Активна оренда. Дата повернення: <strong>24 грудня 2024</strong>
-                        </div>
-                        <div class="pg-order-items">
-                          <div class="pg-order-item">
-                            <div class="pg-order-item__icon">🔦</div>
-                            <div style="flex:1">
-                              <div class="pg-order-item__name">Лазерний рівень Leica Lino L4</div>
-                              <div class="pg-order-item__sku">ART-LL4P1</div>
-                            </div>
-                            <span class="pg-order-item__dates">17.12 – 24.12</span>
-                            <div class="pg-order-item__price">3 200 ₴</div>
-                          </div>
-                        </div>
-                        <div class="pg-order-detail-actions">
-                          <button class="btn btn-ghost btn-sm">Завантажити рахунок</button>
-                          <button class="btn btn-outline btn-sm">Продовжити оренду</button>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-
-                </tbody>
+                <tbody id="tbody-all"></tbody>
               </table>
             </div>
           </div>
 
-          
           <div id="tab-rent-active" class="pg-tab-panel">
             <div class="table-wrapper">
               <table class="table">
                 <thead><tr>
-                  <th></th><th>№ замовлення</th><th>Дата початку</th>
-                  <th>Повернення</th><th>Позицій</th><th>Сума</th><th></th>
+                  <th></th><th>№</th><th>Початок</th>
+                  <th>Повернення</th><th>Сума</th><th></th>
                 </tr></thead>
-                <tbody>
-                  <tr class="pg-order-row" data-order="a1">
-                    <td><span class="pg-order-expand">▶</span></td>
-                    <td class="td-num">#2024-0087</td>
-                    <td class="text-sm">15 груд 2024</td>
-                    <td><span class="num" style="color:var(--c-warning)">22 груд 2024</span></td>
-                    <td class="td-num">2</td><td class="td-num">4 800 ₴</td>
-                    <td style="display:flex;gap:6px;padding:12px 16px">
-                      <button class="btn btn-sm btn-primary">Продовжити</button>
-                      <button class="btn btn-sm btn-outline">Рахунок</button>
-                    </td>
-                  </tr>
-                  <tr class="pg-order-detail-row" id="detail-a1">
-                    <td colspan="7" class="pg-order-detail-cell">
-                      <div class="pg-order-detail-inner">
-                        <div class="pg-order-items">
-                          <div class="pg-order-item"><div class="pg-order-item__icon">⚡</div><div style="flex:1"><div class="pg-order-item__name">Перфоратор Bosch GBH 2-26</div><div class="pg-order-item__sku">ART-BH226</div></div><span class="pg-order-item__dates">15.12 – 22.12</span><div class="pg-order-item__price">2 800 ₴</div></div>
-                          <div class="pg-order-item"><div class="pg-order-item__icon">🔧</div><div style="flex:1"><div class="pg-order-item__name">Шуруповерт DeWalt DCD796</div><div class="pg-order-item__sku">ART-DW796</div></div><span class="pg-order-item__dates">15.12 – 22.12</span><div class="pg-order-item__price">2 000 ₴</div></div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr class="pg-order-row" data-order="a2">
-                    <td><span class="pg-order-expand">▶</span></td>
-                    <td class="td-num">#2024-0091</td>
-                    <td class="text-sm">17 груд 2024</td>
-                    <td><span class="num" style="color:var(--c-success)">24 груд 2024</span></td>
-                    <td class="td-num">1</td><td class="td-num">3 200 ₴</td>
-                    <td style="display:flex;gap:6px;padding:12px 16px">
-                      <button class="btn btn-sm btn-primary">Продовжити</button>
-                      <button class="btn btn-sm btn-outline">Рахунок</button>
-                    </td>
-                  </tr>
-                  <tr class="pg-order-detail-row" id="detail-a2">
-                    <td colspan="7" class="pg-order-detail-cell">
-                      <div class="pg-order-detail-inner">
-                        <div class="pg-order-items">
-                          <div class="pg-order-item"><div class="pg-order-item__icon">🔦</div><div style="flex:1"><div class="pg-order-item__name">Лазерний рівень Leica Lino L4</div><div class="pg-order-item__sku">ART-LL4P1</div></div><span class="pg-order-item__dates">17.12 – 24.12</span><div class="pg-order-item__price">3 200 ₴</div></div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
+                <tbody id="tbody-rent-active"></tbody>
               </table>
             </div>
           </div>
 
-         
           <div id="tab-rent-done" class="pg-tab-panel">
             <div class="table-wrapper">
               <table class="table">
-                <thead><tr><th></th><th>№ замовлення</th><th>Дата</th><th>Статус</th><th>Позицій</th><th>Сума</th><th></th></tr></thead>
-                <tbody>
-                  <tr class="pg-order-row" data-order="d1">
-                    <td><span class="pg-order-expand">▶</span></td>
-                    <td class="td-num">#2024-0072</td><td class="text-sm">2 листоп 2024</td>
-                    <td><span class="badge badge-gray">Завершена</span></td>
-                    <td class="td-num">4</td><td class="td-num">12 600 ₴</td>
-                    <td><button class="btn btn-sm btn-outline">Рахунок</button></td>
-                  </tr>
-                  <tr class="pg-order-detail-row" id="detail-d1">
-                    <td colspan="7" class="pg-order-detail-cell">
-                      <div class="pg-order-detail-inner">
-                        <div class="pg-order-items">
-                          <div class="pg-order-item"><div class="pg-order-item__icon">🪚</div><div style="flex:1"><div class="pg-order-item__name">Торцева пила Makita LS1019</div><div class="pg-order-item__sku">ART-MK1019</div></div><span class="pg-order-item__dates">02.11 – 16.11</span><div class="pg-order-item__price">12 600 ₴</div></div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
+                <thead><tr>
+                  <th></th><th>№</th><th>Дата</th>
+                  <th>Статус</th><th>Сума</th><th></th>
+                </tr></thead>
+                <tbody id="tbody-rent-done"></tbody>
               </table>
             </div>
           </div>
@@ -370,130 +139,56 @@
           <div id="tab-purchase" class="pg-tab-panel">
             <div class="table-wrapper">
               <table class="table">
-                <thead><tr><th></th><th>№ замовлення</th><th>Дата</th><th>Статус</th><th>Позицій</th><th>Сума</th><th></th></tr></thead>
-                <tbody>
-                  <tr class="pg-order-row" data-order="p1">
-                    <td><span class="pg-order-expand">▶</span></td>
-                    <td class="td-num">#2024-0061</td><td class="text-sm">18 жовтня 2024</td>
-                    <td><span class="badge badge-success">Доставлено</span></td>
-                    <td class="td-num">6</td><td class="td-num">38 900 ₴</td>
-                    <td><button class="btn btn-sm btn-outline">Рахунок</button></td>
-                  </tr>
-                  <tr class="pg-order-detail-row" id="detail-p1">
-                    <td colspan="7" class="pg-order-detail-cell">
-                      <div class="pg-order-detail-inner">
-                        <div class="pg-order-items">
-                          <div class="pg-order-item"><div class="pg-order-item__icon">⚙️</div><div style="flex:1"><div class="pg-order-item__name">Зварювальний апарат ESAB 200</div><div class="pg-order-item__sku">ART-ES200</div></div><span class="pg-order-item__qty">×1</span><div class="pg-order-item__price">29 100 ₴</div></div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
+                <thead><tr>
+                  <th></th><th>№</th><th>Дата</th>
+                  <th>К-сть</th><th>Сума</th><th></th>
+                </tr></thead>
+                <tbody id="tbody-purchase"></tbody>
               </table>
             </div>
           </div>
-
         </div>
 
+        
         <div id="panel-wishlist" class="pg-profile-panel">
           <div class="flex-between" style="margin-bottom:var(--sp-5)">
             <h3 style="font-size:1.4rem">Бажане</h3>
-            <span class="text-sm text-3">3 інструменти збережено</span>
           </div>
-          <div class="pg-wishlist-grid">
-            <div class="pg-wish-card">
-              <div class="pg-wish-card__img">🔨</div>
-              <div class="pg-wish-card__body">
-                <div class="pg-wish-card__sku">ART-MK655</div>
-                <div class="pg-wish-card__name">Перфоратор Makita HR2630</div>
-                <div class="pg-wish-card__price">4 800 ₴</div>
-                <div class="pg-wish-card__rent">від 320 ₴/доба</div>
-              </div>
-              <div class="pg-wish-card__footer">
-                <button class="btn btn-primary btn-sm" style="flex:1">До кошика</button>
-                <button class="btn btn-ghost btn-sm">✕</button>
-              </div>
-            </div>
-            <div class="pg-wish-card">
-              <div class="pg-wish-card__img">⚡</div>
-              <div class="pg-wish-card__body">
-                <div class="pg-wish-card__sku">ART-BH226</div>
-                <div class="pg-wish-card__name">Bosch GBH 2-26 DRE</div>
-                <div class="pg-wish-card__price text-3">—</div>
-                <div class="pg-wish-card__rent">від 400 ₴/доба</div>
-              </div>
-              <div class="pg-wish-card__footer">
-                <button class="btn btn-primary btn-sm" style="flex:1">Орендувати</button>
-                <button class="btn btn-ghost btn-sm">✕</button>
-              </div>
-            </div>
-            <div class="pg-wish-card">
-              <div class="pg-wish-card__img">🔩</div>
-              <div class="pg-wish-card__body">
-                <div class="pg-wish-card__sku">ART-HW200</div>
-                <div class="pg-wish-card__name">Hilti TE 30-AVR</div>
-                <div class="pg-wish-card__price">11 200 ₴</div>
-                <div class="pg-wish-card__rent pg-wish-card__rent-none">лише продаж</div>
-              </div>
-              <div class="pg-wish-card__footer">
-                <button class="btn btn-primary btn-sm" style="flex:1">Купити</button>
-                <button class="btn btn-ghost btn-sm">✕</button>
-              </div>
-            </div>
+          <div class="pg-wishlist-grid" id="wishlist-grid">
+            
           </div>
         </div>
 
-
+        
         <div id="panel-edit-company" class="pg-profile-panel">
           <div class="card">
             <div class="card-body">
-              <div class="pg-edit-section">
-                <div class="pg-edit-section-header">
-                  <div class="pg-edit-section-icon">
-                    <svg viewBox="0 0 15 15"><path d="M7.5 1C4.5 1 2 3.5 2 6.5c0 3 5.5 8.5 5.5 8.5S13 9.5 13 6.5C13 3.5 10.5 1 7.5 1z" stroke-width="1.3"/><circle cx="7.5" cy="6.5" r="1.8" stroke-width="1.3"/></svg>
-                  </div>
-                  <div>
-                    <div class="pg-edit-section-title">Реквізити компанії</div>
-                    <div class="pg-edit-section-sub">Юридична та контактна інформація для договорів та рахунків</div>
-                  </div>
+              <div class="pg-edit-section-header">
+                <div class="pg-edit-section-icon">
+                  <svg viewBox="0 0 15 15"><path d="M7.5 1C4.5 1 2 3.5 2 6.5c0 3 5.5 8.5 5.5 8.5S13 9.5 13 6.5C13 3.5 10.5 1 7.5 1z" stroke-width="1.3"/><circle cx="7.5" cy="6.5" r="1.8" stroke-width="1.3"/></svg>
                 </div>
-                <div class="pg-grid-2">
-                  <div class="form-group"><label class="form-label">Повна назва компанії</label><input class="input" value="БудТех ТОВ"></div>
-                  <div class="form-group"><label class="form-label">ЄДРПОУ / ІПН</label><input class="input" value="34712089" style="font-family:var(--font-mono)"></div>
-                  <div class="form-group pg-col-2"><label class="form-label">Юридична адреса</label><input class="input" value="04119, м. Київ, вул. Дегтярівська, 27-Т, оф. 412"></div>
-                  <div class="form-group"><label class="form-label">Телефон компанії</label><input class="input" type="tel" value="+380 44 555 01 02"></div>
-                  <div class="form-group"><label class="form-label">Email для документів</label><input class="input" type="email" value="zakupki@budtech.ua"></div>
+                <div>
+                  <div class="pg-edit-section-title">Реквізити компанії</div>
+                  <div class="pg-edit-section-sub">Юридична та контактна інформація</div>
                 </div>
               </div>
-
-              <hr class="divider">
-
-              <div class="pg-edit-section">
-                <div class="pg-edit-section-header">
-                  <div class="pg-edit-section-icon">
-                    <svg viewBox="0 0 15 15"><rect x="2" y="4" width="11" height="8" rx="1" stroke-width="1.3"/><path d="M2 6l5.5 3.5L13 6" stroke-width="1.3"/></svg>
-                  </div>
-                  <div>
-                    <div class="pg-edit-section-title">Банківські реквізити</div>
-                    <div class="pg-edit-section-sub">Для виставлення рахунків (необов'язково)</div>
-                  </div>
-                </div>
-                <div class="pg-grid-3">
-                  <div class="form-group"><label class="form-label">Банк</label><input class="input" placeholder="Назва банку"></div>
-                  <div class="form-group pg-col-2"><label class="form-label">IBAN</label><input class="input" placeholder="UA00 0000 0000 0000 0000 0000 0000" style="font-family:var(--font-mono)"><span class="form-hint">29 символів</span></div>
-                </div>
+              <div class="pg-grid-2">
+                <div class="form-group"><label class="form-label">Назва компанії</label><input id="field-company-name" class="input"></div>
+                <div class="form-group"><label class="form-label">ЄДРПОУ</label><input id="field-edrpou" class="input" style="font-family:var(--font-mono)"></div>
+                <div class="form-group pg-col-2"><label class="form-label">Юридична адреса</label><input id="field-legal-address" class="input"></div>
+                <div class="form-group"><label class="form-label">Телефон</label><input id="field-phone" class="input" type="tel"></div>
+                <div class="form-group"><label class="form-label">Email</label><input id="field-email-docs" class="input" type="email"></div>
               </div>
             </div>
             <div class="pg-save-bar">
-              <span class="pg-save-bar__hint"><span class="pg-save-bar__unsaved">●</span> Є незбережені зміни</span>
+              <span class="pg-save-bar__hint"><span class="pg-save-bar__unsaved">●</span> Незбережені зміни</span>
               <div style="display:flex;gap:var(--sp-2)">
-                <button class="btn btn-ghost btn-sm" onclick="showToast('Скасовано','info')">Скасувати</button>
-                <button class="btn btn-primary" onclick="showToast('Зміни збережено','success')">Зберегти зміни</button>
+                <button class="btn btn-ghost btn-sm" id="btn-discard-company">Скасувати</button>
+                <button class="btn btn-primary" id="btn-save-company">Зберегти</button>
               </div>
             </div>
           </div>
         </div>
-
 
         <div id="panel-edit-user" class="pg-profile-panel">
           <div class="card">
@@ -503,29 +198,27 @@
                   <svg viewBox="0 0 15 15"><circle cx="7.5" cy="5" r="2.5" stroke-width="1.3"/><path d="M2 13c0-3.5 2.5-5 5.5-5s5.5 1.5 5.5 5" stroke-width="1.3"/></svg>
                 </div>
                 <div>
-                  <div class="pg-edit-section-title">Особисті дані представника</div>
+                  <div class="pg-edit-section-title">Особисті дані</div>
                   <div class="pg-edit-section-sub">Контактна особа від компанії</div>
                 </div>
               </div>
               <div class="pg-grid-3">
-                <div class="form-group"><label class="form-label">Прізвище</label><input class="input" value="Коваленко"></div>
-                <div class="form-group"><label class="form-label">Ім'я</label><input class="input" value="Дмитро"></div>
-                <div class="form-group"><label class="form-label">По батькові</label><input class="input" value="Олексійович"></div>
-                <div class="form-group"><label class="form-label">Email</label><input class="input" type="email" value="d.kovalenko@budtech.ua"></div>
-                <div class="form-group"><label class="form-label">Телефон</label><input class="input" type="tel" value="+380 67 891 23 45"></div>
-                <div class="form-group"><label class="form-label">Посада</label><input class="input" value="Менеджер із закупівель"></div>
+                <div class="form-group"><label class="form-label">Прізвище</label><input id="field-last" class="input"></div>
+                <div class="form-group"><label class="form-label">Ім'я</label><input id="field-first" class="input"></div>
+                <div class="form-group"><label class="form-label">По батькові</label><input id="field-mid" class="input"></div>
+                <div class="form-group"><label class="form-label">Email</label><input id="field-email-user" class="input" type="email"></div>
+                <div class="form-group"><label class="form-label">Телефон</label><input id="field-phone-user" class="input" type="tel"></div>
               </div>
             </div>
             <div class="pg-save-bar">
               <span style="opacity:0">—</span>
               <div style="display:flex;gap:var(--sp-2)">
-                <button class="btn btn-ghost btn-sm">Скасувати</button>
-                <button class="btn btn-primary" onclick="showToast('Зміни збережено','success')">Зберегти</button>
+                <button class="btn btn-ghost btn-sm" id="btn-discard-user">Скасувати</button>
+                <button class="btn btn-primary" id="btn-save-user">Зберегти</button>
               </div>
             </div>
           </div>
         </div>
-
 
         <div id="panel-edit-password" class="pg-profile-panel">
           <div class="card">
@@ -536,23 +229,22 @@
                 </div>
                 <div>
                   <div class="pg-edit-section-title">Зміна пароля</div>
-                  <div class="pg-edit-section-sub">Останній раз змінено 3 місяці тому</div>
                 </div>
               </div>
               <div style="max-width:420px">
                 <div class="form-group">
                   <label class="form-label">Поточний пароль</label>
                   <div class="pg-input-wrap">
-                    <input class="input" type="password" id="pwd-current" value="••••••••••">
-                    <button class="pg-input-eye" onclick="togglePwd('pwd-current',this)">👁</button>
+                    <input class="input" type="password" id="pwd-current">
+                    <button class="pg-input-eye" id="eye-current">👁</button>
                   </div>
                 </div>
                 <hr class="divider">
                 <div class="form-group">
                   <label class="form-label">Новий пароль</label>
                   <div class="pg-input-wrap">
-                    <input class="input" type="password" id="pwd-new" placeholder="Мінімум 8 символів" oninput="calcStrength(this)">
-                    <button class="pg-input-eye" onclick="togglePwd('pwd-new',this)">👁</button>
+                    <input class="input" type="password" id="pwd-new" placeholder="Мінімум 8 символів">
+                    <button class="pg-input-eye" id="eye-new">👁</button>
                   </div>
                   <div class="pg-strength-bar">
                     <div class="pg-strength-seg" id="s1"></div>
@@ -566,12 +258,8 @@
                   <label class="form-label">Підтвердження пароля</label>
                   <div class="pg-input-wrap">
                     <input class="input" type="password" id="pwd-confirm" placeholder="Повторіть пароль">
-                    <button class="pg-input-eye" onclick="togglePwd('pwd-confirm',this)">👁</button>
+                    <button class="pg-input-eye" id="eye-confirm">👁</button>
                   </div>
-                </div>
-                <div class="alert alert-info" style="margin-top:var(--sp-4)">
-                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="7.5" cy="7.5" r="6"/><path d="M7.5 5v.5M7.5 7.5v3" stroke-linecap="round" stroke-width="1.5"/></svg>
-                  Пароль має містити літери, цифри та спецсимволи.
                 </div>
               </div>
             </div>
@@ -579,7 +267,7 @@
               <span style="opacity:0">—</span>
               <div style="display:flex;gap:var(--sp-2)">
                 <button class="btn btn-ghost btn-sm">Скасувати</button>
-                <button class="btn btn-primary" onclick="showToast('Пароль змінено','success')">Змінити пароль</button>
+                <button class="btn btn-primary" id="btn-save-password">Змінити пароль</button>
               </div>
             </div>
           </div>
@@ -590,11 +278,11 @@
   </div>
 </main>
 
-<div class="toast-container" id="toastContainer"></div>
 <div id="footer"></div>
-<script src="./js/utils.js"></script>
-<script src="./js/header.js"></script>
-<script src="./js/profile.js"></script>
+<div class="toast-container" id="toastContainer"></div>
 
+<script src="js/utils.js"></script>
+<script src="js/header.js"></script>
+<script src="js/profile.js"></script>
 </body>
 </html>
