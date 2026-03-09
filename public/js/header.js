@@ -74,7 +74,6 @@ function renderHeader() {
   const target = document.getElementById('header')
   if (target) target.innerHTML = html
 
-  initSearch()
 }
 
 
