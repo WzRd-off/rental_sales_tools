@@ -4,13 +4,15 @@
 
 // ---------- НАВИГАЦИЯ ----------
 const navLinks = [
-  { label: 'Головна',       href: '/index.html' },
-  { label: 'Каталог',       href: '/catalog.html' },
-  { label: 'Оренда',        href: '/catalog.html?type=rent' },
-  { label: 'Про компанію',  href: '/about.html' },
+  { label: 'Головна',       href: 'index.html' },
+  { label: 'Каталог',       href: 'catalog.html' },
+  { label: 'Оренда',        href: 'catalog.html?type=rent' },
+  { label: 'Кредит/Оплата', href: 'payment.html' },
+  { label: 'Контакти',      href: 'contacts.html' },
 ]
 
 // ---------- ГЕНЕРАЦИЯ ХЕДЕРА ----------
+
 function renderHeader() {
   const currentPath = window.location.pathname
 
@@ -35,7 +37,7 @@ function renderHeader() {
       <div class="container">
         <div class="header__inner">
 
-          <a href="/index.html" class="header__logo">
+          <a href="index.html" class="header__logo">
             <div class="header__logo-mark">
               <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:#fff;stroke-width:2">
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
@@ -60,7 +62,7 @@ function renderHeader() {
           </div>
 
           <div class="header__actions">
-            <button class="header__icon-btn" onclick="window.location.href='/cart.html'">
+            <button class="header__icon-btn" onclick="window.location.href='cart.html'">
               <svg style="width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8" viewBox="0 0 24 24">
                 <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
                 <line x1="3" y1="6" x2="21" y2="6"/>
@@ -85,6 +87,7 @@ function renderHeader() {
 }
 
 // ---------- ПОИСК ----------
+
 function initSearch() {
   const input = document.getElementById('search-input')
   if (!input) return
@@ -97,6 +100,7 @@ function initSearch() {
 }
 
 // ---------- ГЕНЕРАЦИЯ ФУТЕРА ----------
+
 function renderFooter() {
   const html = `
     <footer class="footer">
@@ -179,6 +183,7 @@ function updateCartBadge() {
 }
 
 // ---------- ЗАПУСК ----------
+
 document.addEventListener('DOMContentLoaded', function() {
   renderHeader()
   renderFooter()

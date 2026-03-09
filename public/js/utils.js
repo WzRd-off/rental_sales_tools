@@ -53,3 +53,89 @@ function showToast(message, type = 'info') {
 //showToast('Товар добавлен в корзину', 'success') -> зеленая писька снизу справа 
 //showToast('Ошибка при добавлении товара', 'error') -> красная писька снизу справа
 //showToast('Информация сохранена', 'info') -> синяя писька снизу справа
+
+const API_URL = 'http://localhost:3000'
+
+async function fetchProducts() {
+  try {
+    const res = await fetch(`${API_URL}/api/catalog`)
+    if (!res.ok) throw new Error('Error fetching products')
+    const products = await res.json()
+    return products
+  } catch(e) {
+    console.error('Ошибка:', e)
+    showToast('Error to upload products', 'error')
+    return []
+  }
+}
+// fetchProducts() -> возращает масив всех продуктов [{prod_id, name, cost...}, ...]
+
+async function fetchProductById(id) {
+  try {
+    const res = await fetch(`${API_URL}/api/catalog/${id}`)
+    if (!res.ok) throw new Error('Product not found')
+    const product = await res.json()
+    return product
+  } catch(e) {
+    console.error('Ошибка:', e)
+    showToast('Error fetching product', 'error')
+    return null
+  }
+}
+// fetchProductById(5) -> возращает один продукт {prod_id: 5, name, cost...}
+
+
+function renderProductCard(product) {
+  return `
+    <div class="card product-card" data-id="${product.prod_id}">
+      <div class="product-card__img">
+        <div class="product-card__icon">🛠️</div>
+        <div style="position: absolute; top: 10px; right: 10px;">
+          <span class="badge ${product.status === 'В наявності' ? 'badge-success' : 'badge-gray'}">${product.status}</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="product-card__sku">SKU: ${product.prod_id}</div>
+        <h3 class="product-card__name">${product.name}</h3>
+        <div class="mb-4">
+          <div class="product-card__price-label">Продаж</div>
+          <div class="product-card__price">${formatPrice(product.cost)}</div>
+        </div>
+        <div class="mb-4">
+          <div class="product-card__price-label">Категорія</div>
+          <div class="product-card__rent">${product.category}</div>
+        </div>
+        <button class="btn btn-dark btn-block mt-4">ДЕТАЛЬНІШЕ</button>
+      </div>
+    </div>
+  `
+}
+// renderProductCard(product) -> html карточки товара для каталога и страницы товара
+
+
+async function renderProducts(containerId) {
+  const container = document.getElementById(containerId)
+  if (!container) return
+  container.innerHTML = 'Завантаження...'
+  const products = await fetchProducts()
+  if (products.length === 0) {
+    container.innerHTML = 'Товари не знайдені'
+    return
+  }
+  container.innerHTML = products.map(renderProductCard).join('')
+}
+// renderProducts('catalog') -> рендерит все товары в <div id="catalog">
+
+
+async function renderProductById(containerId, productId) {
+  const container = document.getElementById(containerId)
+  if (!container) return
+  container.innerHTML = 'Завантаження...'
+  const product = await fetchProductById(productId)
+  if (!product) {
+    container.innerHTML = 'Товар не знайдений'
+    return
+  }
+  container.innerHTML = renderProductCard(product)
+}
+// renderProductById('product-container', 5) -> редерит продукт с id=5 в <div id="product-container">

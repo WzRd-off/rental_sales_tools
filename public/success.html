@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Замовлення оформлено | БудІнструмент</title>
+</head>
+<body>
+<div id="header"></div>
+
+<main class="container" style="min-height: 70vh; display: flex; align-items: center; justify-content: center;">
+  <div style="max-width: 520px; width: 100%; text-align: center; padding: var(--sp-16) 0;">
+
+    <div style="width: 72px; height: 72px; background: var(--c-success-bg); border: 1px solid #86efac; border-radius: var(--r-lg); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--sp-6); font-size: 2rem;">
+      ✓
+    </div>
+
+    <div class="section-eyebrow" style="justify-content: center; display: flex;">Замовлення прийнято</div>
+    <h1 style="font-size: 2.2rem; margin-bottom: var(--sp-4);">ДЯКУЄМО ЗА<br>ЗАМОВЛЕННЯ!</h1>
+    <p style="margin-bottom: var(--sp-8); max-width: 380px; margin-left: auto; margin-right: auto;">
+      Ми отримали ваше замовлення і вже обробляємо його. Найближчим часом з вами зв'яжеться наш менеджер.
+    </p>
+
+    <div class="flex gap-3" style="justify-content: center;">
+      <a href="catalog.html" class="btn btn-dark btn-lg">ПРОДОВЖИТИ ПОКУПКИ</a>
+      <a href="index.html" class="btn btn-outline btn-lg">НА ГОЛОВНУ</a>
+    </div>
+
+  </div>
+</main>
+
+<div id="footer"></div>
+
+<script src="./js/utils.js"></script>
+<script src="./js/header.js"></script>
+<script>
+  const now = new Date()
+  document.getElementById('order-time').textContent = now.toLocaleTimeString('uk-UA', {
+    hour: '2-digit',
+    minute: '2-digit'
+  }) + ', ' + now.toLocaleDateString('uk-UA')
+</script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Каталог | БудІнструмент</title>
+</head>
+<body>
+    <div id="header"></div>
+
+    <main class="container mt-8" style="margin-bottom: 100px;">
+        <div class="mb-8">
+            <div class="section-eyebrow" style="color: var(--c-brand, #0056b3); font-weight: bold; letter-spacing: 1px; font-size: 12px; text-transform: uppercase; margin-bottom: 8px;">B2B SOLUTIONS</div>
+            <h1 class="section-title" style="font-size: 2.5rem; font-weight: 900; text-transform: uppercase; line-height: 1.2;">КАТАЛОГ ІНСТРУМЕНТІВ</h1>
+            <p style="color: #64748b; margin-top: 12px; font-size: 1.1rem;">Оренда та продаж сертифікованого обладнання для вашого бізнесу</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 280px 1fr; gap: 32px; align-items: start;">
+            
+<aside style="border: 1px solid var(--c-border, #e2e8f0); border-radius: 8px; padding: 24px; background: #fff; position: sticky; top: 20px;">
+    <h4 style="margin-bottom: 20px; font-weight: bold; text-transform: uppercase; font-size: 14px; letter-spacing: 1px;">Фільтри</h4>
+    
+    <form id="filter-form">
+        
+        <div style="display: flex; gap: 8px; margin-bottom: 24px;">
+            <button type="button" id="btn-type-sale" class="deal-toggle active" style="flex: 1; padding: 10px; border: 1px solid #0f172a; background: #0f172a; color: #fff; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.2s;">Покупка</button>
+            <button type="button" id="btn-type-rent" class="deal-toggle" style="flex: 1; padding: 10px; border: 1px solid #cbd5e1; background: #f8fafc; color: #64748b; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.2s;">Оренда</button>
+            <input type="hidden" id="filter-deal-type" name="deal_type" value="sale">
+        </div>
+
+        <div style="margin-bottom: 24px;">
+            <label style="display: block; margin-bottom: 8px; font-size: 12px; font-weight: bold; color: #666; text-transform: uppercase;">Категорія</label>
+            <select id="filter-category" class="input" style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; background: #f8fafc; font-weight: 500; cursor: pointer;">
+                <option value="all">Усі категорії</option>
+                <option value="electro">Електроінструменти</option>
+                <option value="measure">Вимірювальні інструменти</option>
+                <option value="heavy" id="option-heavy" disabled>Велика будівельна техніка (тільки оренда)</option>
+                <option value="hand">Ручні інструменти</option>
+            </select>
+        </div>
+
+        <div id="filter-group-sale" style="margin-bottom: 32px;">
+            <label style="display: block; margin-bottom: 8px; font-size: 12px; font-weight: bold; color: #666; text-transform: uppercase;">Ціна покупки (₴)</label>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                <input type="number" id="sale-min" class="input" placeholder="Від" min="0" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                <input type="number" id="sale-max" class="input" placeholder="До" min="0" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+            </div>
+        </div>
+
+        <div id="filter-group-rent" style="margin-bottom: 32px; display: none;">
+            <label style="display: block; margin-bottom: 8px; font-size: 12px; font-weight: bold; color: #666; text-transform: uppercase;">Ціна оренди / доба (₴)</label>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                <input type="number" id="rent-min" class="input" placeholder="Від" min="0" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                <input type="number" id="rent-max" class="input" placeholder="До" min="0" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block mb-3" style="width: 100%; padding: 14px; background: var(--c-brand, #0056b3); color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">ЗАСТОСУВАТИ</button>
+        <button type="reset" id="filter-reset" class="btn btn-outline btn-block" style="width: 100%; padding: 14px; background: transparent; color: #64748b; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: bold; cursor: pointer;">СКИНУТИ</button>
+    </form>
+</aside>
+            <div>
+                <div class="catalog-grid">
+                    
+                    <div class="product-card-uniform">
+                        <div class="img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=500&h=500&q=80" alt="Перфоратор">
+                            <span class="badge-tag green">• НОВИНКА</span>
+                        </div>
+                        <div class="card-body-flex">
+                            <div class="card-title-wrapper">
+                                <div style="font-size: 11px; color: #94a3b8; letter-spacing: 1px; margin-bottom: 8px;">SKU: BSH-500-TX</div>
+                                <h3 style="font-size: 16px; font-weight: 800; text-transform: uppercase; margin: 0; line-height: 1.4; color: #0f172a;">ВІДБІЙНИЙ МОЛОТОК BOSCH GSH 5</h3>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px;">
+                                <div>
+                                    <div style="font-size: 10px; color: #64748b; text-transform: uppercase; font-weight: 700; margin-bottom: 4px;">Продаж</div>
+                                    <div style="font-size: 18px; font-weight: 900; color: #0f172a;">24 100 ₴</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 10px; color: #64748b; text-transform: uppercase; font-weight: 700; margin-bottom: 4px;">Оренда</div>
+                                    <div style="font-size: 18px; font-weight: 900; color: #0ea5e9;">450 ₴</div>
+                                </div>
+                            </div>
+                            
+                            <button style="width: 100%; padding: 12px; background: #0f172a; color: #fff; border: none; border-radius: 6px; font-weight: 800; letter-spacing: 1px; cursor: pointer; text-transform: uppercase;">В КОШИК</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card-uniform">
+                        <div class="img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1572981779307-38b8cabb2407?auto=format&fit=crop&w=500&h=500&q=80" alt="Шуруповерт">
+                        </div>
+                        <div class="card-body-flex">
+                            <div class="card-title-wrapper">
+                                <div style="font-size: 11px; color: #94a3b8; letter-spacing: 1px; margin-bottom: 8px;">SKU: MKT-453-Z</div>
+                                <h3 style="font-size: 16px; font-weight: 800; text-transform: uppercase; margin: 0; line-height: 1.4; color: #0f172a;">ШУРУПОВЕРТ MAKITA DDF453</h3>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px;">
+                                <div>
+                                    <div style="font-size: 10px; color: #64748b; text-transform: uppercase; font-weight: 700; margin-bottom: 4px;">Продаж</div>
+                                    <div style="font-size: 18px; font-weight: 900; color: #0f172a;">4 850 ₴</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 10px; color: #64748b; text-transform: uppercase; font-weight: 700; margin-bottom: 4px;">Оренда</div>
+                                    <div style="font-size: 18px; font-weight: 900; color: #0ea5e9;">120 ₴</div>
+                                </div>
+                            </div>
+                            
+                            <button style="width: 100%; padding: 12px; background: #0f172a; color: #fff; border: none; border-radius: 6px; font-weight: 800; letter-spacing: 1px; cursor: pointer; text-transform: uppercase;">В КОШИК</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card-uniform">
+                        <div class="img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1581166397057-235af2b3c6dd?auto=format&fit=crop&w=500&h=500&q=80" alt="Рівень">
+                            <span class="badge-tag orange">• АКЦІЯ</span>
+                        </div>
+                        <div class="card-body-flex">
+                            <div class="card-title-wrapper">
+                                <div style="font-size: 11px; color: #94a3b8; letter-spacing: 1px; margin-bottom: 8px;">SKU: DW-088-K</div>
+                                <h3 style="font-size: 16px; font-weight: 800; text-transform: uppercase; margin: 0; line-height: 1.4; color: #0f172a;">ЛАЗЕРНИЙ РІВЕНЬ DEWALT DW088</h3>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px;">
+                                <div>
+                                    <div style="font-size: 10px; color: #64748b; text-transform: uppercase; font-weight: 700; margin-bottom: 4px;">Продаж</div>
+                                    <div style="font-size: 18px; font-weight: 900; color: #0f172a;">6 200 ₴</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 10px; color: #64748b; text-transform: uppercase; font-weight: 700; margin-bottom: 4px;">Оренда</div>
+                                    <div style="font-size: 18px; font-weight: 900; color: #0ea5e9;">200 ₴</div>
+                                </div>
+                            </div>
+                            
+                            <button style="width: 100%; padding: 12px; background: #0f172a; color: #fff; border: none; border-radius: 6px; font-weight: 800; letter-spacing: 1px; cursor: pointer; text-transform: uppercase;">В КОШИК</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card-uniform">
+                        <div class="img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1504307651254-35680f356f12?auto=format&fit=crop&w=500&h=500&q=80" alt="Пила">
+                            <span class="badge-tag red">• -15%</span>
+                        </div>
+                        <div class="card-body-flex">
+                            <div class="card-title-wrapper">
+                                <div style="font-size: 11px; color: #94a3b8; letter-spacing: 1px; margin-bottom: 8px;">SKU: STI-MS-180</div>
+                                <h3 style="font-size: 16px; font-weight: 800; text-transform: uppercase; margin: 0; line-height: 1.4; color: #0f172a;">БЕНЗОПИЛА STIHL MS 180</h3>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px;">
+                                <div>
+                                    <div style="font-size: 10px; color: #64748b; text-transform: uppercase; font-weight: 700; margin-bottom: 4px;">Продаж</div>
+                                    <div style="display: flex; gap: 6px; align-items: baseline;">
+                                        <div style="font-size: 18px; font-weight: 900; color: #dc2626;">7 820 ₴</div>
+                                        <div style="font-size: 12px; color: #94a3b8; text-decoration: line-through;">9 200 ₴</div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 10px; color: #64748b; text-transform: uppercase; font-weight: 700; margin-bottom: 4px;">Оренда</div>
+                                    <div style="font-size: 18px; font-weight: 900; color: #0ea5e9;">320 ₴</div>
+                                </div>
+                            </div>
+                            
+                            <button style="width: 100%; padding: 12px; background: #0f172a; color: #fff; border: none; border-radius: 6px; font-weight: 800; letter-spacing: 1px; cursor: pointer; text-transform: uppercase;">В КОШИК</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card-uniform">
+                        <div class="img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1574636611361-b44c885bb320?auto=format&fit=crop&w=500&h=500&q=80" alt="Пила дискова">
+                        </div>
+                        <div class="card-body-flex">
+                            <div class="card-title-wrapper">
+                                <div style="font-size: 11px; color: #94a3b8; letter-spacing: 1px; margin-bottom: 8px;">SKU: MKT-HR-24</div>
+                                <h3 style="font-size: 16px; font-weight: 800; text-transform: uppercase; margin: 0; line-height: 1.4; color: #0f172a;">ПЕРФОРАТОР MAKITA HR2470</h3>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px;">
+                                <div>
+                                    <div style="font-size: 10px; color: #64748b; text-transform: uppercase; font-weight: 700; margin-bottom: 4px;">Продаж</div>
+                                    <div style="font-size: 18px; font-weight: 900; color: #0f172a;">5 400 ₴</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 10px; color: #64748b; text-transform: uppercase; font-weight: 700; margin-bottom: 4px;">Оренда</div>
+                                    <div style="font-size: 18px; font-weight: 900; color: #0ea5e9;">150 ₴</div>
+                                </div>
+                            </div>
+                            
+                            <button style="width: 100%; padding: 12px; background: #0f172a; color: #fff; border: none; border-radius: 6px; font-weight: 800; letter-spacing: 1px; cursor: pointer; text-transform: uppercase;">В КОШИК</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card-uniform">
+                        <div class="img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1584281722883-207ea3b7eb3b?auto=format&fit=crop&w=500&h=500&q=80" alt="Болгарка">
+                        </div>
+                        <div class="card-body-flex">
+                            <div class="card-title-wrapper">
+                                <div style="font-size: 11px; color: #94a3b8; letter-spacing: 1px; margin-bottom: 8px;">SKU: DW-DCD-77</div>
+                                <h3 style="font-size: 16px; font-weight: 800; text-transform: uppercase; margin: 0; line-height: 1.4; color: #0f172a;">ШУРУПОВЕРТ DEWALT DCD771</h3>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px;">
+                                <div>
+                                    <div style="font-size: 10px; color: #64748b; text-transform: uppercase; font-weight: 700; margin-bottom: 4px;">Продаж</div>
+                                    <div style="font-size: 18px; font-weight: 900; color: #0f172a;">6 100 ₴</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 10px; color: #64748b; text-transform: uppercase; font-weight: 700; margin-bottom: 4px;">Оренда</div>
+                                    <div style="font-size: 18px; font-weight: 900; color: #0ea5e9;">200 ₴</div>
+                                </div>
+                            </div>
+                            
+                            <button style="width: 100%; padding: 12px; background: #0f172a; color: #fff; border: none; border-radius: 6px; font-weight: 800; letter-spacing: 1px; cursor: pointer; text-transform: uppercase;">В КОШИК</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="./js/utils.js"></script>
+    <script src="./js/header.js"></script>
+</body>
+</html>
