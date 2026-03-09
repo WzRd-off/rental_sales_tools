@@ -25,10 +25,11 @@ function renderHeader() {
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0)
 
   const user = storage.get('user')
+  const companyName = user?.company_name || user?.company || user?.fullname || 'User'
   const userHTML = user
     ? `<div class="header__user">
-         <div class="header__avatar">${user.company.slice(0,2).toUpperCase()}</div>
-         <span class="header__user-name">${user.company}</span>
+         <div class="header__avatar">${companyName.slice(0,2).toUpperCase()}</div>
+         <span class="header__user-name">${companyName}</span>
        </div>`
     : `<a href="/login.html" class="btn btn-primary btn-sm">Вхід</a>`
 
