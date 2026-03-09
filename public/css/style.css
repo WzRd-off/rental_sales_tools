@@ -940,3 +940,30 @@ p { color: var(--c-text-2); line-height: 1.7; font-size: 0.95rem; }
         .step-content.active { display: block; }
         .active-header .arrow-icon { transform: rotate(180deg); }
         .arrow-icon { transition: transform 0.3s; font-size: 0.8rem; }
+
+.auth-wrap {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--c-bg);
+    padding: 40px 20px;
+}
+.auth-card {
+    width: 100%;
+    max-width: 480px;
+}
+.view {
+    display: none;
+}
+.switch-link {
+    text-align: center;
+    margin-top: 16px;
+    cursor: pointer;
+    color: var(--c-brand);
+    font-weight: 600;
+    font-size: 14px;
+}
+.switch-link:hover {
+    color: var(--c-brand-dark);
+}
