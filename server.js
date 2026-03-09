@@ -9,6 +9,8 @@ app.use(cors());
 app.use(express.static('public'));
 app.use('/api', apiRouter);
 
+app.use('/image', express.static('image'));
+
 app.listen(PORT, () => {
   console.log(`Сервер запущено на http://localhost:${PORT}`);
 });

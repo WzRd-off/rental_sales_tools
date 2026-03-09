@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Товар | БудІнструмент</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div id="header"></div>
+
+    <main class="container section" style="padding-top: var(--sp-8); padding-bottom: 100px;">
+
+        <!-- BREADCRUMB -->
+        <div style="font-size: 13px; color: #94a3b8; margin-bottom: 32px;">
+            <a href="index.html" style="color: #94a3b8; text-decoration: none;">Головна</a>
+            <span style="margin: 0 8px;">→</span>
+            <a href="catalog.html" style="color: #94a3b8; text-decoration: none;">Каталог</a>
+            <span style="margin: 0 8px;">→</span>
+            <span id="breadcrumb-name" style="color: #0f172a;">Завантаження...</span>
+        </div>
+
+        <!-- PRODUCT MAIN -->
+        <div class="grid grid-2 gap-8 items-start mb-8" id="product-main" style="display:none;">
+
+            <!-- ФОТО -->
+            <div class="gallery">
+                <div class="gallery-main" style="border-radius: 12px; overflow: hidden; background: #f8fafc; border: 1px solid #e2e8f0;">
+                    <img id="main-img" src="" alt="Товар" style="width: 100%; height: 480px; object-fit: contain; padding: 24px;">
+                </div>
+            </div>
+
+            <!-- ІНФО -->
+            <div class="product-info">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                    <span id="product-status-badge" class="badge"></span>
+                    <span id="product-category" style="font-size: 12px; color: #64748b; text-transform: uppercase; font-weight: 700; letter-spacing: 1px;"></span>
+                </div>
+
+                <div class="product-sku" style="font-size: 12px; color: #94a3b8; letter-spacing: 1px; margin-bottom: 8px;">SKU: <span id="product-sku"></span></div>
+                <h1 id="product-name" class="product-title" style="font-size: 2rem; font-weight: 900; text-transform: uppercase; line-height: 1.2; margin-bottom: 16px;"></h1>
+
+                <p id="product-desc" class="text-2 mb-6" style="color: #64748b; line-height: 1.7;"></p>
+
+                <div class="product-price-block" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 24px;">
+                    <div style="margin-bottom: 16px;">
+                        <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; font-weight: 700; margin-bottom: 4px;">Ціна</div>
+                        <div id="product-price" class="product-price" style="font-size: 2.2rem; font-weight: 900; color: #0f172a;"></div>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <button class="btn btn-primary btn-xl" style="flex: 2;" onclick="addToCart()">В КОШИК</button>
+                        <button class="btn btn-outline btn-xl" style="flex: 1;" onclick="toggleWishlist()" title="В список бажань">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <ul class="text-sm text-2" style="list-style: none; display: flex; flex-direction: column; gap: 10px;">
+                    <li style="display: flex; align-items: center; gap: 8px;">
+                        <span style="color: #22c55e; font-weight: 700;">✓</span> Безкоштовна доставка від 3000 ₴
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 8px;">
+                        <span style="color: #22c55e; font-weight: 700;">✓</span> Офіційна гарантія 36 місяців
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 8px;">
+                        <span style="color: #22c55e; font-weight: 700;">✓</span> Оплата при отриманні
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- LOADING -->
+        <div id="product-loading" style="text-align: center; padding: 80px 0;">
+            <div class="spinner"></div>
+        </div>
+
+        <!-- ERROR -->
+        <div id="product-error" style="display: none; text-align: center; padding: 80px 0;">
+            <p style="color: #94a3b8; font-size: 1.2rem;">Товар не знайдено</p>
+            <a href="catalog.html" class="btn btn-primary mt-4" style="margin-top: 16px;">← Повернутись до каталогу</a>
+        </div>
+
+        <!-- TABS -->
+        <div class="tabs-container" id="product-tabs" style="display: none;">
+            <div class="tabs-nav">
+                <button class="tab-btn active" onclick="openTab('tab-desc', this)">Опис</button>
+                <button class="tab-btn" id="reviews-tab-btn" onclick="openTab('tab-reviews', this)">Відгуки</button>
+            </div>
+
+            <div id="tab-desc" class="tab-pane active">
+                <div class="text-2" style="max-width: 800px; line-height: 1.8;">
+                    <p id="tab-desc-text"></p>
+                </div>
+            </div>
+
+            <div id="tab-reviews" class="tab-pane">
+                <div class="flex-between items-center mb-6" style="max-width: 800px;">
+                    <h3>Відгуки покупців</h3>
+                    <button class="btn btn-outline btn-sm">НАПИСАТИ ВІДГУК</button>
+                </div>
+                <div id="reviews-list">
+                    <p style="color: #94a3b8;">Відгуків поки немає</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/header.js"></script>
+
+    <script>
+        let currentProduct = null
+
+        function openTab(tabId, btnElement = null) {
+            document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'))
+            document.getElementById(tabId).classList.add('active')
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'))
+            if (btnElement) btnElement.classList.add('active')
+        }
+
+        function addToCart() {
+            if (!currentProduct) return
+            const cart = storage.get('cart') || []
+            const existing = cart.find(i => i.id === currentProduct.prod_id)
+            if (existing) {
+                existing.quantity++
+            } else {
+                cart.push({ id: currentProduct.prod_id, name: currentProduct.name, price: currentProduct.cost, quantity: 1 })
+            }
+            storage.set('cart', cart)
+            showToast('Товар додано до кошика', 'success')
+        }
+
+        function toggleWishlist() {
+            if (!currentProduct) return
+            const wishlist = storage.get('wishlist') || []
+            const idx = wishlist.findIndex(i => i.id === currentProduct.prod_id)
+            if (idx > -1) {
+                wishlist.splice(idx, 1)
+                showToast('Видалено зі списку бажань', 'info')
+            } else {
+                wishlist.push({ id: currentProduct.prod_id, name: currentProduct.name })
+                showToast('Додано до списку бажань', 'success')
+            }
+            storage.set('wishlist', wishlist)
+        }
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            const params = new URLSearchParams(window.location.search)
+            const id = params.get('id')
+
+            if (!id) {
+                document.getElementById('product-loading').style.display = 'none'
+                document.getElementById('product-error').style.display = 'block'
+                return
+            }
+
+            try {
+                const res = await fetch(`/api/catalog/products/${id}`)
+                const data = await res.json()
+
+                if (!data.success || !data.data) {
+                    document.getElementById('product-loading').style.display = 'none'
+                    document.getElementById('product-error').style.display = 'block'
+                    return
+                }
+
+                const p = data.data
+                currentProduct = p
+
+                // Заповнюємо дані
+                document.title = `${p.name} | БудІнструмент`
+                document.getElementById('breadcrumb-name').textContent = p.name
+                document.getElementById('product-sku').textContent = p.prod_id
+                document.getElementById('product-name').textContent = p.name
+                document.getElementById('product-desc').textContent = p.description
+                document.getElementById('product-price').textContent = formatPrice(p.cost)
+                document.getElementById('product-category').textContent = p.category
+                document.getElementById('tab-desc-text').textContent = p.description
+
+                // Фото
+                const img = document.getElementById('main-img')
+                img.src = `/images/${p.photo}`
+                img.alt = p.name
+
+                // Статус
+                const badge = document.getElementById('product-status-badge')
+                badge.textContent = p.status
+                badge.className = `badge ${p.status === 'В наявності' ? 'badge-success' : 'badge-gray'}`
+
+                // Показуємо контент
+                document.getElementById('product-loading').style.display = 'none'
+                document.getElementById('product-main').style.display = 'grid'
+                document.getElementById('product-tabs').style.display = 'block'
+
+            } catch(e) {
+                console.error(e)
+                document.getElementById('product-loading').style.display = 'none'
+                document.getElementById('product-error').style.display = 'block'
+            }
+        })
+    </script>
+
+</body>
+</html>
