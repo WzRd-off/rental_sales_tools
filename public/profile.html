@@ -1,3 +1,7 @@
+
+Profile · HTML
+Copy
+
 <!DOCTYPE html>
 <html lang="uk">
 <head>
@@ -7,21 +11,20 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="profile.css">
 </head>
 <body>
-<div id="header"></div>
 
+<!-- ════════════════════════════ PROFILE HERO ════════════════════════════════ -->
 <div class="pg-profile-hero">
   <div class="container">
     <div class="pg-profile-hero__inner">
-      <div class="pg-profile-hero__avatar">БТ</div>
+      <div class="pg-profile-hero__avatar" id="hero-avatar">??</div>
       <div class="pg-profile-hero__info">
-        <div class="pg-profile-hero__name">БудТех ТОВ</div>
+        <div class="pg-profile-hero__name" id="hero-name">—</div>
         <div class="pg-profile-hero__meta">
-          <span class="pg-profile-hero__meta-item"><strong>ЄДРПОУ:</strong> 34712089</span>
+          <span class="pg-profile-hero__meta-item"><strong>ЄДРПОУ:</strong> <span id="hero-edrpou">—</span></span>
           <div class="pg-profile-hero__dot"></div>
-          <span class="pg-profile-hero__meta-item"><strong>Email:</strong> zakupki@budtech.ua</span>
+          <span class="pg-profile-hero__meta-item"><strong>Email:</strong> <span id="hero-email">—</span></span>
           <div class="pg-profile-hero__dot"></div>
           <span class="pg-profile-hero__meta-item"><strong>Клієнт з:</strong> березня 2023</span>
         </div>
@@ -44,11 +47,12 @@
   </div>
 </div>
 
-
+<!-- ════════════════════════════════ MAIN ════════════════════════════════════ -->
+<main>
   <div class="container">
     <div class="pg-profile-layout">
 
-     
+      <!-- ── SIDEBAR ──────────────────────────────────────────────────────── -->
       <aside class="pg-profile-sidenav">
         <div class="pg-profile-sidenav__section">
           <div class="pg-profile-sidenav__label">Кабінет</div>
@@ -80,10 +84,10 @@
         </div>
       </aside>
 
-      
+      <!-- ── CONTENT ───────────────────────────────────────────────────────── -->
       <div>
 
-        
+        <!-- ══ PANEL: ORDER HISTORY ══════════════════════════════════════════ -->
         <div id="panel-orders" class="pg-profile-panel is-active">
 
           <div class="flex-between" style="margin-bottom:var(--sp-5)">
@@ -117,7 +121,7 @@
             </button>
           </div>
 
-          
+          <!-- ─ Tab: ALL ─ -->
           <div id="tab-all" class="pg-tab-panel is-active">
             <div class="table-wrapper">
               <table class="table">
@@ -283,9 +287,9 @@
                 </tbody>
               </table>
             </div>
-          </div>
+          </div><!-- /tab-all -->
 
-          
+          <!-- ─ Tab: ACTIVE RENT ─ -->
           <div id="tab-rent-active" class="pg-tab-panel">
             <div class="table-wrapper">
               <table class="table">
@@ -340,7 +344,7 @@
             </div>
           </div>
 
-         
+          <!-- ─ Tab: DONE RENT ─ -->
           <div id="tab-rent-done" class="pg-tab-panel">
             <div class="table-wrapper">
               <table class="table">
@@ -367,6 +371,7 @@
             </div>
           </div>
 
+          <!-- ─ Tab: PURCHASES ─ -->
           <div id="tab-purchase" class="pg-tab-panel">
             <div class="table-wrapper">
               <table class="table">
@@ -393,8 +398,10 @@
             </div>
           </div>
 
-        </div>
+        </div><!-- /panel-orders -->
 
+
+        <!-- ══ PANEL: WISHLIST ════════════════════════════════════════════════ -->
         <div id="panel-wishlist" class="pg-profile-panel">
           <div class="flex-between" style="margin-bottom:var(--sp-5)">
             <h3 style="font-size:1.4rem">Бажане</h3>
@@ -444,6 +451,7 @@
         </div>
 
 
+        <!-- ══ PANEL: EDIT COMPANY ════════════════════════════════════════════ -->
         <div id="panel-edit-company" class="pg-profile-panel">
           <div class="card">
             <div class="card-body">
@@ -458,11 +466,11 @@
                   </div>
                 </div>
                 <div class="pg-grid-2">
-                  <div class="form-group"><label class="form-label">Повна назва компанії</label><input class="input" value="БудТех ТОВ"></div>
-                  <div class="form-group"><label class="form-label">ЄДРПОУ / ІПН</label><input class="input" value="34712089" style="font-family:var(--font-mono)"></div>
-                  <div class="form-group pg-col-2"><label class="form-label">Юридична адреса</label><input class="input" value="04119, м. Київ, вул. Дегтярівська, 27-Т, оф. 412"></div>
-                  <div class="form-group"><label class="form-label">Телефон компанії</label><input class="input" type="tel" value="+380 44 555 01 02"></div>
-                  <div class="form-group"><label class="form-label">Email для документів</label><input class="input" type="email" value="zakupki@budtech.ua"></div>
+                  <div class="form-group"><label class="form-label">Повна назва компанії</label><input id="field-company-name" class="input"></div>
+                  <div class="form-group"><label class="form-label">ЄДРПОУ / ІПН</label><input id="field-edrpou" class="input" style="font-family:var(--font-mono)"></div>
+                  <div class="form-group pg-col-2"><label class="form-label">Юридична адреса</label><input id="field-legal-address" class="input"></div>
+                  <div class="form-group"><label class="form-label">Телефон компанії</label><input id="field-phone" class="input" type="tel"></div>
+                  <div class="form-group"><label class="form-label">Email для документів</label><input id="field-email-docs" class="input" type="email"></div>
                 </div>
               </div>
 
@@ -487,14 +495,15 @@
             <div class="pg-save-bar">
               <span class="pg-save-bar__hint"><span class="pg-save-bar__unsaved">●</span> Є незбережені зміни</span>
               <div style="display:flex;gap:var(--sp-2)">
-                <button class="btn btn-ghost btn-sm" onclick="showToast('Скасовано','info')">Скасувати</button>
-                <button class="btn btn-primary" onclick="showToast('Зміни збережено','success')">Зберегти зміни</button>
+                <button class="btn btn-ghost btn-sm">Скасувати</button>
+                <button class="btn btn-primary">Зберегти зміни</button>
               </div>
             </div>
           </div>
         </div>
 
 
+        <!-- ══ PANEL: EDIT USER ═══════════════════════════════════════════════ -->
         <div id="panel-edit-user" class="pg-profile-panel">
           <div class="card">
             <div class="card-body">
@@ -508,25 +517,26 @@
                 </div>
               </div>
               <div class="pg-grid-3">
-                <div class="form-group"><label class="form-label">Прізвище</label><input class="input" value="Коваленко"></div>
-                <div class="form-group"><label class="form-label">Ім'я</label><input class="input" value="Дмитро"></div>
-                <div class="form-group"><label class="form-label">По батькові</label><input class="input" value="Олексійович"></div>
-                <div class="form-group"><label class="form-label">Email</label><input class="input" type="email" value="d.kovalenko@budtech.ua"></div>
-                <div class="form-group"><label class="form-label">Телефон</label><input class="input" type="tel" value="+380 67 891 23 45"></div>
-                <div class="form-group"><label class="form-label">Посада</label><input class="input" value="Менеджер із закупівель"></div>
+                <div class="form-group"><label class="form-label">Прізвище</label><input id="field-last" class="input"></div>
+                <div class="form-group"><label class="form-label">Ім'я</label><input id="field-first" class="input"></div>
+                <div class="form-group"><label class="form-label">По батькові</label><input id="field-mid" class="input"></div>
+                <div class="form-group"><label class="form-label">Email</label><input id="field-email-user" class="input" type="email"></div>
+                <div class="form-group"><label class="form-label">Телефон</label><input id="field-phone-user" class="input" type="tel"></div>
+                <div class="form-group"><label class="form-label">Посада</label><input class="input" placeholder="Посада (необов'язково)"></div>
               </div>
             </div>
             <div class="pg-save-bar">
               <span style="opacity:0">—</span>
               <div style="display:flex;gap:var(--sp-2)">
                 <button class="btn btn-ghost btn-sm">Скасувати</button>
-                <button class="btn btn-primary" onclick="showToast('Зміни збережено','success')">Зберегти</button>
+                <button class="btn btn-primary">Зберегти</button>
               </div>
             </div>
           </div>
         </div>
 
 
+        <!-- ══ PANEL: PASSWORD ════════════════════════════════════════════════ -->
         <div id="panel-edit-password" class="pg-profile-panel">
           <div class="card">
             <div class="card-body">
@@ -579,14 +589,14 @@
               <span style="opacity:0">—</span>
               <div style="display:flex;gap:var(--sp-2)">
                 <button class="btn btn-ghost btn-sm">Скасувати</button>
-                <button class="btn btn-primary" onclick="showToast('Пароль змінено','success')">Змінити пароль</button>
+                <button class="btn btn-primary">Змінити пароль</button>
               </div>
             </div>
           </div>
         </div>
 
-      </div>
-    </div>
+      </div><!-- /content -->
+    </div><!-- /pg-profile-layout -->
   </div>
 </main>
 
@@ -594,71 +604,6 @@
 <div id="footer"></div>
 <script src="./js/utils.js"></script>
 <script src="./js/header.js"></script>
-
-<script>
-
-  document.querySelectorAll('.pg-profile-sidenav__item[data-panel]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.pg-profile-sidenav__item').forEach(b => b.classList.remove('is-active'));
-      document.querySelectorAll('.pg-profile-panel').forEach(p => p.classList.remove('is-active'));
-      btn.classList.add('is-active');
-      document.getElementById('panel-' + btn.dataset.panel).classList.add('is-active');
-    });
-  });
-
-
-  document.querySelectorAll('.pg-history-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      document.querySelectorAll('.pg-history-tab').forEach(t => t.classList.remove('is-active'));
-      document.querySelectorAll('.pg-tab-panel').forEach(p => p.classList.remove('is-active'));
-      tab.classList.add('is-active');
-      document.getElementById('tab-' + tab.dataset.tab).classList.add('is-active');
-    });
-  });
-
-
-  document.addEventListener('click', e => {
-    const row = e.target.closest('.pg-order-row');
-    if (!row) return;
-    const detail = document.getElementById('detail-' + row.dataset.order);
-    if (!detail) return;
-    const isOpen = row.classList.contains('is-open');
-    document.querySelectorAll('.pg-order-row.is-open').forEach(r => {
-      r.classList.remove('is-open');
-      const d = document.getElementById('detail-' + r.dataset.order);
-      if (d) d.classList.remove('is-active');
-    });
-    if (!isOpen) { row.classList.add('is-open'); detail.classList.add('is-active'); }
-  });
-
-
-  function togglePwd(id, btn) {
-    const el = document.getElementById(id);
-    el.type = el.type === 'password' ? 'text' : 'password';
-    btn.textContent = el.type === 'password' ? '👁' : '🙈';
-  }
-
-
-  function calcStrength(input) {
-    const v = input.value;
-    const score = [v.length >= 8, /[A-Z]/.test(v), /[0-9]/.test(v), /[^A-Za-z0-9]/.test(v)].filter(Boolean).length;
-    const cls = ['', 'is-weak', 'is-fair', 'is-strong', 'is-strong'];
-    const lbl = ['Введіть пароль', 'Слабкий', 'Задовільний', 'Добрий', 'Надійний'];
-    ['s1','s2','s3','s4'].forEach((id, i) => {
-      const el = document.getElementById(id);
-      el.className = 'pg-strength-seg' + (i < score ? ' ' + cls[score] : '');
-    });
-    document.getElementById('strength-label').textContent = v.length ? lbl[score] : lbl[0];
-  }
-
-  function showToast(msg, type = 'success') {
-    const c = document.getElementById('toastContainer');
-    const t = document.createElement('div');
-    t.className = 'toast ' + type;
-    t.textContent = msg;
-    c.appendChild(t);
-    setTimeout(() => t.remove(), 3200);
-  }
-</script>
+<script src="./js/profile.js"></script>
 </body>
 </html>
