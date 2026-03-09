@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     const grid = document.getElementById('catalog-grid')
 
     try {
-        const res = await fetch('http://localhost:3000/api/catalog/products/')
+        const res = await fetch('/api/catalog/products/')
         const data = await res.json() 
 
         if (data.success && data.data.length > 0) {
