@@ -1,279 +1,125 @@
 <!DOCTYPE html>
 <html lang="uk">
-
 <head>
     <meta charset="UTF-8">
-    <title>Профіль</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-
-    <style>
-        .container {
-            padding-top: 64px;
-            padding-bottom: 64px;
-        }
-
-        .profile-layout {
-            max-width: 900px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 32px;
-        }
-
-        .wishlist-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-        }
-
-        .product-mini {
-            border: 1px solid var(--c-border);
-            border-radius: var(--r-sm);
-            padding: 12px;
-            background: var(--c-bg-white);
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .product-mini__name {
-            font-family: var(--font-display);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-        }
-
-        .product-mini__price {
-            font-family: var(--font-mono);
-            font-weight: 600;
-        }
-
-        .product-mini__actions {
-            display: flex;
-            gap: 6px;
-        }
-    </style>
+    <title>БудІнструмент — Головна</title>
 </head>
-
 <body>
 
-    <div class="container">
+<div id="header"></div>
 
-        <div class="profile-layout">
-
-            <h1 class="section-title text-center">Профіль</h1>
-
-            <div class="card">
-                <div class="card-body">
-
-                    <h2 class="mb-6 text-center">Зміна користувацьких даних</h2>
-
-                    <form>
-
-                        <div class="grid grid-2">
-
-                            <div class="form-group">
-                                <label class="form-label">Назва компанії</label>
-                                <input class="input" type="text" value="ТОВ Інструмент Плюс">
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">ЄДРПОУ</label>
-                                <input class="input font-mono" type="text" value="12345678">
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">Телефон</label>
-                                <input class="input" type="tel" value="+380 00 000 00 00">
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">Email</label>
-                                <input class="input" type="email" value="office@company.ua">
-                            </div>
-
-                        </div>
-
-                        <div class="form-group mt-4">
-                            <label class="form-label">Юридична адреса</label>
-                            <input class="input" type="text" value="м. Київ, вул. Приклад 1">
-                        </div>
-
-                        <div class="form-group mt-4">
-                            <label class="form-label">Новий пароль</label>
-                            <input class="input" type="password" placeholder="Змінити пароль">
-                        </div>
-
-                        <button class="btn btn-primary mt-4">
-                            Зберегти зміни
-                        </button>
-
-                    </form>
-
-                </div>
+    <section class="section" style="background: var(--c-header-bg); color: white; padding: 100px 0;">
+        <div class="container">
+            <div class="section-eyebrow">B2B SOLUTIONS</div>
+            <h1 style="color: white; margin-bottom: var(--sp-4);">ПРОФЕСІЙНИЙ ІНСТРУМЕНТ<br><span class="text-brand">ДЛЯ ВАШОГО БІЗНЕСУ</span></h1>
+            <p style="color: rgba(255,255,255,0.6); max-width: 500px; margin-bottom: var(--sp-8);">
+                Оренда та продаж сертифікованого обладнання. Гнучкі тарифи для постійних клієнтів та швидка доставка на об'єкт.
+            </p>
+            <div class="flex gap-4">
+                <a href="catalog.html" class="btn btn-primary btn-xl">ПЕРЕГЛЯНУТИ КАТАЛОГ</a>
+                <button class="btn btn-outline btn-xl" style="background: transparent; color: white; border-color: rgba(255,255,255,0.2);">ПРО КОНСУЛЬТУВАТИСЯ</button>
             </div>
-
-
-            <div class="card">
-                <div class="card-body">
-
-                    <div class="flex-between mb-4">
-
-                        <h2>Історія покупок / оренд</h2>
-
-                        <div class="flex gap-2">
-
-                            <button class="btn btn-outline btn-sm">Усі</button>
-                            <button class="btn btn-outline btn-sm">Активні оренди</button>
-                            <button class="btn btn-outline btn-sm">Завершені</button>
-                            <button class="btn btn-outline btn-sm">Покупки</button>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="table-wrapper">
-
-                        <table class="table">
-
-                            <thead>
-                                <tr>
-                                    <th>Дата</th>
-                                    <th>Склад</th>
-                                    <th>Статус</th>
-                                    <th>Сума</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-
-                                <tr>
-                                    <td class="td-num">12.03.2026</td>
-                                    <td>Перфоратор Makita HR2470</td>
-                                    <td><span class="badge badge-warning">Активна оренда</span></td>
-                                    <td class="td-num">1200 ₴</td>
-                                    <td><button class="btn btn-outline btn-sm">Деталі</button></td>
-                                </tr>
-
-                                <tr>
-                                    <td class="td-num">05.03.2026</td>
-                                    <td>Болгарка Bosch GWS 750</td>
-                                    <td><span class="badge badge-success">Завершено</span></td>
-                                    <td class="td-num">800 ₴</td>
-                                    <td><button class="btn btn-outline btn-sm">Деталі</button></td>
-                                </tr>
-
-                                <tr>
-                                    <td class="td-num">18.02.2026</td>
-                                    <td>Шуруповерт DeWalt DCD771</td>
-                                    <td><span class="badge badge-blue">Покупка</span></td>
-                                    <td class="td-num">3200 ₴</td>
-                                    <td><button class="btn btn-outline btn-sm">Деталі</button></td>
-                                </tr>
-
-                            </tbody>
-
-                        </table>
-
-                    </div>
-
-                </div>
-            </div>
-
-
-            <div class="card">
-                <div class="card-body">
-
-                    <div class="flex-between mb-6">
-                        <h2>Бажане</h2>
-                    </div>
-
-                    <div class="wishlist-grid">
-
-                        <div class="product-mini">
-
-                            <div class="product-mini__name">
-                                Перфоратор Makita HR2470
-                            </div>
-
-                            <div class="product-mini__price">
-                                1200 ₴ / оренда
-                            </div>
-
-                            <div class="product-mini__actions">
-
-                                <button class="btn btn-outline btn-sm">
-                                    Перейти
-                                </button>
-
-                                <button class="btn btn-danger btn-sm">
-                                    Видалити
-                                </button>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="product-mini">
-
-                            <div class="product-mini__name">
-                                Болгарка Bosch GWS 750
-                            </div>
-
-                            <div class="product-mini__price">
-                                800 ₴ / оренда
-                            </div>
-
-                            <div class="product-mini__actions">
-
-                                <button class="btn btn-outline btn-sm">
-                                    Перейти
-                                </button>
-
-                                <button class="btn btn-danger btn-sm">
-                                    Видалити
-                                </button>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="product-mini">
-
-                            <div class="product-mini__name">
-                                Шуруповерт DeWalt DCD771
-                            </div>
-
-                            <div class="product-mini__price">
-                                3200 ₴
-                            </div>
-
-                            <div class="product-mini__actions">
-
-                                <button class="btn btn-outline btn-sm">
-                                    Перейти
-                                </button>
-
-                                <button class="btn btn-danger btn-sm">
-                                    Видалити
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-
-
         </div>
-    </div>
+    </section>
+
+    <section class="container" style="margin-top: -40px;">
+        <div class="stats-strip">
+            <div class="stat-item">
+                <div class="stat-item__value">1.2k+</div>
+                <div class="stat-item__label">Товарів у наявності</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-item__value">24/7</div>
+                <div class="stat-item__label">Підтримка об'єктів</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-item__value num">0%</div>
+                <div class="stat-item__label">Прихованих комісій</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-item__value">15 хв</div>
+                <div class="stat-item__label">Оформлення заявки</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="flex-between mb-8">
+                <div>
+                    <div class="section-eyebrow">MOST POPULAR</div>
+                    <h2 class="section-title">ПОПУЛЯРНІ ІНСТРУМЕНТИ</h2>
+                </div>
+                <a href="catalog.html" class="btn btn-ghost">ДИВИТИСЯ ВСІ ➔</a>
+            </div>
+
+            <div class="grid grid-4" id="popular-grid">
+                <div class="loading-overlay">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background: var(--c-bg-raised); border-top: 1px solid var(--c-border); border-bottom: 1px solid var(--c-border);">
+        <div class="container">
+            <div class="flex-between mb-8">
+                <div>
+                    <div class="section-eyebrow" style="color: var(--c-danger);">Hot Offers</div>
+                    <h2 class="section-title">Акційні пропозиції</h2>
+                    <p class="section-subtitle">Найкращі ціни на професійне обладнання цього тижня</p>
+                </div>
+                <a href="catalog.html" class="btn btn-outline-brand btn-sm">Всі акції ➔</a>
+            </div>
+            <div class="grid grid-4" id="sale-grid">
+                <div class="loading-overlay">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<div id="footer"></div>
+
+<script src="js/utils.js"></script>
+<script src="js/header.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', async function() {
+
+
+        const popularGrid = document.getElementById('popular-grid')
+        try {
+            const res = await fetch('/api/catalog')
+            const data = await res.json()
+            if (data.success && data.data.length > 0) {
+                const popular = data.data.slice(0, 4)
+                popularGrid.innerHTML = popular.map(renderProductCard).join('')
+            } else {
+                popularGrid.innerHTML = '<p class="text-3">Товари не знайдені</p>'
+            }
+        } catch(e) {
+            popularGrid.innerHTML = '<p class="text-3">Помилка завантаження</p>'
+        }
+        const saleGrid = document.getElementById('sale-grid')
+        try {
+            const res = await fetch('/api/catalog')
+            const data = await res.json()
+            if (data.success && data.data.length > 0) {
+                const sale = data.data.slice(4, 8)
+                saleGrid.innerHTML = sale.length > 0
+                    ? sale.map(renderProductCard).join('')
+                    : '<p class="text-3">Акційних товарів немає</p>'
+            } else {
+                saleGrid.innerHTML = '<p class="text-3">Товари не знайдені</p>'
+            }
+        } catch(e) {
+            saleGrid.innerHTML = '<p class="text-3">Помилка завантаження</p>'
+        }
+
+    })
+</script>
 
 </body>
-
 </html>
