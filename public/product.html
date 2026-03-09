@@ -21,58 +21,6 @@
             <span id="breadcrumb-name" style="color: #0f172a;">Завантаження...</span>
         </div>
 
-        <!-- PRODUCT MAIN -->
-        <div class="grid grid-2 gap-8 items-start mb-8" id="product-main" style="display:none;">
-
-            <!-- ФОТО -->
-            <div class="gallery">
-                <div class="gallery-main" style="border-radius: 12px; overflow: hidden; background: #f8fafc; border: 1px solid #e2e8f0;">
-                    <img id="main-img" src="" alt="Товар" style="width: 100%; height: 480px; object-fit: contain; padding: 24px;">
-                </div>
-            </div>
-
-            <!-- ІНФО -->
-            <div class="product-info">
-                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
-                    <span id="product-status-badge" class="badge"></span>
-                    <span id="product-category" style="font-size: 12px; color: #64748b; text-transform: uppercase; font-weight: 700; letter-spacing: 1px;"></span>
-                </div>
-
-                <div class="product-sku" style="font-size: 12px; color: #94a3b8; letter-spacing: 1px; margin-bottom: 8px;">SKU: <span id="product-sku"></span></div>
-                <h1 id="product-name" class="product-title" style="font-size: 2rem; font-weight: 900; text-transform: uppercase; line-height: 1.2; margin-bottom: 16px;"></h1>
-
-                <p id="product-desc" class="text-2 mb-6" style="color: #64748b; line-height: 1.7;"></p>
-
-                <div class="product-price-block" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 24px;">
-                    <div style="margin-bottom: 16px;">
-                        <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; font-weight: 700; margin-bottom: 4px;">Ціна</div>
-                        <div id="product-price" class="product-price" style="font-size: 2.2rem; font-weight: 900; color: #0f172a;"></div>
-                    </div>
-
-                    <div class="flex gap-3">
-                        <button class="btn btn-primary btn-xl" style="flex: 2;" onclick="addToCart()">В КОШИК</button>
-                        <button class="btn btn-outline btn-xl" style="flex: 1;" onclick="toggleWishlist()" title="В список бажань">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <ul class="text-sm text-2" style="list-style: none; display: flex; flex-direction: column; gap: 10px;">
-                    <li style="display: flex; align-items: center; gap: 8px;">
-                        <span style="color: #22c55e; font-weight: 700;">✓</span> Безкоштовна доставка від 3000 ₴
-                    </li>
-                    <li style="display: flex; align-items: center; gap: 8px;">
-                        <span style="color: #22c55e; font-weight: 700;">✓</span> Офіційна гарантія 36 місяців
-                    </li>
-                    <li style="display: flex; align-items: center; gap: 8px;">
-                        <span style="color: #22c55e; font-weight: 700;">✓</span> Оплата при отриманні
-                    </li>
-                </ul>
-            </div>
-        </div>
-
         <!-- LOADING -->
         <div id="product-loading" style="text-align: center; padding: 80px 0;">
             <div class="spinner"></div>
@@ -81,33 +29,115 @@
         <!-- ERROR -->
         <div id="product-error" style="display: none; text-align: center; padding: 80px 0;">
             <p style="color: #94a3b8; font-size: 1.2rem;">Товар не знайдено</p>
-            <a href="catalog.html" class="btn btn-primary mt-4" style="margin-top: 16px;">← Повернутись до каталогу</a>
+            <a href="catalog.html" class="btn btn-primary" style="margin-top: 16px;">← Повернутись до каталогу</a>
         </div>
 
-        <!-- TABS -->
-        <div class="tabs-container" id="product-tabs" style="display: none;">
-            <div class="tabs-nav">
-                <button class="tab-btn active" onclick="openTab('tab-desc', this)">Опис</button>
-                <button class="tab-btn" id="reviews-tab-btn" onclick="openTab('tab-reviews', this)">Відгуки</button>
+        <!-- PRODUCT MAIN -->
+        <div id="product-main" style="display: none;">
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; margin-bottom: 48px;">
+
+                <!-- ФОТО -->
+                <div style="background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; display: flex; align-items: center; justify-content: center; min-height: 420px;">
+                    <img id="main-img" src="" alt="Товар"
+                         style="width: 100%; max-height: 420px; object-fit: contain; padding: 32px;"
+                         onerror="this.style.display='none'; document.getElementById('img-fallback').style.display='flex'">
+                    <div id="img-fallback" style="display: none; align-items: center; justify-content: center; font-size: 5rem; min-height: 420px;">🛠️</div>
+                </div>
+
+                <!-- ІНФО -->
+                <div>
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+                        <span id="product-status-badge" class="badge"></span>
+                        <span id="product-category" style="font-size: 11px; color: #64748b; text-transform: uppercase; font-weight: 700; letter-spacing: 1.5px; background: #f1f5f9; padding: 4px 10px; border-radius: 4px;"></span>
+                    </div>
+
+                    <div style="font-size: 11px; color: #94a3b8; letter-spacing: 1px; margin-bottom: 8px; font-family: monospace;">SKU: <span id="product-sku"></span></div>
+                    <h1 id="product-name" style="font-size: 2rem; font-weight: 900; text-transform: uppercase; line-height: 1.2; margin-bottom: 16px; color: #0f172a;"></h1>
+                    <p id="product-desc" style="color: #64748b; line-height: 1.7; margin-bottom: 24px; font-size: 15px;"></p>
+
+                    <!-- ЦІНА + КНОПКИ -->
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 24px;">
+                        <div style="margin-bottom: 20px;">
+                            <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; font-weight: 700; margin-bottom: 6px; letter-spacing: 1px;">Ціна</div>
+                            <div id="product-price" style="font-size: 2.4rem; font-weight: 900; color: #0f172a; font-family: monospace;"></div>
+                        </div>
+                        <div style="display: flex; gap: 12px;">
+                            <button class="btn btn-dark btn-xl" style="flex: 2;" onclick="addToCart()">В КОШИК</button>
+                            <button class="btn btn-outline btn-xl" style="flex: 1;" onclick="toggleWishlist()" title="В список бажань">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <div style="display: flex; align-items: center; gap: 10px; font-size: 14px; color: #475569;">
+                            <span style="color: #22c55e; font-weight: 700; font-size: 16px;">✓</span> Безкоштовна доставка від 3 000 ₴
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; font-size: 14px; color: #475569;">
+                            <span style="color: #22c55e; font-weight: 700; font-size: 16px;">✓</span> Офіційна гарантія 36 місяців
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; font-size: 14px; color: #475569;">
+                            <span style="color: #22c55e; font-weight: 700; font-size: 16px;">✓</span> Оплата при отриманні
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div id="tab-desc" class="tab-pane active">
-                <div class="text-2" style="max-width: 800px; line-height: 1.8;">
+            <!-- TABS -->
+            <div style="border-top: 1px solid #e2e8f0; padding-top: 32px;">
+                <div style="display: flex; gap: 0; border-bottom: 2px solid #e2e8f0; margin-bottom: 32px;">
+                    <button id="tab-btn-desc" onclick="openTab('tab-desc', this)"
+                        style="padding: 12px 24px; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; border: none; background: none; cursor: pointer; border-bottom: 2px solid #0f172a; margin-bottom: -2px; color: #0f172a;">
+                        Опис
+                    </button>
+                    <button id="tab-btn-reviews" onclick="openTab('tab-reviews', this)"
+                        style="padding: 12px 24px; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; border: none; background: none; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; color: #94a3b8;">
+                        Відгуки <span id="reviews-count-badge" style="background: #f1f5f9; padding: 2px 8px; border-radius: 10px; font-size: 11px; margin-left: 4px;">0</span>
+                    </button>
+                </div>
+
+                <!-- ТАБ ОПИС -->
+                <div id="tab-desc" style="max-width: 800px; line-height: 1.8; color: #475569; font-size: 15px;">
                     <p id="tab-desc-text"></p>
                 </div>
+
+                <!-- ТАБ ВІДГУКИ -->
+                <div id="tab-reviews" style="display: none; max-width: 800px;">
+
+                    <!-- ФОРМА -->
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 32px;">
+                        <h4 style="font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px;">Написати відгук</h4>
+                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                            <div>
+                                <label style="font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 6px;">Оцінка</label>
+                                <div id="star-selector" style="display: flex; gap: 4px; font-size: 1.5rem; cursor: pointer;">
+                                    <span data-val="1" onclick="setRating(1)">☆</span>
+                                    <span data-val="2" onclick="setRating(2)">☆</span>
+                                    <span data-val="3" onclick="setRating(3)">☆</span>
+                                    <span data-val="4" onclick="setRating(4)">☆</span>
+                                    <span data-val="5" onclick="setRating(5)">☆</span>
+                                </div>
+                            </div>
+                            <div>
+                                <label style="font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 6px;">Коментар</label>
+                                <textarea id="review-text" rows="3" placeholder="Ваш відгук..."
+                                    style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; resize: vertical; font-family: inherit; box-sizing: border-box;"></textarea>
+                            </div>
+                            <button class="btn btn-dark" style="align-self: flex-start;" onclick="submitReview()">ВІДПРАВИТИ ВІДГУК</button>
+                        </div>
+                    </div>
+
+                    <!-- СПИСОК ВІДГУКІВ -->
+                    <div id="reviews-list">
+                        <p style="color: #94a3b8;">Відгуків поки немає</p>
+                    </div>
+                </div>
             </div>
 
-            <div id="tab-reviews" class="tab-pane">
-                <div class="flex-between items-center mb-6" style="max-width: 800px;">
-                    <h3>Відгуки покупців</h3>
-                    <button class="btn btn-outline btn-sm">НАПИСАТИ ВІДГУК</button>
-                </div>
-                <div id="reviews-list">
-                    <p style="color: #94a3b8;">Відгуків поки немає</p>
-                </div>
-            </div>
         </div>
-
     </main>
 
     <div id="footer"></div>
@@ -117,12 +147,25 @@
 
     <script>
         let currentProduct = null
+        let currentRating = 0
 
-        function openTab(tabId, btnElement = null) {
-            document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'))
-            document.getElementById(tabId).classList.add('active')
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'))
-            if (btnElement) btnElement.classList.add('active')
+        function openTab(tabId, btnElement) {
+            document.getElementById('tab-desc').style.display = 'none'
+            document.getElementById('tab-reviews').style.display = 'none'
+            document.getElementById(tabId).style.display = 'block'
+            document.querySelectorAll('#tab-btn-desc, #tab-btn-reviews').forEach(b => {
+                b.style.borderBottomColor = 'transparent'
+                b.style.color = '#94a3b8'
+            })
+            btnElement.style.borderBottomColor = '#0f172a'
+            btnElement.style.color = '#0f172a'
+        }
+
+        function setRating(val) {
+            currentRating = val
+            document.querySelectorAll('#star-selector span').forEach((s, i) => {
+                s.textContent = i < val ? '★' : '☆'
+            })
         }
 
         function addToCart() {
@@ -132,9 +175,16 @@
             if (existing) {
                 existing.quantity++
             } else {
-                cart.push({ id: currentProduct.prod_id, name: currentProduct.name, price: currentProduct.cost, quantity: 1 })
+                cart.push({
+                    id: currentProduct.prod_id,
+                    name: currentProduct.name,
+                    price: currentProduct.cost,
+                    photo: currentProduct.photo,
+                    quantity: 1
+                })
             }
             storage.set('cart', cart)
+            updateCartBadge()
             showToast('Товар додано до кошика', 'success')
         }
 
@@ -150,6 +200,69 @@
                 showToast('Додано до списку бажань', 'success')
             }
             storage.set('wishlist', wishlist)
+        }
+
+        async function loadReviews(prodId) {
+            try {
+                const res = await fetch(`/api/comments/product/${prodId}`)
+                const data = await res.json()
+                const list = document.getElementById('reviews-list')
+                const badge = document.getElementById('reviews-count-badge')
+
+                if (!data.success || data.data.length === 0) {
+                    list.innerHTML = '<p style="color: #94a3b8;">Відгуків поки немає</p>'
+                    badge.textContent = '0'
+                    return
+                }
+
+                badge.textContent = data.data.length
+                list.innerHTML = data.data.map(r => `
+                    <div style="border: 1px solid #e2e8f0; border-radius: 10px; padding: 20px; margin-bottom: 12px; background: #fff;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <div>
+                                <span style="font-weight: 700; font-size: 14px;">${r.fullname || 'Анонім'}</span>
+                                <span style="font-size: 12px; color: #94a3b8; margin-left: 10px;">${r.time || ''}</span>
+                            </div>
+                            <div style="color: #f59e0b; font-size: 1.1rem;">${'★'.repeat(r.grade || 0)}${'☆'.repeat(5 - (r.grade || 0))}</div>
+                        </div>
+                        <p style="color: #475569; font-size: 14px; line-height: 1.6; margin: 0;">${r.comment}</p>
+                    </div>
+                `).join('')
+            } catch(e) {
+                console.error('Помилка завантаження відгуків:', e)
+            }
+        }
+
+        async function submitReview() {
+            const user = storage.get('user')
+            if (!user) { showToast('Увійдіть в систему щоб залишити відгук', 'error'); return }
+            if (currentRating === 0) { showToast('Оберіть оцінку', 'error'); return }
+            const text = document.getElementById('review-text').value.trim()
+            if (!text) { showToast('Напишіть відгук', 'error'); return }
+
+            try {
+                const res = await fetch('/api/comments/add', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        prod_id: currentProduct.prod_id,
+                        user_id: user.user_id,
+                        grade: currentRating,
+                        comment: text
+                    })
+                })
+                const data = await res.json()
+                if (data.success) {
+                    showToast('Відгук додано!', 'success')
+                    document.getElementById('review-text').value = ''
+                    setRating(0)
+                    await loadReviews(currentProduct.prod_id)
+                } else {
+                    showToast(data.message || 'Помилка', 'error')
+                }
+            } catch(e) {
+                showToast('Помилка сервера', 'error')
+            }
         }
 
         document.addEventListener('DOMContentLoaded', async function() {
@@ -175,7 +288,6 @@
                 const p = data.data
                 currentProduct = p
 
-                // Заповнюємо дані
                 document.title = `${p.name} | БудІнструмент`
                 document.getElementById('breadcrumb-name').textContent = p.name
                 document.getElementById('product-sku').textContent = p.prod_id
@@ -185,20 +297,18 @@
                 document.getElementById('product-category').textContent = p.category
                 document.getElementById('tab-desc-text').textContent = p.description
 
-                // Фото
                 const img = document.getElementById('main-img')
                 img.src = `/images/${p.photo}`
                 img.alt = p.name
 
-                // Статус
                 const badge = document.getElementById('product-status-badge')
                 badge.textContent = p.status
                 badge.className = `badge ${p.status === 'В наявності' ? 'badge-success' : 'badge-gray'}`
 
-                // Показуємо контент
                 document.getElementById('product-loading').style.display = 'none'
-                document.getElementById('product-main').style.display = 'grid'
-                document.getElementById('product-tabs').style.display = 'block'
+                document.getElementById('product-main').style.display = 'block'
+
+                await loadReviews(p.prod_id)
 
             } catch(e) {
                 console.error(e)
