@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS history_purchases (
   user_id INTEGER,
   quantity INTEGER DEFAULT 1,
   total_price REAL NOT NULL,
-  order_date TEXT DEFAULT Date('now'),
+  order_date TEXT DEFAULT (Date('now')),
   FOREIGN KEY (user_id) REFERENCES users(user_id),
   FOREIGN KEY (prod_id) REFERENCES products(prod_id)
 );
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS history_rentals (
   end_date TEXT NOT NULL,
   total_price REAL NOT NULL,
   status TEXT DEFAULT 'Активна',
-  order_date TEXT DEFAULT Date('now'),
+  order_date TEXT DEFAULT (Date('now')),
   FOREIGN KEY (user_id) REFERENCES users(user_id),
   FOREIGN KEY (prod_id) REFERENCES products(prod_id)
 );

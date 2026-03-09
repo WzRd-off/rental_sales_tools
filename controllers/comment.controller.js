@@ -18,7 +18,7 @@ const getCommentsByProductId = async (req, res) => {
   try {
     const { prod_id } = req.params;
     const comments = await db.all(
-      'SELECT r.review_id, r.prod_id, r.user_id, r.rating, r.comment, r.time, u.fullname FROM reviews r JOIN users u ON r.user_id = u.user_id WHERE r.prod_id = ?',
+      'SELECT r.reviews_id, r.prod_id, r.user_id, r.rating, r.comment, r.time, u.fullname FROM reviews r JOIN users u ON r.user_id = u.user_id WHERE r.prod_id = ?',
       [prod_id]
     );
     res.status(200).json({ success: true, data: comments });
