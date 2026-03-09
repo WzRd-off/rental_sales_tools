@@ -13,6 +13,7 @@ const db = new sqlite3.Database(DB_PATH, (err) => {
 class DBManager {
   constructor() {
     this.db = db;
+    this.initSchema();
   }
 
   run(query, params = []) {
@@ -41,6 +42,22 @@ class DBManager {
       });
     });
   }
+
+    initSchema() {
+        try {
+            const schemaSql = fs.readFileSync('./database/schema.sql', 'utf8');
+
+            db.exec(schemaSql, (err) => {
+                if (err) {
+                    console.error('Помилка при виконанні schema.sql:', err.message);
+                } else {
+                    console.log('База даних успішно ініціалізована схемою.');
+                }
+            });
+        } catch (err) {
+            console.error('Помилка читання файлу schema.sql:', err.message);
+        }
+    }
 }
 
 module.exports = new DBManager();

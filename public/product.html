@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Товар | БудІнструмент</title>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .wishlist-btn { transition: all 0.2s ease; }
+        .wishlist-btn.active { background: #fee2e2 !important; border-color: #dc2626 !important; color: #dc2626 !important; }
+        .wishlist-btn.active svg { fill: #dc2626; stroke: #dc2626; }
+    </style>
 </head>
 <body>
 
@@ -64,7 +69,7 @@
                         </div>
                         <div style="display: flex; gap: 12px;">
                             <button class="btn btn-dark btn-xl" style="flex: 2;" onclick="addToCart()">В КОШИК</button>
-                            <button class="btn btn-outline btn-xl" style="flex: 1;" onclick="toggleWishlist()" title="В список бажань">
+                            <button id="wishlist-btn" class="btn btn-outline btn-xl wishlist-btn" style="flex: 1;" onclick="toggleWishlist()" title="В список бажань">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                                 </svg>
@@ -99,26 +104,22 @@
                     </button>
                 </div>
 
-                <!-- ТАБ ОПИС -->
                 <div id="tab-desc" style="max-width: 800px; line-height: 1.8; color: #475569; font-size: 15px;">
                     <p id="tab-desc-text"></p>
                 </div>
 
-                <!-- ТАБ ВІДГУКИ -->
                 <div id="tab-reviews" style="display: none; max-width: 800px;">
-
-                    <!-- ФОРМА -->
                     <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 32px;">
                         <h4 style="font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px;">Написати відгук</h4>
                         <div style="display: flex; flex-direction: column; gap: 12px;">
                             <div>
                                 <label style="font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 6px;">Оцінка</label>
                                 <div id="star-selector" style="display: flex; gap: 4px; font-size: 1.5rem; cursor: pointer;">
-                                    <span data-val="1" onclick="setRating(1)">☆</span>
-                                    <span data-val="2" onclick="setRating(2)">☆</span>
-                                    <span data-val="3" onclick="setRating(3)">☆</span>
-                                    <span data-val="4" onclick="setRating(4)">☆</span>
-                                    <span data-val="5" onclick="setRating(5)">☆</span>
+                                    <span onclick="setRating(1)">☆</span>
+                                    <span onclick="setRating(2)">☆</span>
+                                    <span onclick="setRating(3)">☆</span>
+                                    <span onclick="setRating(4)">☆</span>
+                                    <span onclick="setRating(5)">☆</span>
                                 </div>
                             </div>
                             <div>
@@ -129,14 +130,11 @@
                             <button class="btn btn-dark" style="align-self: flex-start;" onclick="submitReview()">ВІДПРАВИТИ ВІДГУК</button>
                         </div>
                     </div>
-
-                    <!-- СПИСОК ВІДГУКІВ -->
                     <div id="reviews-list">
                         <p style="color: #94a3b8;">Відгуків поки немає</p>
                     </div>
                 </div>
             </div>
-
         </div>
     </main>
 
@@ -148,6 +146,7 @@
     <script>
         let currentProduct = null
         let currentRating = 0
+        let isInWishlist = false
 
         function openTab(tabId, btnElement) {
             document.getElementById('tab-desc').style.display = 'none'
@@ -166,6 +165,16 @@
             document.querySelectorAll('#star-selector span').forEach((s, i) => {
                 s.textContent = i < val ? '★' : '☆'
             })
+        }
+
+        function setWishlistBtn(active) {
+            isInWishlist = active
+            const btn = document.getElementById('wishlist-btn')
+            if (active) {
+                btn.classList.add('active')
+            } else {
+                btn.classList.remove('active')
+            }
         }
 
         function addToCart() {
@@ -188,18 +197,60 @@
             showToast('Товар додано до кошика', 'success')
         }
 
-        function toggleWishlist() {
+        async function toggleWishlist() {
             if (!currentProduct) return
-            const wishlist = storage.get('wishlist') || []
-            const idx = wishlist.findIndex(i => i.id === currentProduct.prod_id)
-            if (idx > -1) {
-                wishlist.splice(idx, 1)
-                showToast('Видалено зі списку бажань', 'info')
-            } else {
-                wishlist.push({ id: currentProduct.prod_id, name: currentProduct.name })
-                showToast('Додано до списку бажань', 'success')
+            const user = storage.get('user')
+            if (!user) {
+                showToast('Увійдіть щоб додати до списку бажань', 'error')
+                return
             }
-            storage.set('wishlist', wishlist)
+
+            const headers = { 'Content-Type': 'application/json', 'user-id': user.user_id }
+
+            if (isInWishlist) {
+                // Видалити
+                try {
+                    await fetch('/api/profile/wishlist/remove', {
+                        method: 'DELETE',
+                        headers,
+                        body: JSON.stringify({ prod_id: currentProduct.prod_id })
+                    })
+                    setWishlistBtn(false)
+                    showToast('Видалено зі списку бажань', 'info')
+                } catch(e) {
+                    showToast('Помилка сервера', 'error')
+                }
+            } else {
+                // Додати
+                try {
+                    await fetch('/api/profile/wishlist/add', {
+                        method: 'POST',
+                        headers,
+                        body: JSON.stringify({ prod_id: currentProduct.prod_id })
+                    })
+                    setWishlistBtn(true)
+                    showToast('Додано до списку бажань', 'success')
+                } catch(e) {
+                    showToast('Помилка сервера', 'error')
+                }
+            }
+        }
+
+        async function checkWishlist(prodId) {
+            const user = storage.get('user')
+            if (!user) return
+            try {
+                const res = await fetch('/api/profile/wishlist', {
+                    headers: { 'user-id': user.user_id }
+                })
+                const data = await res.json()
+                if (data.success) {
+                    const inList = data.data.some(item => item.prod_id === prodId)
+                    setWishlistBtn(inList)
+                }
+            } catch(e) {
+                console.error('Помилка перевірки вішліста:', e)
+            }
         }
 
         async function loadReviews(prodId) {
@@ -239,7 +290,6 @@
             if (currentRating === 0) { showToast('Оберіть оцінку', 'error'); return }
             const text = document.getElementById('review-text').value.trim()
             if (!text) { showToast('Напишіть відгук', 'error'); return }
-
             try {
                 const res = await fetch('/api/comments/add', {
                     method: 'POST',
@@ -308,7 +358,11 @@
                 document.getElementById('product-loading').style.display = 'none'
                 document.getElementById('product-main').style.display = 'block'
 
-                await loadReviews(p.prod_id)
+                // Паралельно завантажуємо відгуки і вішліст
+                await Promise.all([
+                    loadReviews(p.prod_id),
+                    checkWishlist(p.prod_id)
+                ])
 
             } catch(e) {
                 console.error(e)
