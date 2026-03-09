@@ -107,7 +107,7 @@ function renderProductCard(product) {
           <div class="product-card__price-label">Ціна</div>
           <div class="product-card__price">${formatPrice(product.cost)}</div>
         </div>
-        <button class="btn btn-dark btn-block mt-4">ДЕТАЛЬНІШЕ</button>
+        <button class="btn btn-dark btn-block mt-4" onclick="window.location.href='product.html?id=${product.prod_id}'">ДЕТАЛЬНІШЕ</button>
       </div>
     </div>
   `
