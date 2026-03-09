@@ -26,13 +26,13 @@ function renderHeader() {
 
   const user = storage.get('user')
   const companyName = user?.company_name || user?.company || user?.fullname || 'User'
-  const userHTML = user
-    ? `<div class="header__user">
+ const userHTML = user
+    ? `<div class="header__user" onclick="window.location.href='profile.html'" style="cursor: pointer;">
          <div class="header__avatar">${companyName.slice(0,2).toUpperCase()}</div>
          <span class="header__user-name">${companyName}</span>
        </div>`
     : `<a href="/login.html" class="btn btn-primary btn-sm">Вхід</a>`
-
+    
   const html = `
     <header class="header">
       <div class="container">
@@ -87,18 +87,6 @@ function renderHeader() {
   initSearch()
 }
 
-// ---------- ПОИСК ----------
-
-function initSearch() {
-  const input = document.getElementById('search-input')
-  if (!input) return
-
-  input.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' && input.value.trim()) {
-      window.location.href = '/catalog.html?search=' + encodeURIComponent(input.value.trim())
-    }
-  })
-}
 
 // ---------- ГЕНЕРАЦИЯ ФУТЕРА ----------
 
