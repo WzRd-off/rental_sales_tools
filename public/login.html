@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Авторизація</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .auth-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 48px; 
+    }
+
+    .auth-card {
+        width: 100%;
+        max-width: 480px;
+    }
+
+    .text-center-h1 {
+        text-align: center;
+    }
+
+    .container {
+        padding-top: 64px;
+        padding-bottom: 64px;
+    }
+
+    .view {
+      display: none;
+    }
+
+    .switch-link {
+      text-align: center;
+      margin-top: 12px;
+      cursor: pointer;
+      color: var(--c-brand);
+      font-weight: 600;
+    }
+    .switch-link:hover {
+      color: var(--c-brand-dark);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="auth-grid">
+
+      <!-- вход -->
+      <div class="card auth-card" id="loginCard">
+        <div class="card-body">
+          <h2 class="h2 mb-6 text-center">Вхід</h2>
+
+            <div class="form-group">
+              <label class="form-label" for="login_email">Email</label>
+              <input class="input" type="email" id="login_email" name="email" required placeholder="example@company.com">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="login_password">Пароль</label>
+              <input class="input" type="password" id="login_password" name="password" required placeholder="Ваш пароль">
+            </div>
+
+            <button class="btn btn-primary w-full mt-4" type="submit">Увійти</button>
+          </form>
+
+          <div class="switch-link" id="showRegister">У вас немає акаунта? Зареєструватися</div>
+
+        </div>
+      </div>
+
+      <!-- регистрация -->
+      <div class="card auth-card view" id="registerCard">
+        <div class="card-body">
+          <h2 class="h2 mb-6 text-center">Реєстрація</h2>
+
+            <h3 class="text-2 font-bold mb-4 text-center">Дані представника</h3>
+
+            <div class="form-group">
+              <label class="form-label" for="fullname">ПІБ</label>
+              <input class="input" type="text" id="fullname" name="fullname" required placeholder="Ім'я Прізвище">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="email">Email</label>
+              <input class="input" type="email" id="email" name="email" required placeholder="example@company.com">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="phone">Телефон</label>
+              <input class="input" type="tel" id="phone" name="phone" required placeholder="+380 00 000 00 00">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="password">Пароль</label>
+              <input class="input" type="password" id="password" name="password" required minlength="6" placeholder="Ваш пароль">
+            </div>
+
+            <h3 class="text-2 font-bold mt-6 mb-4 text-center">Реквізити компанії</h3>
+
+            <div class="form-group">
+              <label class="form-label" for="company_name">Назва компанії</label>
+              <input class="input" type="text" id="company_name" name="company_name" required placeholder="ТОВ Приклад">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="company_code">ЄДРПОУ / ІПН</label>
+              <input class="input" type="text" id="company_code" name="company_code" required placeholder="12345678">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="company_address">Юридична адреса</label>
+              <input class="input" type="text" id="company_address" name="company_address" required placeholder="вул. Приклад, 1, Київ">
+            </div>
+
+            <button class="btn btn-primary w-full mt-4" type="submit">Зареєструватися</button>
+          </form>
+
+          <div class="switch-link" id="showLogin">У вас є акаунт? Увійти</div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    const showRegister = document.getElementById('showRegister');
+    const showLogin = document.getElementById('showLogin');
+    const loginCard = document.getElementById('loginCard');
+    const registerCard = document.getElementById('registerCard');
+
+    showRegister.addEventListener('click', () => {
+      loginCard.classList.add('view');       
+      showRegister.classList.add('view');    
+      registerCard.classList.remove('view'); 
+    });
+
+    showLogin.addEventListener('click', () => {
+      registerCard.classList.add('view');     
+      loginCard.classList.remove('view');    
+      showRegister.classList.remove('view');  
+    });
+  </script>
+</body>
+</html>
