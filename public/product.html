@@ -200,7 +200,7 @@
             if (isInWishlist) {
                 // Видалити
                 try {
-                    await fetch('/api/profile/wishlist/remove', {
+                    await fetch('/api/wishlist/wishlist/remove', {
                         method: 'DELETE',
                         headers,
                         body: JSON.stringify({ prod_id: currentProduct.prod_id })
@@ -213,7 +213,7 @@
             } else {
                 // Додати
                 try {
-                    await fetch('/api/profile/wishlist/add', {
+                    await fetch('/api/wishlist/wishlist/add', {
                         method: 'POST',
                         headers,
                         body: JSON.stringify({ prod_id: currentProduct.prod_id })
@@ -230,7 +230,7 @@
             const user = storage.get('user')
             if (!user) return
             try {
-                const res = await fetch('/api/profile/wishlist', {
+                const res = await fetch('/api/wishlist/wishlist', {
                     headers: { 'user-id': user.user_id }
                 })
                 const data = await res.json()
