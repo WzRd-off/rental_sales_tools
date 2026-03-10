@@ -5,6 +5,8 @@ const orderRouter = require('./order.routes');
 const authRouter = require('./auth.routes');
 const profileRouter = require('./profile.routes');
 const commentRouter = require('./comment.routes');
+const wishlistRouter = require('./wishlist.routes');
+
 
 
 router.use('/catalog', catalogRouter);
@@ -12,5 +14,6 @@ router.use('/orders', orderRouter);
 router.use('/auth', authRouter);
 router.use('/profile', profileRouter);
 router.use('/comments', commentRouter);
+router.use('/wishlist', wishlistRouter);
 
 module.exports = router;

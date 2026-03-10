@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const profileController = require('../controllers/profile.controller');
+const wishlistController = require('../controllers/wishlist.controller');
 
-router.get('/wishlist', profileController.getWishlist);
-router.post('/wishlist/add', profileController.addToWishlist);
-router.delete('/wishlist/remove', profileController.removeFromWishlist);
+router.get('/wishlist', wishlistController.getWishlist);
+router.post('/wishlist/add', wishlistController.addToWishlist);
+router.delete('/wishlist/remove', wishlistController.removeFromWishlist);
 
 module.exports = router;

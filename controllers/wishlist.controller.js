@@ -46,4 +46,4 @@ const removeFromWishlist = async (req, res) => {
     }
 };
 
-module.exports = { getProfile, getHistory, updateProfile, getWishlist, addToWishlist, removeFromWishlist };
+module.exports = { getWishlist, addToWishlist, removeFromWishlist };
