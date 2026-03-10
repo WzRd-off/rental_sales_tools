@@ -5,5 +5,6 @@ const profileController = require('../controllers/profile.controller');
 router.get('/info', profileController.getProfile);
 router.get('/history', profileController.getHistory);
 router.put('/update', profileController.updateProfile);
+router.put('/change-password', profileController.changePassword);
 
 module.exports = router;
