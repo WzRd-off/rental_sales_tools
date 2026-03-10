@@ -58,7 +58,7 @@ const API_URL = 'http://localhost:3000'
 
 async function fetchProducts() {
   try {
-    const res = await fetch(`${API_URL}/api/catalog`)
+    const res = await fetch(`${API_URL}/api/catalog/products`)
     if (!res.ok) throw new Error('Error fetching products')
     const products = await res.json()
     return products
