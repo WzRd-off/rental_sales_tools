@@ -82,7 +82,7 @@ function renderFooter() {
   const html = `
     <footer class="footer">
       <div class="container">
-        <div class="footer__grid">
+      <div class="footer__grid" style="grid-template-columns: 1fr 1fr;">
 
           <div>
             <div class="footer__logo">
@@ -94,8 +94,10 @@ function renderFooter() {
             </p>
           </div>
 
-        <div style="text-align: right;">
+
+          <div style="text-align: right; margin-left: auto;">
   <div class="footer__col-title">Контакти</div>
+
             <ul class="footer__links">
               <li><a href="tel:+380441234567">+38 (044) 123-45-67</a></li>
               <li>м. Одесса, вул. Дмитрівська, 40</li>
