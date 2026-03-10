@@ -89,6 +89,60 @@ async function loadHistory() {
 }
 
 
+// ---------- ВИШЛІСТ ----------
+
+async function loadWishlist() {
+    try {
+        const res  = await fetch(`${API_URL}/api/wishlist`, { headers: authHeaders() })
+        const json = await res.json()
+        const grid = document.getElementById('wishlist-grid')
+        if (!grid) return
+
+        if (!json.success || !json.data.length) {
+            grid.innerHTML = '<p style="color:var(--c-text-3)">Список бажаного порожній</p>'
+            return
+        }
+
+        grid.innerHTML = json.data.map(item => `
+            <div class="pg-wish-card">
+                <div class="pg-wish-card__img">
+                    <img src="/images/${item.photo || ''}" alt="${item.name}"
+                         style="width:100%;height:100%;object-fit:contain;"
+                         onerror="this.style.display='none'">
+                </div>
+                <div class="pg-wish-card__body">
+                    <div class="pg-wish-card__sku">SKU: ${item.prod_id}</div>
+                    <div class="pg-wish-card__name">${item.name}</div>
+                    <div class="pg-wish-card__price">${formatPrice(item.cost)}</div>
+                </div>
+                <div class="pg-wish-card__footer">
+                    <button class="btn btn-dark btn-sm" style="flex:1"
+                        onclick="window.location.href='product.html?id=${item.prod_id}'">
+                        ДЕТАЛЬНІШЕ
+                    </button>
+                    <button class="btn btn-outline btn-sm" style="color:var(--c-danger)"
+                        onclick="removeWishlist(${item.prod_id})">✕</button>
+                </div>
+            </div>
+        `).join('')
+    } catch (err) {
+        console.error('loadWishlist:', err)
+    }
+}
+
+async function removeWishlist(prod_id) {
+    try {
+        await fetch(`${API_URL}/api/wishlist/remove`, {
+            method: 'DELETE',
+            headers: authHeaders(),
+            body: JSON.stringify({ prod_id })
+        })
+        loadWishlist()
+    } catch (err) {
+        console.error('removeWishlist:', err)
+    }
+}
+
 
 function fmtDate(str) {
     if (!str) return '—'
@@ -520,4 +574,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initUI()
     loadProfile().then(() => initDirtyTracking())
     loadHistory()
+    loadWishlist()
 })
