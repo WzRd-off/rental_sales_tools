@@ -22,7 +22,6 @@ async function loadProfile() {
 
         const u = json.data
 
-    
         const initials = (u.company_name || u.fullname || '??')
             .split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()
         setText('hero-avatar', initials)
@@ -30,7 +29,6 @@ async function loadProfile() {
         setText('hero-edrpou', u.edrpou  || '—')
         setText('hero-email',  u.email   || '—')
 
-       
         setVal('field-company-name',  u.company_name)
         setVal('field-edrpou',        u.edrpou)
         setVal('field-legal-address', u.legal_address)
@@ -43,6 +41,9 @@ async function loadProfile() {
         setVal('field-mid',        parts[2])
         setVal('field-email-user', u.email)
         setVal('field-phone-user', u.number)
+
+        setDirty('company', false)
+        setDirty('user', false)
 
     } catch (err) {
         console.error('loadProfile:', err)
@@ -64,21 +65,18 @@ async function loadHistory() {
         const doneRentals   = rentals.filter(r => r.status !== 'Активна')
         const total         = purchases.length + rentals.length
 
-   
         setText('count-all',         total)
         setText('count-rent-active', activeRentals.length)
         setText('count-rent-done',   doneRentals.length)
         setText('count-purchase',    purchases.length)
         setText('nav-count-orders',  total)
 
-       
         const totalSpent = [...purchases, ...rentals]
             .reduce((sum, r) => sum + (r.total_price || 0), 0)
         setText('stat-total',  total)
         setText('stat-active', activeRentals.length)
         setText('stat-spent',  formatPrice(totalSpent))
 
-        
         renderAllTab(purchases, rentals)
         renderRentActiveTab(activeRentals)
         renderRentDoneTab(doneRentals)
@@ -90,7 +88,7 @@ async function loadHistory() {
     }
 }
 
-  
+
 
 function fmtDate(str) {
     if (!str) return '—'
@@ -233,9 +231,137 @@ function renderPurchaseTab(purchases) {
     }).join('')
 }
 
+const COMPANY_FIELDS = ['field-company-name', 'field-edrpou', 'field-legal-address', 'field-phone', 'field-email-docs']
+const USER_FIELDS    = ['field-last', 'field-first', 'field-mid', 'field-email-user', 'field-phone-user']
+
+let _snapCompany = {}
+let _snapUser    = {}
+
+function snapFields(fields) {
+    const snap = {}
+    fields.forEach(id => { snap[id] = getVal(id) })
+    return snap
+}
+
+function isDirty(fields, snap) {
+    return fields.some(id => getVal(id) !== (snap[id] || ''))
+}
+
+function setDirty(form, dirty) {
+    // form: 'company' | 'user'
+    const bar  = form === 'company'
+        ? document.querySelector('#panel-edit-company .pg-save-bar__hint')
+        : document.querySelector('#panel-edit-user .pg-save-bar__hint')
+    if (!bar) return
+    bar.style.visibility = dirty ? 'visible' : 'hidden'
+}
+
+function watchFields(fields, snap, formName) {
+    fields.forEach(id => {
+        const el = document.getElementById(id)
+        if (!el) return
+        el.addEventListener('input', () => setDirty(formName, isDirty(fields, snap)))
+    })
+}
+
+function initDirtyTracking() {
+    // Знімаємо знімок після того як loadProfile заповнить поля
+    setTimeout(() => {
+        _snapCompany = snapFields(COMPANY_FIELDS)
+        _snapUser    = snapFields(USER_FIELDS)
+        watchFields(COMPANY_FIELDS, _snapCompany, 'company')
+        watchFields(USER_FIELDS,    _snapUser,    'user')
+        // Ховаємо індикатори одразу
+        setDirty('company', false)
+        setDirty('user',    false)
+    }, 300)
+}
+
+function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+}
+
+function validatePhone(phone) {
+    return /^\+?[\d\s\-()]{7,15}$/.test(phone)
+}
+
+function validateEdrpou(code) {
+    return /^\d{8,10}$/.test(code)
+}
+
+function setFieldError(id, msg) {
+    const el = document.getElementById(id)
+    if (!el) return
+    el.classList.toggle('input--error', !!msg)
+    // підказка під полем
+    let hint = el.parentElement.querySelector('.field-error-hint')
+    if (msg) {
+        if (!hint) {
+            hint = document.createElement('span')
+            hint.className = 'field-error-hint form-hint'
+            hint.style.color = 'var(--c-danger, #e05)'
+            el.parentElement.appendChild(hint)
+        }
+        hint.textContent = msg
+    } else {
+        hint?.remove()
+    }
+}
+
+function clearErrors(fields) {
+    fields.forEach(id => setFieldError(id, ''))
+}
+
+function validateCompanyForm() {
+    clearErrors(COMPANY_FIELDS)
+    let ok = true
+
+    const name = getVal('field-company-name')
+    if (!name) { setFieldError('field-company-name', 'Обов\'язкове поле'); ok = false }
+
+    const edrpou = getVal('field-edrpou')
+    if (edrpou && !validateEdrpou(edrpou)) { setFieldError('field-edrpou', 'ЄДРПОУ має містити 8–10 цифр'); ok = false }
+
+    const email = getVal('field-email-docs')
+    if (email && !validateEmail(email)) { setFieldError('field-email-docs', 'Невірний формат email'); ok = false }
+
+    const phone = getVal('field-phone')
+    if (phone && !validatePhone(phone)) { setFieldError('field-phone', 'Невірний формат телефону'); ok = false }
+
+    return ok
+}
+
+function validateUserForm() {
+    clearErrors(USER_FIELDS)
+    let ok = true
+
+    const last = getVal('field-last')
+    if (!last) { setFieldError('field-last', 'Обов\'язкове поле'); ok = false }
+
+    const first = getVal('field-first')
+    if (!first) { setFieldError('field-first', 'Обов\'язкове поле'); ok = false }
+
+    const email = getVal('field-email-user')
+    if (!email) { setFieldError('field-email-user', 'Обов\'язкове поле'); ok = false }
+    else if (!validateEmail(email)) { setFieldError('field-email-user', 'Невірний формат email'); ok = false }
+
+    const phone = getVal('field-phone-user')
+    if (phone && !validatePhone(phone)) { setFieldError('field-phone-user', 'Невірний формат телефону'); ok = false }
+
+    return ok
+}
 
 
-async function submitUpdate() {
+
+async function submitUpdate(formType) {
+    // formType: 'company' | 'user'
+    const isCompany = formType === 'company'
+    const valid = isCompany ? validateCompanyForm() : validateUserForm()
+    if (!valid) {
+        showToast('Перевірте правильність заповнення полів', 'error')
+        return
+    }
+
     const fullname = [getVal('field-last'), getVal('field-first'), getVal('field-mid')]
         .filter(Boolean).join(' ')
 
@@ -257,11 +383,14 @@ async function submitUpdate() {
         const json = await res.json()
 
         if (json.success) {
-            
             const user = storage.get('user')
             storage.set('user', { ...user, ...body })
             showToast('Зміни збережено', 'success')
-            loadProfile()
+            await loadProfile()
+            // Оновлюємо знімки після збереження
+            _snapCompany = snapFields(COMPANY_FIELDS)
+            _snapUser    = snapFields(USER_FIELDS)
+            setDirty(formType, false)
         } else {
             showToast(json.message || 'Помилка збереження', 'error')
         }
@@ -271,10 +400,8 @@ async function submitUpdate() {
     }
 }
 
-
-
 function initUI() {
-  
+
     document.querySelectorAll('.pg-profile-sidenav__item[data-panel]').forEach(btn => {
         btn.addEventListener('click', () => {
             document.querySelectorAll('.pg-profile-sidenav__item').forEach(b => b.classList.remove('is-active'))
@@ -284,7 +411,6 @@ function initUI() {
         })
     })
 
-   
     document.querySelectorAll('.pg-history-tab').forEach(tab => {
         tab.addEventListener('click', () => {
             document.querySelectorAll('.pg-history-tab').forEach(t => t.classList.remove('is-active'))
@@ -294,7 +420,6 @@ function initUI() {
         })
     })
 
-    
     document.addEventListener('click', e => {
         const row = e.target.closest('.pg-order-row')
         if (!row) return
@@ -309,15 +434,18 @@ function initUI() {
         if (!isOpen) { row.classList.add('is-open'); detail.classList.add('is-active') }
     })
 
-    
-    document.getElementById('btn-save-company')?.addEventListener('click', submitUpdate)
-    document.getElementById('btn-save-user')?.addEventListener('click', submitUpdate)
+    document.getElementById('btn-save-company')?.addEventListener('click', () => submitUpdate('company'))
+    document.getElementById('btn-save-user')?.addEventListener('click',    () => submitUpdate('user'))
 
-    
-    document.getElementById('btn-discard-company')?.addEventListener('click', loadProfile)
-    document.getElementById('btn-discard-user')?.addEventListener('click', loadProfile)
+    document.getElementById('btn-discard-company')?.addEventListener('click', () => {
+        loadProfile()
+        clearErrors(COMPANY_FIELDS)
+    })
+    document.getElementById('btn-discard-user')?.addEventListener('click', () => {
+        loadProfile()
+        clearErrors(USER_FIELDS)
+    })
 
-    
     ;[['eye-current','pwd-current'], ['eye-new','pwd-new'], ['eye-confirm','pwd-confirm']]
         .forEach(([btnId, inputId]) => {
             document.getElementById(btnId)?.addEventListener('click', () => {
@@ -328,12 +456,11 @@ function initUI() {
             })
         })
 
-        document.getElementById('btn-logout')?.addEventListener('click', () => {
+    document.getElementById('btn-logout')?.addEventListener('click', () => {
         storage.remove('user')
         window.location.href = 'login.html'
     })
 
-  
     document.getElementById('pwd-new')?.addEventListener('input', calcStrength)
 }
 
@@ -350,6 +477,7 @@ function calcStrength() {
 }
 
 
+// ─── Хелпери ──────────────────────────────────────────────────────────────────
 
 function setText(id, val) {
     const el = document.getElementById(id)
@@ -367,6 +495,6 @@ function getVal(id) {
 
 document.addEventListener('DOMContentLoaded', () => {
     initUI()
-    loadProfile()
+    loadProfile().then(() => initDirtyTracking())
     loadHistory()
 })
