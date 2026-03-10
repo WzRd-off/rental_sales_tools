@@ -88,10 +88,10 @@ const changePassword = async (req, res) => {
     const userId = req.headers['user-id'];
     const { oldPassword, newPassword } = req.body;
 
-const [oldPassHash, newPassHash] = await Promise.all([
-    bcrypt.hash(oldPassword, 10),
-    bcrypt.hash(newPassword, 10)
-])
+    const {oldPassHash, newPassHash} = await Promise.all([
+        bcrypt.hash(oldPassword, 10),
+        bcrypt.hash(newPassword, 10)
+    ]);
 
     if (!userId) {
         return res.status(401).json({ success: false, message: 'Не авторизовано' });
