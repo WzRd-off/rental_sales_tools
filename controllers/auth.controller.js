@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 const registerUser = async (req, res) => {
   try {
-    const { email, fullname, password, number } = req.body;
+    const { email, fullname, password, number, company_name, company_code, company_address } = req.body;
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
@@ -22,7 +22,7 @@ const registerUser = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
     await db.run(
-      'INSERT INTO users (email, fullname, password_hash, number) VALUES (?, ?, ?, ?)',
+      'INSERT INTO users (email, fullname, password_hash, number, company_name, edrpou, legal_address) VALUES (?, ?, ?, ?, ?, ?, ?)',
       [email, fullname, hashedPassword, number]
     );
 
