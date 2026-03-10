@@ -952,3 +952,24 @@ p { color: var(--c-text-2); line-height: 1.7; font-size: 0.95rem; }
     border-color: #dc3545; 
     background-color: #fff8f8; 
 }
+.checkout-layout {
+    display: grid;
+    /* На мобільних телефонах все буде йти в одну колонку (один під одним) */
+    grid-template-columns: 1fr; 
+    gap: 30px;
+    align-items: start;
+}
+
+/* На екранах комп'ютерів (ширше 992px) перемикаємо на дві колонки */
+@media (min-width: 992px) {
+    .checkout-layout {
+        /* Ліва колонка розтягується (1fr), а права жорстко фіксується на 380px */
+        grid-template-columns: 1fr 380px; 
+    }
+}
+
+/* Робимо так, щоб права колонка "їздила" за екраном при прокрутці */
+.checkout-sidebar {
+    position: sticky;
+    top: 20px;
+}
