@@ -87,7 +87,7 @@ async function fetchProductById(id) {
 
 function renderProductCard(product) {
   return `
-    <div class="card product-card" data-id="${product.prod_id}">
+<div class="card product-card" data-id="${product.prod_id}" style="display:flex; flex-direction:column; height:100%;">
       <div class="product-card__img">
         <img src="/images/${product.photo}" alt="${product.name}" style="width:100%;height:100%;object-fit:cover;" 
              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
