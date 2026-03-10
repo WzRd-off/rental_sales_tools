@@ -79,13 +79,13 @@ document.addEventListener('DOMContentLoaded', function() {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            fullname,
-            email,
-            number:        phone,
-            password,
-            company_name,
-            edrpou:        company_code,
-            legal_address: company_address
+            fullname:        fullname,
+            email:           email,
+            number:          phone,
+            password:        password,
+            company_name:    company_name,
+            edrpou:          company_code,
+            legal_address:   company_address
           })
         })
 

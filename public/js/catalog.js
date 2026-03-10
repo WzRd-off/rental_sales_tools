@@ -63,3 +63,4 @@ document.addEventListener('DOMContentLoaded', async function() {
         setTimeout(applyFilters, 0)
     })
 })
+
