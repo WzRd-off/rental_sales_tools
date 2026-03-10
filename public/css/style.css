@@ -439,6 +439,11 @@ p { color: var(--c-text-2); line-height: 1.7; font-size: 0.95rem; }
 .card:hover { box-shadow: var(--shadow-md); border-color: var(--c-border-dark); }
 .card-body   { padding: var(--sp-5); }
 .card-footer { padding: var(--sp-3) var(--sp-5); border-top: 1px solid var(--c-border); background: var(--c-bg); }
+.product-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 
 .product-card__img {
   background: var(--c-bg);
@@ -850,7 +855,7 @@ p { color: var(--c-text-2); line-height: 1.7; font-size: 0.95rem; }
 .grid   { display: grid; gap: var(--sp-4); }
 .grid-2 { grid-template-columns: repeat(2, 1fr); }
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
-.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); align-items: stretch; }
 
 .flex         { display: flex; }
 .flex-center  { display: flex; align-items: center; justify-content: center; }

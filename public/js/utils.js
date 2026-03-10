@@ -96,9 +96,9 @@ function renderProductCard(product) {
           <span class="badge ${product.status === 'В наявності' ? 'badge-success' : 'badge-gray'}">${product.status}</span>
         </div>
       </div>
-      <div class="card-body">
+      <div class="card-body" style="display:flex; flex-direction:column; flex:1;">
         <div class="product-card__sku">SKU: ${product.prod_id}</div>
-        <h3 class="product-card__name">${product.name}</h3>
+        <h3 class="product-card__name" style="min-height: 3em;">${product.name}</h3>
         <div class="mb-4">
           <div class="product-card__price-label">Категорія</div>
           <div class="product-card__rent">${product.category}</div>
@@ -107,7 +107,7 @@ function renderProductCard(product) {
           <div class="product-card__price-label">Ціна</div>
           <div class="product-card__price">${formatPrice(product.cost)}</div>
         </div>
-        <button class="btn btn-dark btn-block mt-4" onclick="window.location.href='product.html?id=${product.prod_id}'">ДЕТАЛЬНІШЕ</button>
+        <button class="btn btn-dark btn-block mt-4" style="margin-top:auto;" onclick="window.location.href='product.html?id=${product.prod_id}'">ДЕТАЛЬНІШЕ</button>
       </div>
     </div>
   `

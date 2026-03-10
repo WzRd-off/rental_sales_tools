@@ -94,29 +94,11 @@ function renderFooter() {
             </p>
           </div>
 
-          <div>
-            <div class="footer__col-title">Навігація</div>
-            <ul class="footer__links">
-              <li><a href="/catalog.html">Каталог товарів</a></li>
-              <li><a href="/catalog.html?type=rent">Тарифи оренди</a></li>
-              <li><a href="#">Доставка</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <div class="footer__col-title">Клієнтам</div>
-            <ul class="footer__links">
-              <li><a href="/profile.html">Особистий кабінет</a></li>
-              <li><a href="/profile.html#orders">Історія замовлень</a></li>
-              <li><a href="#">Техпідтримка</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <div class="footer__col-title">Контакти</div>
+        <div style="text-align: right;">
+  <div class="footer__col-title">Контакти</div>
             <ul class="footer__links">
               <li><a href="tel:+380441234567">+38 (044) 123-45-67</a></li>
-              <li>м. Київ, вул. Будівельників, 40</li>
+              <li>м. Одесса, вул. Дмитрівська, 40</li>
             </ul>
           </div>
 
