@@ -248,8 +248,7 @@ function isDirty(fields, snap) {
 }
 
 function setDirty(form, dirty) {
-    // form: 'company' | 'user'
-    const bar  = form === 'company'
+    const bar = form === 'company'
         ? document.querySelector('#panel-edit-company .pg-save-bar__hint')
         : document.querySelector('#panel-edit-user .pg-save-bar__hint')
     if (!bar) return
@@ -265,13 +264,11 @@ function watchFields(fields, snap, formName) {
 }
 
 function initDirtyTracking() {
-    // Знімаємо знімок після того як loadProfile заповнить поля
     setTimeout(() => {
         _snapCompany = snapFields(COMPANY_FIELDS)
         _snapUser    = snapFields(USER_FIELDS)
         watchFields(COMPANY_FIELDS, _snapCompany, 'company')
         watchFields(USER_FIELDS,    _snapUser,    'user')
-        // Ховаємо індикатори одразу
         setDirty('company', false)
         setDirty('user',    false)
     }, 300)
@@ -293,7 +290,6 @@ function setFieldError(id, msg) {
     const el = document.getElementById(id)
     if (!el) return
     el.classList.toggle('input--error', !!msg)
-    // підказка під полем
     let hint = el.parentElement.querySelector('.field-error-hint')
     if (msg) {
         if (!hint) {
@@ -317,7 +313,7 @@ function validateCompanyForm() {
     let ok = true
 
     const name = getVal('field-company-name')
-    if (!name) { setFieldError('field-company-name', 'Обов\'язкове поле'); ok = false }
+    if (!name) { setFieldError('field-company-name', "Обов'язкове поле"); ok = false }
 
     const edrpou = getVal('field-edrpou')
     if (edrpou && !validateEdrpou(edrpou)) { setFieldError('field-edrpou', 'ЄДРПОУ має містити 8–10 цифр'); ok = false }
@@ -336,13 +332,13 @@ function validateUserForm() {
     let ok = true
 
     const last = getVal('field-last')
-    if (!last) { setFieldError('field-last', 'Обов\'язкове поле'); ok = false }
+    if (!last) { setFieldError('field-last', "Обов'язкове поле"); ok = false }
 
     const first = getVal('field-first')
-    if (!first) { setFieldError('field-first', 'Обов\'язкове поле'); ok = false }
+    if (!first) { setFieldError('field-first', "Обов'язкове поле"); ok = false }
 
     const email = getVal('field-email-user')
-    if (!email) { setFieldError('field-email-user', 'Обов\'язкове поле'); ok = false }
+    if (!email) { setFieldError('field-email-user', "Обов'язкове поле"); ok = false }
     else if (!validateEmail(email)) { setFieldError('field-email-user', 'Невірний формат email'); ok = false }
 
     const phone = getVal('field-phone-user')
@@ -351,10 +347,7 @@ function validateUserForm() {
     return ok
 }
 
-
-
 async function submitUpdate(formType) {
-    // formType: 'company' | 'user'
     const isCompany = formType === 'company'
     const valid = isCompany ? validateCompanyForm() : validateUserForm()
     if (!valid) {
@@ -387,7 +380,6 @@ async function submitUpdate(formType) {
             storage.set('user', { ...user, ...body })
             showToast('Зміни збережено', 'success')
             await loadProfile()
-            // Оновлюємо знімки після збереження
             _snapCompany = snapFields(COMPANY_FIELDS)
             _snapUser    = snapFields(USER_FIELDS)
             setDirty(formType, false)
@@ -396,6 +388,38 @@ async function submitUpdate(formType) {
         }
     } catch (err) {
         console.error('submitUpdate:', err)
+        showToast('Помилка мережі', 'error')
+    }
+}
+
+async function submitChangePassword() {
+    const oldPassword = document.getElementById('pwd-current')?.value.trim()
+    const newPassword = document.getElementById('pwd-new')?.value.trim()
+    const confirm     = document.getElementById('pwd-confirm')?.value.trim()
+
+    if (!oldPassword) return showToast('Введіть поточний пароль', 'error')
+    if (newPassword.length < 8) return showToast('Новий пароль — мінімум 8 символів', 'error')
+    if (newPassword !== confirm) return showToast('Паролі не співпадають', 'error')
+
+    try {
+        const res  = await fetch(`${PROFILE_URL}/change-password`, {
+            method: 'PUT',
+            headers: authHeaders(),
+            body: JSON.stringify({ oldPassword, newPassword }),
+        })
+        const json = await res.json()
+
+        if (json.success) {
+            showToast('Пароль змінено', 'success')
+            document.getElementById('pwd-current').value = ''
+            document.getElementById('pwd-new').value     = ''
+            document.getElementById('pwd-confirm').value = ''
+            calcStrength()
+        } else {
+            showToast(json.message || 'Помилка', 'error')
+        }
+    } catch (err) {
+        console.error('changePassword:', err)
         showToast('Помилка мережі', 'error')
     }
 }
@@ -456,6 +480,8 @@ function initUI() {
             })
         })
 
+    document.getElementById('btn-save-password')?.addEventListener('click', submitChangePassword)
+
     document.getElementById('btn-logout')?.addEventListener('click', () => {
         storage.remove('user')
         window.location.href = 'login.html'
@@ -475,9 +501,6 @@ function calcStrength() {
     })
     setText('strength-label', v.length ? lbl[score] : lbl[0])
 }
-
-
-// ─── Хелпери ──────────────────────────────────────────────────────────────────
 
 function setText(id, val) {
     const el = document.getElementById(id)
