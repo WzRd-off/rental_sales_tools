@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Каталог | БудІнструмент</title>
+</head>
+<body>
+    <div id="header"></div>
+
+    <main class="container mt-8" style="margin-bottom: 100px;">
+        <div class="mb-8">
+            <div class="section-eyebrow" style="color: var(--c-brand, #0056b3); font-weight: bold; letter-spacing: 1px; font-size: 12px; text-transform: uppercase; margin-bottom: 8px;">B2B SOLUTIONS</div>
+            <h1 class="section-title" style="font-size: 2.5rem; font-weight: 900; text-transform: uppercase; line-height: 1.2;">КАТАЛОГ ІНСТРУМЕНТІВ</h1>
+            <p style="color: #64748b; margin-top: 12px; font-size: 1.1rem;">Оренда 01 та продаж сертифікованого обладнання для вашого бізнесу</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 280px 1fr; gap: 32px; align-items: start;">
+
+            <aside style="border: 1px solid var(--c-border, #e2e8f0); border-radius: 8px; padding: 24px; background: #fff; position: sticky; top: 20px;">
+                <h4 style="margin-bottom: 20px; font-weight: bold; text-transform: uppercase; font-size: 14px; letter-spacing: 1px;">Фільтри</h4>
+
+                <form id="filter-form">
+                    <div style="margin-bottom: 24px;">
+                        <label style="display: block; margin-bottom: 8px; font-size: 12px; font-weight: bold; color: #666; text-transform: uppercase;">Категорія</label>
+                        <select id="filter-category" class="input" style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; background: #f8fafc; font-weight: 500; cursor: pointer;">
+                            <option value="all">Усі категорії</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 24px;">
+                        <label style="display: block; margin-bottom: 8px; font-size: 12px; font-weight: bold; color: #666; text-transform: uppercase;">Статус</label>
+                        <select id="filter-status" class="input" style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; background: #f8fafc; font-weight: 500; cursor: pointer;">
+                            <option value="all">Всі</option>
+                            <option value="В наявності">В наявності</option>
+                            <option value="Немає в наявності">Немає в наявності</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 32px;">
+                        <label style="display: block; margin-bottom: 8px; font-size: 12px; font-weight: bold; color: #666; text-transform: uppercase;">Ціна (₴)</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                            <input type="number" id="price-min" class="input" placeholder="Від" min="0" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                            <input type="number" id="price-max" class="input" placeholder="До" min="0" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 24px;">
+                        <label style="display: block; margin-bottom: 8px; font-size: 12px; font-weight: bold; color: #666; text-transform: uppercase;">Пошук</label>
+                        <input type="text" id="filter-search" class="input" placeholder="Назва товару..." style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block mb-3" style="width: 100%; padding: 14px; background: var(--c-brand, #0056b3); color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">ЗАСТОСУВАТИ</button>
+                    <button type="reset" id="filter-reset" class="btn btn-outline btn-block" style="width: 100%; padding: 14px; background: transparent; color: #64748b; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: bold; cursor: pointer;">СКИНУТИ</button>
+                </form>
+            </aside>
+
+            <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <span id="products-count" style="font-size: 14px; color: #64748b;"></span>
+                </div>
+                <div class="grid grid-4" id="catalog-grid">
+                    <div class="loading-overlay"><div class="spinner"></div></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="./js/utils.js"></script>
+    <script src="./js/header.js"></script>
+    <script src="./js/catalog.js"></script>
+</body>
+</html>

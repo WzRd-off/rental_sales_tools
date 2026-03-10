@@ -1,38 +1,90 @@
 const db = require('../database/db_manager');
 
-const getUserProfile = async (req, res) => {
-    const userId = req.params.id;
+const getProfile = async (req, res) => {
+    const userId = req.headers['user-id'];
+
+    if (!userId) {
+        return res.status(401).json({ success: false, message: 'Не авторизовано' });
+    }
+
     try {
-        const user = await db._get('SELECT username FROM users WHERE user_id = ?', [userId]);
+        const user = await db.get(
+            'SELECT user_id, email, fullname, number, company_name, edrpou, legal_address FROM users WHERE user_id = ?',
+            [userId]
+        );
+
         if (!user) {
             return res.status(404).json({ success: false, message: 'Користувача не знайдено' });
         }
-        const purchases = await db._all(
-            `SELECT p.prod_id, p.name, hp.total_price, hp.purchase_date 
-             FROM history_purchases hp
-             JOIN products p ON hp.prod_id = p.prod_id
-             WHERE hp.user_id = ?`,
-            [userId]
-        );
 
-        const rentals = await db._all(
-            `SELECT p.prod_id, p.name, hr.total_price, hr.start_date, hr.end_date
-             FROM history_rentals hr
-             JOIN products p ON hr.prod_id = p.prod_id
-             WHERE hr.user_id = ?`,
-            [userId]
-        );
+        res.status(200).json({ success: true, data: user });
+    } catch (error) {
+        console.error('Помилка отримання профілю:', error);
+        res.status(500).json({ success: false, message: 'Помилка сервера' });
+    }
+};
+
+const getHistory = async (req, res) => {
+    const userId = req.headers['user-id'];
+
+    if (!userId) {
+        return res.status(401).json({ success: false, message: 'Не авторизовано' });
+    }
+
+    try {
+        const purchases = await db.all(`
+            SELECT h.*, p.name, p.photo 
+            FROM history_purchases h
+            JOIN products p ON h.prod_id = p.prod_id
+            WHERE h.user_id = ?
+            ORDER BY h.order_date DESC
+        `, [userId]);
+
+        const rentals = await db.all(`
+            SELECT h.*, p.name, p.photo 
+            FROM history_rentals h
+            JOIN products p ON h.prod_id = p.prod_id
+            WHERE h.user_id = ?
+            ORDER BY h.order_date DESC
+        `, [userId]);
 
         res.status(200).json({
             success: true,
-            user: user,
-            purchases: purchases,
-            rentals: rentals
+            data: {
+                purchases,
+                rentals
+            }
         });
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Помилка отримання профілю: " + error.message
-        });
+        console.error('Помилка отримання історії:', error);
+        res.status(500).json({ success: false, message: 'Помилка сервера' });
     }
+};
+
+const updateProfile = async (req, res) => {
+    const userId = req.headers['user-id'];
+    const { email, fullname, number, company_name, edrpou, legal_address } = req.body;
+
+    if (!userId) {
+        return res.status(401).json({ success: false, message: 'Не авторизовано' });
+    }
+
+    try {
+        await db.run(`
+            UPDATE users 
+            SET email = ?, fullname = ?, number = ?, company_name = ?, edrpou = ?, legal_address = ?
+            WHERE user_id = ?
+        `, [email, fullname, number, company_name, edrpou, legal_address, userId]);
+
+        res.status(200).json({ success: true, message: 'Профіль оновлено' });
+    } catch (error) {
+        console.error('Помилка оновлення профілю:', error);
+        res.status(500).json({ success: false, message: 'Помилка сервера' });
+    }
+};
+
+module.exports = {
+    getProfile,
+    getHistory,
+    updateProfile
 };

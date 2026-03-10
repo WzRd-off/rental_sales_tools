@@ -20,7 +20,10 @@
   },
   "homepage": "https://github.com/WzRd-off/rental_sales_tools#readme",
   "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
     "express": "^5.2.1",
+    "i": "^0.3.7",
     "sequelize": "^6.37.7",
     "sqlite3": "^5.0.2"
   }

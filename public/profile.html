@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Особистий кабінет</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="header"></div>
+
+
+<div class="pg-profile-hero">
+  <div class="container">
+    <div class="pg-profile-hero__inner">
+      <div class="pg-profile-hero__avatar" id="hero-avatar">—</div>
+      <div class="pg-profile-hero__info">
+        <div class="pg-profile-hero__name" id="hero-name">—</div>
+        <div class="pg-profile-hero__meta">
+          <span class="pg-profile-hero__meta-item"><strong>ЄДРПОУ:</strong> <span id="hero-edrpou">—</span></span>
+          <div class="pg-profile-hero__dot"></div>
+          <span class="pg-profile-hero__meta-item"><strong>Email:</strong> <span id="hero-email">—</span></span>
+        </div>
+      </div>
+      <div class="pg-profile-hero__stats">
+        <div class="pg-profile-hero__stat">
+          <div class="pg-profile-hero__stat-val" id="stat-total">—</div>
+          <div class="pg-profile-hero__stat-lbl">Замовлень</div>
+        </div>
+        <div class="pg-profile-hero__stat">
+          <div class="pg-profile-hero__stat-val" id="stat-active">—</div>
+          <div class="pg-profile-hero__stat-lbl">Активних</div>
+        </div>
+        <div class="pg-profile-hero__stat">
+          <div class="pg-profile-hero__stat-val" id="stat-spent">—</div>
+          <div class="pg-profile-hero__stat-lbl">Грн витрачено</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<main>
+  <div class="container">
+    <div class="pg-profile-layout">
+      <aside class="pg-profile-sidenav">
+        <div class="pg-profile-sidenav__section">
+          <div class="pg-profile-sidenav__label">Кабінет</div>
+          <button class="pg-profile-sidenav__item is-active" data-panel="orders">
+            <svg viewBox="0 0 15 15"><rect x="2" y="1" width="11" height="13" rx="1"/><path d="M5 5h5M5 8h5M5 11h3" stroke-width="1.3"/></svg>
+            Історія замовлень
+            <span class="pg-profile-sidenav__count" id="nav-count-orders">0</span
+          </button>
+          <button class="pg-profile-sidenav__item" data-panel="wishlist">
+            <svg viewBox="0 0 15 15"><path d="M7.5 12.5S2 9 2 5.5a2.5 2.5 0 015 0 2.5 2.5 0 015 0c0 3.5-5.5 7-5.5 7z" stroke-width="1.3"/></svg>
+            Бажане
+          </button>
+        </div>
+        <div class="pg-profile-sidenav__section">
+          <div class="pg-profile-sidenav__label">Налаштування</div>
+          <button class="pg-profile-sidenav__item" data-panel="edit-company">
+            <svg viewBox="0 0 15 15"><path d="M7.5 1C4.5 1 2 3.5 2 6.5c0 3 5.5 8.5 5.5 8.5S13 9.5 13 6.5C13 3.5 10.5 1 7.5 1z" stroke-width="1.3"/><circle cx="7.5" cy="6.5" r="1.8" stroke-width="1.3"/></svg>
+            Реквізити компанії
+          </button>
+          <button class="pg-profile-sidenav__item" data-panel="edit-user">
+            <svg viewBox="0 0 15 15"><circle cx="7.5" cy="5" r="2.5" stroke-width="1.3"/><path d="M2 13c0-3.5 2.5-5 5.5-5s5.5 1.5 5.5 5" stroke-width="1.3"/></svg>
+            Особисті дані
+          </button>
+          <button class="pg-profile-sidenav__item" data-panel="edit-password">
+            <svg viewBox="0 0 15 15"><rect x="3" y="7" width="9" height="7" rx="1" stroke-width="1.3"/><path d="M5 7V5a2.5 2.5 0 015 0v2" stroke-width="1.3"/><circle cx="7.5" cy="10.5" r="1" fill="currentColor" stroke="none"/></svg>
+            Безпека / пароль
+          </button>
+        </div>
+      </aside>
+
+      <div>
+        <div id="panel-orders" class="pg-profile-panel is-active">
+          <div class="flex-between" style="margin-bottom:var(--sp-5)">
+            <h3 style="font-size:1.4rem">Історія замовлень</h3>
+          </div>
+
+          <div class="pg-history-tabs">
+            <button class="pg-history-tab is-active" data-tab="all">
+              Всі <span class="pg-history-tab__count" id="count-all">0</span>
+            </button>
+            <button class="pg-history-tab" data-tab="rent-active">
+              Активна оренда <span class="pg-history-tab__count" id="count-rent-active">0</span>
+            </button>
+            <button class="pg-history-tab" data-tab="rent-done">
+              Завершена оренда <span class="pg-history-tab__count" id="count-rent-done">0</span>
+            </button>
+            <button class="pg-history-tab" data-tab="purchase">
+              Покупки <span class="pg-history-tab__count" id="count-purchase">0</span>
+            </button>
+          </div>
+
+          <div id="tab-all" class="pg-tab-panel is-active">
+            <div class="table-wrapper">
+              <table class="table">
+                <thead><tr>
+                  <th></th><th>№</th><th>Дата</th><th>Тип</th>
+                  <th>Статус</th><th>Сума</th><th></th>
+                </tr></thead>
+                <tbody id="tbody-all"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="tab-rent-active" class="pg-tab-panel">
+            <div class="table-wrapper">
+              <table class="table">
+                <thead><tr>
+                  <th></th><th>№</th><th>Початок</th>
+                  <th>Повернення</th><th>Сума</th><th></th>
+                </tr></thead>
+                <tbody id="tbody-rent-active"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="tab-rent-done" class="pg-tab-panel">
+            <div class="table-wrapper">
+              <table class="table">
+                <thead><tr>
+                  <th></th><th>№</th><th>Дата</th>
+                  <th>Статус</th><th>Сума</th><th></th>
+                </tr></thead>
+                <tbody id="tbody-rent-done"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="tab-purchase" class="pg-tab-panel">
+            <div class="table-wrapper">
+              <table class="table">
+                <thead><tr>
+                  <th></th><th>№</th><th>Дата</th>
+                  <th>К-сть</th><th>Сума</th><th></th>
+                </tr></thead>
+                <tbody id="tbody-purchase"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        
+        <div id="panel-wishlist" class="pg-profile-panel">
+          <div class="flex-between" style="margin-bottom:var(--sp-5)">
+            <h3 style="font-size:1.4rem">Бажане</h3>
+          </div>
+          <div class="pg-wishlist-grid" id="wishlist-grid">
+            
+          </div>
+        </div>
+
+        
+        <div id="panel-edit-company" class="pg-profile-panel">
+          <div class="card">
+            <div class="card-body">
+              <div class="pg-edit-section-header">
+                <div class="pg-edit-section-icon">
+                  <svg viewBox="0 0 15 15"><path d="M7.5 1C4.5 1 2 3.5 2 6.5c0 3 5.5 8.5 5.5 8.5S13 9.5 13 6.5C13 3.5 10.5 1 7.5 1z" stroke-width="1.3"/><circle cx="7.5" cy="6.5" r="1.8" stroke-width="1.3"/></svg>
+                </div>
+                <div>
+                  <div class="pg-edit-section-title">Реквізити компанії</div>
+                  <div class="pg-edit-section-sub">Юридична та контактна інформація</div>
+                </div>
+              </div>
+              <div class="pg-grid-2">
+                <div class="form-group"><label class="form-label">Назва компанії</label><input id="field-company-name" class="input"></div>
+                <div class="form-group"><label class="form-label">ЄДРПОУ</label><input id="field-edrpou" class="input" style="font-family:var(--font-mono)"></div>
+                <div class="form-group pg-col-2"><label class="form-label">Юридична адреса</label><input id="field-legal-address" class="input"></div>
+                <div class="form-group"><label class="form-label">Телефон</label><input id="field-phone" class="input" type="tel"></div>
+                <div class="form-group"><label class="form-label">Email</label><input id="field-email-docs" class="input" type="email"></div>
+              </div>
+            </div>
+            <div class="pg-save-bar">
+              <span class="pg-save-bar__hint"><span class="pg-save-bar__unsaved">●</span> Незбережені зміни</span>
+              <div style="display:flex;gap:var(--sp-2)">
+                <button class="btn btn-ghost btn-sm" id="btn-discard-company">Скасувати</button>
+                <button class="btn btn-primary" id="btn-save-company">Зберегти</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="panel-edit-user" class="pg-profile-panel">
+          <div class="card">
+            <div class="card-body">
+              <div class="pg-edit-section-header">
+                <div class="pg-edit-section-icon">
+                  <svg viewBox="0 0 15 15"><circle cx="7.5" cy="5" r="2.5" stroke-width="1.3"/><path d="M2 13c0-3.5 2.5-5 5.5-5s5.5 1.5 5.5 5" stroke-width="1.3"/></svg>
+                </div>
+                <div>
+                  <div class="pg-edit-section-title">Особисті дані</div>
+                  <div class="pg-edit-section-sub">Контактна особа від компанії</div>
+                </div>
+              </div>
+              <div class="pg-grid-3">
+                <div class="form-group"><label class="form-label">Прізвище</label><input id="field-last" class="input"></div>
+                <div class="form-group"><label class="form-label">Ім'я</label><input id="field-first" class="input"></div>
+                <div class="form-group"><label class="form-label">По батькові</label><input id="field-mid" class="input"></div>
+                <div class="form-group"><label class="form-label">Email</label><input id="field-email-user" class="input" type="email"></div>
+                <div class="form-group"><label class="form-label">Телефон</label><input id="field-phone-user" class="input" type="tel"></div>
+              </div>
+            </div>
+            <div class="pg-save-bar">
+              <span style="opacity:0">—</span>
+              <div style="display:flex;gap:var(--sp-2)">
+                <button class="btn btn-ghost btn-sm" id="btn-discard-user">Скасувати</button>
+                <button class="btn btn-primary" id="btn-save-user">Зберегти</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="panel-edit-password" class="pg-profile-panel">
+          <div class="card">
+            <div class="card-body">
+              <div class="pg-edit-section-header">
+                <div class="pg-edit-section-icon">
+                  <svg viewBox="0 0 15 15"><rect x="3" y="7" width="9" height="7" rx="1" stroke-width="1.3"/><path d="M5 7V5a2.5 2.5 0 015 0v2" stroke-width="1.3"/><circle cx="7.5" cy="10.5" r="1" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <div>
+                  <div class="pg-edit-section-title">Зміна пароля</div>
+                </div>
+              </div>
+              <div style="max-width:420px">
+                <div class="form-group">
+                  <label class="form-label">Поточний пароль</label>
+                  <div class="pg-input-wrap">
+                    <input class="input" type="password" id="pwd-current">
+                    <button class="pg-input-eye" id="eye-current">👁</button>
+                  </div>
+                </div>
+                <hr class="divider">
+                <div class="form-group">
+                  <label class="form-label">Новий пароль</label>
+                  <div class="pg-input-wrap">
+                    <input class="input" type="password" id="pwd-new" placeholder="Мінімум 8 символів">
+                    <button class="pg-input-eye" id="eye-new">👁</button>
+                  </div>
+                  <div class="pg-strength-bar">
+                    <div class="pg-strength-seg" id="s1"></div>
+                    <div class="pg-strength-seg" id="s2"></div>
+                    <div class="pg-strength-seg" id="s3"></div>
+                    <div class="pg-strength-seg" id="s4"></div>
+                  </div>
+                  <span class="form-hint" id="strength-label">Введіть пароль</span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Підтвердження пароля</label>
+                  <div class="pg-input-wrap">
+                    <input class="input" type="password" id="pwd-confirm" placeholder="Повторіть пароль">
+                    <button class="pg-input-eye" id="eye-confirm">👁</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pg-save-bar">
+              <span style="opacity:0">—</span>
+              <div style="display:flex;gap:var(--sp-2)">
+                <button class="btn btn-ghost btn-sm">Скасувати</button>
+                <button class="btn btn-primary" id="btn-save-password">Змінити пароль</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<div id="footer"></div>
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="js/utils.js"></script>
+<script src="js/header.js"></script>
+<script src="js/profile.js"></script>
+</body>
+</html>

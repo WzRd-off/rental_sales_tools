@@ -1,130 +1,133 @@
 <!DOCTYPE html>
 <html lang="uk">
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Оформлення замовлення | БудІнструмент</title>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Оформлення замовлення | БудІнструмент</title>
 </head>
-<div id="header"></div>
-
-<body style="background-color: #f8f9fa; color: #212529;">
+<body>
 
 <div id="header"></div>
-    <main class="container" style="max-width: 1100px; margin: 40px auto; padding: 0 20px;">
-        <h1 style="font-size: 2rem; margin-bottom: 30px; border-bottom: 2px solid #004085; padding-bottom: 10px;">Оформлення замовлення</h1>
 
-        <div class="checkout-layout">
-            
-            <form id="checkout-form">
-                
-                <div class="card-accordion">
-                    <div class="step-header active-header" onclick="toggleStep(this)">
-                        <span class="step-number">1. Контактні дані</span>
-                        <span class="arrow-icon">▼</span>
-                    </div>
-                    <div class="step-content active">
-                        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 10px;">
-                            <input type="text" class="input" style="width: 100%; padding: 12px; border: 1px solid #dee2e6; border-radius: 4px;" placeholder="ПІБ" required>
-                            <input type="tel" class="input" style="width: 100%; padding: 12px; border: 1px solid #dee2e6; border-radius: 4px;" placeholder="Телефон" required>
-                        </div>
-                    </div>
-                </div>
+<main class="container" style="max-width: 1100px; margin: 40px auto; padding: 0 20px;">
+  <h1 style="font-size: 2rem; margin-bottom: 30px; border-bottom: 2px solid var(--c-brand); padding-bottom: 10px;">Оформлення замовлення</h1>
 
-<div class="card-accordion">
-    <div class="step-header" onclick="toggleStep(this)">
-        <span class="step-number">2. Доставка</span>
-        <span class="arrow-icon">▼</span>
-    </div>
-    <div class="step-content">
-        <div style="margin-top: 15px;">
-            <label style="display: block; margin-bottom: 8px; font-size: 14px; font-weight: bold;">Оберіть ваше місто:</label>
-            <select id="city-select" onchange="updateSelectedCity()" style="width: 100%; padding: 12px; border: 1px solid #dee2e6; border-radius: 6px; font-size: 16px; margin-bottom: 20px;">
-                <option value="Київ">Київ</option>
-                <option value="Одеса">Одеса</option>
-                <option value="Дніпро">Дніпро</option>
-                <option value="Львів">Львів</option>
-                <option value="Харків">Харків</option>
-                <option value="Запоріжжя">Запоріжжя</option>
+  <div style="display: grid; grid-template-columns: 1fr 360px; gap: 32px; align-items: start;">
+
+    <form id="checkout-form">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h3 style="margin-bottom: 16px;">1. Контактні дані</h3>
+          <div class="form-group">
+            <label class="form-label">ПІБ</label>
+            <input type="text" id="user-name" class="input w-full" placeholder="Іванов Іван Іванович" required>
+            <div class="form-error" id="name-error" style="display:none;">Мінімум 3 символи</div>
+          </div>
+          <div class="form-group mt-3">
+            <label class="form-label">Телефон</label>
+            <input type="tel" id="user-phone" class="input w-full" placeholder="0671234567" required>
+            <div class="form-error" id="phone-error" style="display:none;">Введіть коректний номер (10 цифр)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-body">
+          <h3 style="margin-bottom: 16px;">2. Доставка</h3>
+          <div class="form-group">
+            <label class="form-label">Оберіть місто</label>
+            <select id="city-select" class="input w-full" onchange="updateSelectedCity()">
+              <option value="Київ">Київ</option>
+              <option value="Одеса">Одеса</option>
+              <option value="Дніпро">Дніпро</option>
+              <option value="Львів">Львів</option>
+              <option value="Харків">Харків</option>
+              <option value="Запоріжжя">Запоріжжя</option>
             </select>
-
-            <p style="font-size: 14px; margin-bottom: 15px;">📍 Ваше місто: <b id="display-city">Київ</b></p>
-            
-            <div style="display: flex; flex-direction: column; gap: 10px;">
-                <label style="display: flex; align-items: center; gap: 10px; padding: 12px; border: 1px solid #dee2e6; border-radius: 6px; cursor: pointer;">
-                    <input type="radio" name="delivery" value="pickup" checked> Самовивіз з магазину
-                </label>
-                <label style="display: flex; align-items: center; gap: 10px; padding: 12px; border: 1px solid #dee2e6; border-radius: 6px; cursor: pointer;">
-                    <input type="radio" name="delivery" value="np"> Нова Пошта
-                </label>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="card-accordion">
-    <div class="step-header" onclick="toggleStep(this)">
-        <span class="step-number">3. Оплата</span>
-        <span class="arrow-icon">▼</span>
-    </div>
-    <div class="step-content">
-        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 15px;">
-            <label style="display: flex; align-items: center; gap: 10px; padding: 12px; border: 1px solid #dee2e6; border-radius: 6px; cursor: pointer;">
-                <input type="radio" name="payment" value="online" onchange="toggleCardFields(true)"> Оплата карткою (Visa/Mastercard)
+            <p class="form-hint">📍 Ваше місто: <b id="display-city">Київ</b></p>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 12px;">
+            <label style="display: flex; align-items: center; gap: 10px; padding: 12px; border: 1px solid var(--c-border); border-radius: 6px; cursor: pointer;">
+              <input type="radio" name="delivery" value="pickup" checked> Самовивіз з магазину
             </label>
-
-            <div id="card-fields" style="display: none; padding: 15px; background: #f8f9fa; border-radius: 8px; border: 1px dashed #ced4da;">
-                <input type="text" class="input" placeholder="0000 0000 0000 0000" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
-                <div style="display: flex; gap: 10px;">
-                    <input type="text" class="input" placeholder="ММ/РР" style="width: 50%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-                    <input type="text" class="input" placeholder="CVV" style="width: 50%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-                </div>
-            </div>
-            
+            <label style="display: flex; align-items: center; gap: 10px; padding: 12px; border: 1px solid var(--c-border); border-radius: 6px; cursor: pointer;">
+              <input type="radio" name="delivery" value="np"> Нова Пошта
+            </label>
+          </div>
         </div>
-    </div>
-</div>
+      </div>
 
-  <aside style="position: sticky; top: 20px;">
-            <div style="background: #fff; border: 1px solid #dee2e6; border-radius: 8px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
-                <h3>Ваше замовлення</h3>
-                <p>Перфоратор Bosch — <b>13 000 ₴</b></p>
-                <hr>
-                <div style="font-size: 1.5rem; font-weight: bold; margin: 20px 0;">Разом: 13 000 ₴</div>
-                <button type="submit" form="checkout-form" style="width: 100%; padding: 16px; background: #004085; color: white; border: none; border-radius: 4px; cursor: pointer;">
-                    ОФОРМИТИ ЗАМОВЛЕННЯ
-                </button>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h3 style="margin-bottom: 16px;">3. Оплата</h3>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <label style="display: flex; align-items: center; gap: 10px; padding: 12px; border: 1px solid var(--c-border); border-radius: 6px; cursor: pointer;">
+              <input type="radio" name="payment" value="cash" checked> Оплата при отриманні
+            </label>
+            <label style="display: flex; align-items: center; gap: 10px; padding: 12px; border: 1px solid var(--c-border); border-radius: 6px; cursor: pointer;">
+              <input type="radio" name="payment" value="online" onchange="toggleCardFields(true)"> Оплата карткою (Visa/Mastercard)
+            </label>
+            <div id="card-fields" style="display: none; padding: 15px; background: var(--c-bg-raised); border-radius: 8px; border: 1px dashed var(--c-border);">
+              <input type="text" class="input w-full" placeholder="0000 0000 0000 0000" style="margin-bottom: 10px;">
+              <div style="display: flex; gap: 10px;">
+                <input type="text" class="input" placeholder="ММ/РР" style="width: 50%;">
+                <input type="text" class="input" placeholder="CVV" style="width: 50%;">
+              </div>
             </div>
-        </aside>
+          </div>
+        </div>
+      </div>
 
-    </div>
+    </form>
+    <aside style="position: sticky; top: 20px;">
+      <div class="card">
+        <div class="card-body">
+          <h3 style="margin-bottom: 16px;">Ваше замовлення</h3>
+          <div id="order-summary">
+          </div>
+          <hr style="margin: 16px 0; border-color: var(--c-border);">
+          <div style="font-size: 1.3rem; font-weight: bold; margin-bottom: 20px;">
+            Разом: <span id="cart-total" class="num">0 ₴</span>
+          </div>
+          <button id="submit-btn" type="submit" form="checkout-form" class="btn btn-primary btn-block btn-lg">
+            ОФОРМИТИ ЗАМОВЛЕННЯ
+          </button>
+        </div>
+      </div>
+    </aside>
+
+  </div>
 </main>
 
-
-
-<script>
-    function toggleStep(header) {
-        const content = header.nextElementSibling;
-        content.style.display = content.style.display === "block" ? "none" : "block";
-        header.classList.toggle('active-header');
-    }
-    function updateSelectedCity() {
-        document.getElementById('display-city').innerText = document.getElementById('city-select').value;
-    }
-    function toggleCardFields(show) {
-        document.getElementById('card-fields').style.display = show ? "block" : "none";
-    }
-</script>
-<script>
-    function updateSelectedCity() {
-        const select = document.getElementById('city-select');
-        const display = document.getElementById('display-city');
-        display.innerText = select.value;
-    }
-</script>
-
 <div id="footer"></div>
- <script src="./js/utils.js"></script>
-<script src="./js/header.js"></script>
+
+<script src="js/utils.js"></script>
+<script src="js/header.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/checkout.js"></script>
+<script>
+  function updateSelectedCity() {
+    document.getElementById('display-city').innerText = document.getElementById('city-select').value;
+  }
+  function toggleCardFields(show) {
+    document.getElementById('card-fields').style.display = show ? 'block' : 'none';
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    const cart = storage.get('cart') || []
+    const summary = document.getElementById('order-summary')
+    if (cart.length === 0) {
+      summary.innerHTML = '<p class="text-3 text-sm">Кошик порожній</p>'
+      return
+    }
+    summary.innerHTML = cart.map(item => `
+      <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+        <span class="text-sm">${item.name}</span>
+        <span class="num text-sm">${formatPrice(item.type === 'rent' ? item.rentPrice * item.days * item.quantity : item.price * item.quantity)}</span>
+      </div>
+    `).join('')
+  })
+</script>
+
 </body>
 </html>

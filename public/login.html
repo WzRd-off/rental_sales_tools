@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Авторизація | БудІнструмент</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="auth-wrap">
+    <div>
+
+      <div style="text-align:center; margin-bottom: 32px;">
+        <a href="/index.html" style="font-size: 1.4rem; font-weight: 800; color: var(--c-text); text-decoration: none; letter-spacing: 0.05em;">
+          БУД<span style="color: var(--c-brand);">ІНСТРУМЕНТ</span>
+        </a>
+      </div>
+
+      <div class="card auth-card" id="loginCard">
+        <div class="card-body">
+          <h2 class="mb-6" style="text-align:center;">Вхід</h2>
+
+          <div class="form-group">
+            <label class="form-label" for="login_email">Email</label>
+            <input class="input w-full" type="email" id="login_email" placeholder="example@company.com">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="login_password">Пароль</label>
+            <input class="input w-full" type="password" id="login_password" placeholder="Ваш пароль">
+          </div>
+
+          <button class="btn btn-primary btn-block mt-4" type="button">Увійти</button>
+
+          <div class="switch-link" id="showRegister">Немає акаунта? Зареєструватися</div>
+        </div>
+      </div>
+
+      <div class="card auth-card view" id="registerCard">
+        <div class="card-body">
+          <h2 class="mb-6" style="text-align:center;">Реєстрація</h2>
+
+          <h3 class="text-2 font-bold mb-4" style="text-align:center;">Дані представника</h3>
+
+          <div class="form-group">
+            <label class="form-label" for="fullname">ПІБ</label>
+            <input class="input w-full" type="text" id="fullname" placeholder="Іванов Іван Іванович">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Email</label>
+            <input class="input w-full" type="email" id="email" placeholder="example@company.com">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="phone">Телефон</label>
+            <input class="input w-full" type="tel" id="phone" placeholder="+380671234567">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="password">Пароль</label>
+            <input class="input w-full" type="password" id="password" placeholder="Мінімум 6 символів">
+          </div>
+
+          <h3 class="text-2 font-bold mt-6 mb-4" style="text-align:center;">Реквізити компанії</h3>
+
+          <div class="form-group">
+            <label class="form-label" for="company_name">Назва компанії</label>
+            <input class="input w-full" type="text" id="company_name" placeholder="ТОВ Приклад">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="company_code">ЄДРПОУ / ІПН</label>
+            <input class="input w-full" type="text" id="company_code" placeholder="12345678">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="company_address">Юридична адреса</label>
+            <input class="input w-full" type="text" id="company_address" placeholder="вул. Приклад, 1, Київ">
+          </div>
+
+          <button class="btn btn-primary btn-block mt-4" type="button">Зареєструватися</button>
+
+          <div class="switch-link" id="showLogin">Є акаунт? Увійти</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/utils.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    document.getElementById('showRegister').addEventListener('click', () => {
+      document.getElementById('loginCard').classList.add('view')
+      document.getElementById('showRegister').classList.add('view')
+      document.getElementById('registerCard').classList.remove('view')
+    })
+    document.getElementById('showLogin').addEventListener('click', () => {
+      document.getElementById('registerCard').classList.add('view')
+      document.getElementById('loginCard').classList.remove('view')
+      document.getElementById('showRegister').classList.remove('view')
+    })
+  </script>
+
+</body>
+</html>

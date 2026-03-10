@@ -4,11 +4,11 @@
 
 // ---------- НАВИГАЦИЯ ----------
 const navLinks = [
+  { label: 'Головна',       href: 'index.html' },
+  { label: 'Каталог',       href: 'catalog.html' },
 
-  { label: 'Головна',       href: '/index.html' },
-  { label: 'Каталог',       href: '/catalog.html' },
-  { label: 'Оренда',        href: '/catalog.html?type=rent' },
-  { label: 'Про компанію',  href: '/about.html' },
+  { label: 'Кредит/Оплата', href: 'payment.html' },
+  { label: 'Контакти',      href: 'contacts.html' },
 ]
 
 // ---------- ГЕНЕРАЦИЯ ХЕДЕРА ----------
@@ -25,10 +25,11 @@ function renderHeader() {
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0)
 
   const user = storage.get('user')
-  const userHTML = user
-    ? `<div class="header__user">
-         <div class="header__avatar">${user.company.slice(0,2).toUpperCase()}</div>
-         <span class="header__user-name">${user.company}</span>
+  const companyName = user?.company_name || user?.company || user?.fullname || 'User'
+ const userHTML = user
+    ? `<div class="header__user" onclick="window.location.href='profile.html'" style="cursor: pointer;">
+         <div class="header__avatar">${companyName.slice(0,2).toUpperCase()}</div>
+         <span class="header__user-name">${companyName}</span>
        </div>`
     : `<a href="/login.html" class="btn btn-primary btn-sm">Вхід</a>`
 
@@ -37,7 +38,7 @@ function renderHeader() {
       <div class="container">
         <div class="header__inner">
 
-          <a href="/index.html" class="header__logo">
+          <a href="index.html" class="header__logo">
             <div class="header__logo-mark">
               <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:#fff;stroke-width:2">
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
@@ -51,18 +52,8 @@ function renderHeader() {
           <nav class="header__nav">
             ${navHTML}
           </nav>
-
-          <div class="header__search">
-            <span class="header__search-icon">
-              <svg style="width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2" viewBox="0 0 24 24">
-                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-              </svg>
-            </span>
-            <input type="text" id="search-input" placeholder="Пошук за артикулом..."/>
-          </div>
-
           <div class="header__actions">
-            <button class="header__icon-btn" onclick="window.location.href='/cart.html'">
+            <button class="header__icon-btn" onclick="window.location.href='cart.html'">
               <svg style="width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8" viewBox="0 0 24 24">
                 <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
                 <line x1="3" y1="6" x2="21" y2="6"/>
@@ -82,22 +73,8 @@ function renderHeader() {
 
   const target = document.getElementById('header')
   if (target) target.innerHTML = html
-
-  initSearch()
 }
 
-// ---------- ПОИСК ----------
-
-function initSearch() {
-  const input = document.getElementById('search-input')
-  if (!input) return
-
-  input.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' && input.value.trim()) {
-      window.location.href = '/catalog.html?search=' + encodeURIComponent(input.value.trim())
-    }
-  })
-}
 
 // ---------- ГЕНЕРАЦИЯ ФУТЕРА ----------
 
