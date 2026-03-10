@@ -328,6 +328,11 @@ function initUI() {
             })
         })
 
+        document.getElementById('btn-logout')?.addEventListener('click', () => {
+        storage.remove('user')
+        window.location.href = 'login.html'
+    })
+
   
     document.getElementById('pwd-new')?.addEventListener('input', calcStrength)
 }
