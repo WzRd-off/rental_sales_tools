@@ -89,7 +89,7 @@ function renderProductCard(product) {
   return `
     <div class="card product-card" data-id="${product.prod_id}">
       <div class="product-card__img">
-        <img src="${product.photo}" alt="${product.name}" style="width:100%;height:100%;object-fit:cover;" 
+        <img src="/images/${product.photo}" alt="${product.name}" style="width:100%;height:100%;object-fit:cover;" 
              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
         <div class="product-card__icon" style="display:none;">🛠️</div>
         <div style="position: absolute; top: 10px; right: 10px;">
