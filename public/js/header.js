@@ -1,8 +1,3 @@
-// ============================================
-// HEADER.JS — генерация хедера и футера
-// ============================================
-
-// ---------- НАВИГАЦИЯ ----------
 const navLinks = [
   { label: 'Головна',       href: 'index.html' },
   { label: 'Каталог',       href: 'catalog.html' },
@@ -10,8 +5,6 @@ const navLinks = [
   { label: 'Кредит/Оплата', href: 'payment.html' },
   { label: 'Контакти',      href: 'contacts.html' },
 ]
-
-// ---------- ГЕНЕРАЦИЯ ХЕДЕРА ----------
 
 function renderHeader() {
   const currentPath = window.location.pathname
@@ -75,9 +68,6 @@ function renderHeader() {
   if (target) target.innerHTML = html
 }
 
-
-// ---------- ГЕНЕРАЦИЯ ФУТЕРА ----------
-
 function renderFooter() {
   const html = `
     <footer class="footer">
@@ -120,7 +110,6 @@ function renderFooter() {
   if (target) target.innerHTML = html
 }
 
-// ---------- ОБНОВЛЕНИЕ СЧЁТЧИКА КОРЗИНЫ ----------
 function updateCartBadge() {
   const cart = storage.get('cart') || []
   const count = cart.reduce((sum, item) => sum + item.quantity, 0)
@@ -142,8 +131,6 @@ function updateCartBadge() {
     if (badge) badge.remove()
   }
 }
-
-// ---------- ЗАПУСК ----------
 
 document.addEventListener('DOMContentLoaded', function() {
   renderHeader()
